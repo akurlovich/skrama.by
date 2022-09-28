@@ -19,6 +19,7 @@ const { app } = wsInstance;
 // const aWss = wsInstance.getWss();
 
 app.use(express.json());
+app.use(express.static('static'))
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
