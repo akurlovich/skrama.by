@@ -15,7 +15,7 @@ export default {
   JWT_ACCESS_SECRET_KEY: process.env['JWT_ACCESS_SECRET_KEY'] || 'access-secret-key',
   JWT_REFRESH_SECRET_KEY: process.env['JWT_REFRESH_SECRET_KEY'] || 'refresh-secret-key',
   AUTH_MODE: process.env['AUTH_MODE'] === 'true',
-  DB_CONNECT: process.env['DB_CONNECT'] || 'mongodb+srv://ellibrary:ellibrary@cluster0.cm82w.mongodb.net/eLibrary?retryWrites=true&w=majority',
+  DB_CONNECT: process.env['DB_CONNECT'] || 'mongodb+srv://skrama:skrama123@cluster0.3noostx.mongodb.net/?retryWrites=true&w=majority',
   SMTP_HOST: process.env['SMTP_HOST'] || 'smtp.gmail.com',
   SMTP_PORT: process.env['SMTP_POPT'] || 587,
   SMTP_USER: process.env['SMTP_USER'] || 'qa.a.kurlovich@gmail.com',

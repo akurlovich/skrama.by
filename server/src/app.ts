@@ -16,7 +16,7 @@ import config from './common/config';
 const appBase = express();
 const wsInstance = expressWS(appBase);
 const { app } = wsInstance;
-const aWss = wsInstance.getWss();
+// const aWss = wsInstance.getWss();
 
 app.use(express.json());
 app.use(cookieParser());
@@ -45,9 +45,9 @@ app.use('/api', router);
 //   })
 // };
 
-// mongoose
-//   .connect(config.DB_CONNECT, {})
-//   .then(() => console.log('Connected to DB'))
-//   .catch((err) => console.log(err));
+mongoose
+  .connect(config.DB_CONNECT, {})
+  .then(() => console.log('Connected to DB'))
+  .catch((err) => console.log(err));
 
 export default app;

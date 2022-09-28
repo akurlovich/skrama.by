@@ -14,6 +14,17 @@ class UserController {
     }
   };
 
+  async registration(req: Request, res: Response, next: NextFunction) {
+    try {
+      
+      const userData = await userService.registration('email', 'password', 'profileImage');
+      
+      return res.json(userData)
+    } catch (error) {
+      next(error);
+    }
+  };
+
 };
 
 export default new UserController();
