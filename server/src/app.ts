@@ -4,7 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import expressWS from 'express-ws';
 import router from './router/index';
-// import errorMiddleware from './middlewares/error-middleware';
+import errorMiddleware from './middlewares/error-middleware';
 import config from './common/config';
 
 // interface IMSGProps {
@@ -26,7 +26,7 @@ app.use(cors({
   origin: config.CLIENT_URL,
 }));
 app.use('/api', router);
-// app.use(errorMiddleware);
+app.use(errorMiddleware);
 
 // app.ws('/', (ws, req) => {
 //   ws.on('message', (msg: string) => {
