@@ -1,30 +1,31 @@
 import { Router } from 'express';
 import userController from '../controllers/user-controller';
-// import { body } from 'express-validator';
-// import authMiddleware from '../middlewares/auth-middleware';
+import { body } from 'express-validator';
+import authMiddleware from '../middlewares/auth-middleware';
 // import bookController from '../controllers/book-controller';
 // import genreController from '../controllers/genre-controller';
-// import roleController from '../controllers/role-controller';
+import roleController from '../controllers/role-controller';
 // import bookedController from '../controllers/booked-controller';
 // import issuedController from '../controllers/issued-controller';
 // import commentConroller from '../controllers/comment-conroller';
 
 const router = Router();
-router.get('/', userController.getUsers);
+// router.get('/', userController.getUsers);
+// router.post('/reg', userController.registration);
+// router.delete('/reg', userController.deleteUser);
 
-router.get('/reg', userController.registration);
-
-// router.post('/registration',
-//   body('email').isEmail(),
-//   body('password').isLength({min: 6, max: 32}),  
-//   userController.registration);
-// router.post('/login', userController.login);
-// router.post('/logout', userController.logout);
-// router.get('/refresh', userController.refresh);
+router.post('/registration',
+  body('email').isEmail(),
+  body('password').isLength({min: 6, max: 32}),  
+  userController.registration);
+router.post('/login', userController.login);
+router.post('/logout', userController.logout);
+router.get('/refresh', userController.refresh);
 // router.get('/users', authMiddleware, userController.getUsers);
-// router.get('/users/:id', userController.getUserById);
-// router.put('/users/profileImage', userController.updateUserProfileImage);
-// router.put('/users/isBlocked', userController.updateUserIsBlocked);
+router.get('/users', userController.getUsers);
+router.get('/users/:id', userController.getUserById);
+router.put('/users/profileImage', userController.updateUserProfileImage);
+router.put('/users/isBlocked', userController.updateUserIsBlocked);
 
 // router.get('/books', bookController.getAllBooks);
 // router.get('/books/:id', bookController.getBookByID);
@@ -36,10 +37,10 @@ router.get('/reg', userController.registration);
 // router.get('/genres', genreController.getAllGenres);
 // router.post('/genres', genreController.addGenre);
 
-// router.get('/role', roleController.getRole);
-// router.get('/role/:id', roleController.getRoleByID);
-// router.get('/roles', roleController.getAllRoles);
-// router.post('/roles', roleController.addRole);
+router.get('/role', roleController.getRole);
+router.get('/role/:id', roleController.getRoleByID);
+router.get('/roles', roleController.getAllRoles);
+router.post('/role', roleController.addRole);
 
 // router.get('/booked/books/:id', bookedController.getAllBookedsBookID);
 // router.get('/booked/users/:id', bookedController.getAllBookedsUserID);
