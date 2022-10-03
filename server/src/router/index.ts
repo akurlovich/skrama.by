@@ -5,6 +5,7 @@ import authMiddleware from '../middlewares/auth-middleware';
 // import bookController from '../controllers/book-controller';
 // import genreController from '../controllers/genre-controller';
 import roleController from '../controllers/role-controller';
+import deviceController from '../controllers/device-controller';
 // import bookedController from '../controllers/booked-controller';
 // import issuedController from '../controllers/issued-controller';
 // import commentConroller from '../controllers/comment-conroller';
@@ -27,6 +28,15 @@ router.get('/users/:id', userController.getUserById);
 router.put('/users/profileImage', userController.updateUserProfileImage);
 router.put('/users/isBlocked', userController.updateUserIsBlocked);
 
+router.get('/role', roleController.getRole);
+router.get('/role/:id', roleController.getRoleByID);
+router.get('/roles', roleController.getAllRoles);
+router.post('/role', roleController.addRole);
+
+router.get('/device', deviceController.getDevice);
+router.get('/device/:id', deviceController.getDeviceByID);
+router.get('/devices', deviceController.getAllDevices);
+router.post('/device', deviceController.addDevice);
 // router.get('/books', bookController.getAllBooks);
 // router.get('/books/:id', bookController.getBookByID);
 // router.post('/books', bookController.addBook);
@@ -37,10 +47,6 @@ router.put('/users/isBlocked', userController.updateUserIsBlocked);
 // router.get('/genres', genreController.getAllGenres);
 // router.post('/genres', genreController.addGenre);
 
-router.get('/role', roleController.getRole);
-router.get('/role/:id', roleController.getRoleByID);
-router.get('/roles', roleController.getAllRoles);
-router.post('/role', roleController.addRole);
 
 // router.get('/booked/books/:id', bookedController.getAllBookedsBookID);
 // router.get('/booked/users/:id', bookedController.getAllBookedsUserID);
