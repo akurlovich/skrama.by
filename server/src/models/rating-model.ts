@@ -2,16 +2,16 @@ import { Schema, model } from "mongoose";
 import { IRating } from "../types/IRating";
 
 const RatingSchema: Schema = new Schema<IRating>({
-  productID: [{
+  productID: {
     type: Schema.Types.ObjectId,
     ref: 'Product',
     required: true,
-  }],
-  userID: [{
+  },
+  userID: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  }],
+  },
   rate: {
     type: Number,
     required: true,

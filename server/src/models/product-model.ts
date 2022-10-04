@@ -5,29 +5,37 @@ const ProductSchema: Schema = new Schema<IProduct>({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   price: {
     type: Number,
     required: true,
   },
-  rating: {
+  count: {
     type: Number,
     required: true,
+    default: 1,
   },
+  rating: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Rating',
+    required: true,
+    default: [],
+  }],
   coverImage: {
     type: String,
     required: true,
   },
-  typeID: [{
+  typeID: {
     type: Schema.Types.ObjectId,
     ref: 'Type',
     required: true,
-  }],
-  brandID: [{
+  },
+  brandID: {
     type: Schema.Types.ObjectId,
     ref: 'Brand',
     required: true,
-  }],
+  },
 },
 { timestamps: true },
 );

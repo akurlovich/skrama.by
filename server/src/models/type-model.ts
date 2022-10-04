@@ -5,6 +5,7 @@ const TypeSchema: Schema = new Schema<IType>({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
 },
 { timestamps: true },

@@ -10,11 +10,11 @@ const ProductInfoSchema: Schema = new Schema<IProductInfo>({
     type: String,
     required: true,
   },
-  productID: [{
+  productID: {
     type: Schema.Types.ObjectId,
     ref: 'Product',
     required: true,
-  }],
+  },
 },
 { timestamps: true },
 );
