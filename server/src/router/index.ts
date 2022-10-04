@@ -1,4 +1,10 @@
 import { Router } from 'express';
+import userRouter from './userRouter';
+import brandRouter from './brandRouter';
+import productRouter from './productRouter';
+import roleRouter from './roleRouter';
+import typeRouter from './typeRouter';
+
 import userController from '../controllers/user-controller';
 import { body } from 'express-validator';
 import authMiddleware from '../middlewares/auth-middleware';
@@ -11,32 +17,41 @@ import productController from '../controllers/product-controller';
 // import commentConroller from '../controllers/comment-conroller';
 
 const router = Router();
-// router.get('/', userController.getUsers);
-// router.post('/reg', userController.registration);
-// router.delete('/reg', userController.deleteUser);
+router.use('/user', userRouter);
+router.use('/type', typeRouter);
+router.use('/brand', brandRouter);
+router.use('/product', productRouter);
+router.use('/role', roleRouter);
 
-router.post('/registration',
-  body('email').isEmail(),
-  body('password').isLength({min: 6, max: 32}),  
-  userController.registration);
-router.post('/login', userController.login);
-router.post('/logout', userController.logout);
-router.get('/refresh', userController.refresh);
-// router.get('/users', authMiddleware, userController.getUsers);
-router.get('/users', userController.getUsers);
-router.get('/users/:id', userController.getUserById);
-router.put('/users/profileImage', userController.updateUserProfileImage);
-router.put('/users/isBlocked', userController.updateUserIsBlocked);
+// router.post('/registration',
+//   body('email').isEmail(),
+//   body('password').isLength({min: 6, max: 32}),  
+//   userController.registration);
+// router.post('/login', userController.login);
+// router.post('/logout', userController.logout);
+// router.get('/refresh', userController.refresh);
+// // router.get('/users', authMiddleware, userController.getUsers);
+// router.get('/users', userController.getUsers);
+// router.get('/users/:id', userController.getUserById);
+// router.put('/users/profileImage', userController.updateUserProfileImage);
+// router.put('/users/isBlocked', userController.updateUserIsBlocked);
 
-router.get('/role', roleController.getRole);
-router.get('/role/:id', roleController.getRoleByID);
-router.get('/roles', roleController.getAllRoles);
-router.post('/role', roleController.addRole);
+// router.get('/role', roleController.getRole);
+// router.get('/role/:id', roleController.getRoleByID);
+// router.get('/roles', roleController.getAllRoles);
+// router.post('/role', roleController.addRole);
 
-router.get('/device', productController.getProduct);
-router.get('/device/:id', productController.getProductByID);
-router.get('/devices', productController.getAllProducts);
-router.post('/device', productController.addProduct);
+// router.get('/product', productController.getProduct);
+// router.get('/product/:id', productController.getProductByID);
+// router.get('/products', productController.getAllProducts);
+// router.post('/product', productController.addProduct);
+
+
+
+
+
+
+
 // router.get('/books', bookController.getAllBooks);
 // router.get('/books/:id', bookController.getBookByID);
 // router.post('/books', bookController.addBook);
