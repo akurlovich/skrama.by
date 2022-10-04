@@ -18,10 +18,10 @@ import productController from '../controllers/product-controller';
 
 const router = Router();
 router.use('/user', userRouter);
-router.use('/type', typeRouter);
-router.use('/brand', brandRouter);
-router.use('/product', productRouter);
-router.use('/role', roleRouter);
+router.use('/', typeRouter);
+router.use('/', brandRouter);
+router.use('/', productRouter);
+router.use('/', roleRouter);
 
 // router.post('/registration',
 //   body('email').isEmail(),
