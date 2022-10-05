@@ -1,3 +1,4 @@
+import { Request } from "express";
 import productModel from "../models/product-model"
 import { IProduct } from "../types/IProduct";
 
@@ -14,8 +15,21 @@ class ProductService {
     return await productModel.findById(id);
   };
 
-  async getAllProducts() {
-    return await productModel.find();
+  async getAllProducts(query: Request) {
+    const { typeID, brandID } = query.query;
+    if (!brandID && !typeID) {
+      return await productModel.find();
+    }
+    if (brandID && !typeID) {
+      return await productModel.find({brandID});
+    }
+    if (!brandID && typeID) {
+      return await productModel.find({typeID});
+    }
+    if (brandID && typeID) {
+      return await productModel.find({typeID, brandID});
+    }
+    
   };
     
 };
