@@ -38,7 +38,6 @@ class ProductController {
 
   async getAllProducts(req: Request, res: Response, next: NextFunction) {
     try {
-      // const { typeID, brandID } = req.query;
       const products = await productService.getAllProducts(req);
       return res.json(products);
     } catch (error) {
