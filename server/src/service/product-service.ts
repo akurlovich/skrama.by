@@ -1,7 +1,8 @@
 import productModel from "../models/product-model"
+import { IProduct } from "../types/IProduct";
 
 class ProductService {
-  async addProduct(product: string) {
+  async addProduct(product: IProduct) {
     return await productModel.create(product);
   };
 

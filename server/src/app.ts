@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import expressWS from 'express-ws';
+import fileUpload from 'express-fileupload';
 import router from './router/index';
 import errorMiddleware from './middlewares/error-middleware';
 import config from './common/config';
@@ -19,14 +20,15 @@ const { app } = wsInstance;
 // const aWss = wsInstance.getWss();
 
 app.use(express.json());
-app.use(express.static('static'))
+app.use(express.static('static'));
+app.use(fileUpload({}));
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
   origin: config.CLIENT_URL,
 }));
 app.use('/api', router);
-app.use(errorMiddleware);
+// app.use(errorMiddleware);
 
 // app.ws('/', (ws, req) => {
 //   ws.on('message', (msg: string) => {

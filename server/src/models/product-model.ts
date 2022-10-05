@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { USER_AVATAR } from "../constants";
 import { IProduct } from "../types/IProduct";
 
 const ProductSchema: Schema = new Schema<IProduct>({
@@ -21,12 +20,12 @@ const ProductSchema: Schema = new Schema<IProduct>({
     type: Schema.Types.ObjectId,
     ref: 'Rating',
     required: true,
-    default: [],
+    default: 0,
   }],
   coverImage: {
     type: String,
     required: true,
-    default: USER_AVATAR,
+    default: '',
   },
   typeID: {
     type: Schema.Types.ObjectId,

@@ -1,10 +1,16 @@
 import { NextFunction, Request, Response } from "express";
+import { v4 as uuid } from 'uuid';
+import path from 'path';
 import productService from "../service/product-service";
 
 class ProductController {
   async addProduct(req: Request, res: Response, next: NextFunction) {
     try {
-      const newProduct = await productService.addProduct(req.body);
+      let fileName = uuid() + '.jpg';
+      const { coverImage } = req.files;
+      // @ts-ignore
+      coverImage.mv(path.resolve(__dirname, '../..', 'static', fileName));
+      const newProduct = await productService.addProduct({...req.body, coverImage: fileName});
       return res.json(newProduct);
     } catch (error) {
       next(error);
