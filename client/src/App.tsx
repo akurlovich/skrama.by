@@ -9,7 +9,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import { useAppDispatch, useAppSelector } from "./redux/hooks/redux";
 import React from 'react';
-// import "./scss/app.scss";
+import "./scss/app.scss";
 
 const App: FC = () => {
   const [searchValue, setSearchValue] = useState<string>('');
