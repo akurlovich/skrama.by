@@ -6,7 +6,7 @@ import { setTextRange } from "typescript";
 import { Categories } from "../components/Categories";
 import { Pagination } from "../components/Pagination";
 import PizzaBlock from "../components/PizzaBlock";
-// import Skeleton from "../components/PizzaBlock/Skeleton";
+import Skeleton from "../components/PizzaBlock/Skeleton";
 import { Sort } from "../components/Sort";
 import { useAppDispatch, useAppSelector } from "../redux/hooks/redux";
 import { setFilters, setPageCount } from "../redux/slices/filterSlice";
@@ -56,7 +56,7 @@ const Home: FC<IProps> = ({searchValue}) => {
       />
     </Link>
   ));
-  // const skeletons = [...new Array(12)].map((_, index) => <Skeleton key={index} />);
+  const skeletons = [...new Array(12)].map((_, index) => <Skeleton key={index} />);
 
   useEffect(() => {
     const fetch_Pizzas = async () => {
@@ -124,7 +124,7 @@ const Home: FC<IProps> = ({searchValue}) => {
 
         : (
           <div className="content__items">
-            {status === 'loading' ? pizzas : pizzas}
+            {status === 'loading' ? skeletons : pizzas}
           </div>
         )
       }

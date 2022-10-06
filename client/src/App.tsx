@@ -8,7 +8,6 @@ import FullPizza from "./pages/FullPizza";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import { useAppDispatch, useAppSelector } from "./redux/hooks/redux";
-import React from 'react';
 import "./scss/app.scss";
 
 const App: FC = () => {
@@ -30,4 +29,3 @@ const App: FC = () => {
 };
 
 export default App;
-

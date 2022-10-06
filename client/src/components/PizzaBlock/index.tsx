@@ -1,4 +1,3 @@
-import React from "react";
 import { FC, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
 import { addItem } from "../../redux/slices/cartSlice";

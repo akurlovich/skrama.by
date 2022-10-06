@@ -1,12 +1,10 @@
 import React, { FC } from 'react';
 // @ts-ignore
-// import styles from './NotFoudBlock.module.scss';
+import styles from './NotFoudBlock.module.scss';
 
 const NotFoundBlock: FC = () => {
   return (
-      <h1 
-      // className={styles.root}
-      >
+      <h1 className={styles.root}>
         <span>
           :(
         </span>

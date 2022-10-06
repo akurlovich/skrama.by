@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 // @ts-ignore
-// import styles from './Pagination.module.scss';
+import styles from './Pagination.module.scss';
 
 interface IProps {
   currentPage?: number;
@@ -10,7 +10,7 @@ interface IProps {
 
 export const Pagination: React.FC<IProps> = ({ currentPage, onChangePage }) => (
   <ReactPaginate
-    // className={styles.root}
+    className={styles.root}
     breakLabel="..."
     nextLabel=">"
     previousLabel="<"
