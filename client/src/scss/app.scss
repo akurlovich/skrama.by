@@ -7,9 +7,18 @@ body {
   background-color: $background;
 }
 
-.wrapper {
-  width: calc(100vw - 100px);
+#root {
+  
   height: 100%;
+}
+
+.wrapper {
+  // position: relative;
+  display: flex;
+  flex-direction: column;
+
+  width: calc(100vw - 100px);
+  min-height: 92vh;
   background-color: #fff;
   margin: 50px auto;
   border-radius: 10px;
@@ -21,8 +30,14 @@ body {
   }
 }
 
+.container {
+  width: 100%;
+  flex: 1 1 auto;
+}
+
 .content {
   padding: 40px 0;
+  flex: 1 1 auto;
 
   &__error-info {
     margin: 100px auto;
