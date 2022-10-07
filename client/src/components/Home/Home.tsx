@@ -19,7 +19,7 @@ import logoSvg from '../../assets/img/building.png';
 import './home.scss';
 
 interface IProps {
-  searchValue: string;
+  searchValue?: string;
 };
 
 interface IParams {
@@ -30,8 +30,8 @@ interface IParams {
 
 const Home: FC<IProps> = ({searchValue}) => {
   const navigate = useNavigate();
-  const { categoryId, sort: sortType, pageCount } = useAppSelector(state => state.filterReducer);
-  const { items, status } = useAppSelector(state => state.pizzasReducer);
+  // const { categoryId, sort: sortType, pageCount } = useAppSelector(state => state.filterReducer);
+  // const { items, status } = useAppSelector(state => state.pizzasReducer);
   // const [items, setItems] = useState<IPizza[]>([]);
   // const [isLoading, setIsLoading] = useState<boolean>(true);
   // const [categoryId, setCategoryId] = useState<number>(0);
@@ -43,58 +43,59 @@ const Home: FC<IProps> = ({searchValue}) => {
     dispatch(setPageCount(page));
   };
 
-  const pizzas = items.filter(item => {
-    if (item.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
-      return true;
-    }
-    return false;
-  }).map((item) => (
-    <Link key={item.id} to={`/pizza/${item.id}`}>
-      <PizzaBlock
-        id={Number(item.id)}
-        name={item.title}
-        price={item.price}
-        imageUrl={item.imageUrl}
-        size={item.sizes}
-        type={item.types}
-      />
-    </Link>
-  ));
-  const skeletons = [...new Array(12)].map((_, index) => <Skeleton key={index} />);
+  // const pizzas = items.filter(item => {
+  //   if (item.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+  //     return true;
+  //   }
+  //   return false;
+  // }).map((item) => (
+  //   <Link key={item.id} to={`/pizza/${item.id}`}>
+  //     <PizzaBlock
+  //       id={Number(item.id)}
+  //       name={item.title}
+  //       price={item.price}
+  //       imageUrl={item.imageUrl}
+  //       size={item.sizes}
+  //       type={item.types}
+  //     />
+  //   </Link>
+  // ));
 
-  useEffect(() => {
-    const fetch_Pizzas = async () => {
-      const order = sortType.name.includes('-') ? 'asc' : 'desc';
-      const sortBy = sortType.name.replace('-', '');
-      const category = categoryId > 0 ? `category=${categoryId}` : '';
-      const search = searchValue ? `&search=${searchValue}` : '';
-      // setIsLoading(true);
-      dispatch(fetchPizzas({order, sortBy, category, search, pageCount}));
-      // setIsLoading(false);
-      // try {
-      //   const res = await axios.get(`https://626d16545267c14d5677d9c2.mockapi.io/items?page=${pageCount}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`);
-      //   // setItems(res.data);
-      //   dispatch(setItems(res.data));
-      // } catch (error) {
-      //   console.log('ERROR', error);
-      // } finally {
-      //   setIsLoading(false);
-      // };
-      window.scrollTo(0, 0);
-    };
+  // const skeletons = [...new Array(12)].map((_, index) => <Skeleton key={index} />);
 
-    fetch_Pizzas();
+  // useEffect(() => {
+  //   const fetch_Pizzas = async () => {
+  //     const order = sortType.name.includes('-') ? 'asc' : 'desc';
+  //     const sortBy = sortType.name.replace('-', '');
+  //     const category = categoryId > 0 ? `category=${categoryId}` : '';
+  //     const search = searchValue ? `&search=${searchValue}` : '';
+  //     // setIsLoading(true);
+  //     dispatch(fetchPizzas({order, sortBy, category, search, pageCount}));
+  //     // setIsLoading(false);
+  //     // try {
+  //     //   const res = await axios.get(`https://626d16545267c14d5677d9c2.mockapi.io/items?page=${pageCount}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`);
+  //     //   // setItems(res.data);
+  //     //   dispatch(setItems(res.data));
+  //     // } catch (error) {
+  //     //   console.log('ERROR', error);
+  //     // } finally {
+  //     //   setIsLoading(false);
+  //     // };
+  //     window.scrollTo(0, 0);
+  //   };
+
+  //   fetch_Pizzas();
     
-  }, [categoryId, sortType, searchValue, pageCount]);
+  // }, [categoryId, sortType, searchValue, pageCount]);
 
-  useEffect(() => {
-    const queryString = qs.stringify({
-      sortProperty: sortType.name,
-      categoryId,
-      pageCount,
-    })
-    navigate(`?${queryString}`);
-  }, [categoryId, sortType, pageCount]);
+  // useEffect(() => {
+  //   const queryString = qs.stringify({
+  //     sortProperty: sortType.name,
+  //     categoryId,
+  //     pageCount,
+  //   })
+  //   navigate(`?${queryString}`);
+  // }, [categoryId, sortType, pageCount]);
 
   useEffect(() => {
     if (window.location.search) {
@@ -111,22 +112,22 @@ const Home: FC<IProps> = ({searchValue}) => {
       <div className="content__top">
         <Categories
           // onClickCategory={setCategoryId}
-          categoryId={categoryId}
+          categoryId={5}
         />
-        <Sort
+        {/* <Sort
           // onClickSortType={setSortType}
           sortType={sortType.name}
-        />
+        /> */}
       </div>
       {/* <h2 className="content__title">All Pizza</h2> */}
-      {status === 'error' ? (
+      {/* {status === 'error' ? (
         <div className="content__error-info">
           <h2>Have some error...</h2>
           <p>Please, try late.</p>
         </div>
       )
 
-        : (
+        : ( */}
           <div className="content__items">
             {/* {status === 'loading' ? skeletons : pizzas} */}
             <BookBlock title="Поликарбонат" imgSrc={logoSvg}/>
@@ -135,9 +136,9 @@ const Home: FC<IProps> = ({searchValue}) => {
             <BookBlock title="Металлочерепича" imgSrc={logoSvg}/>
             <BookBlock title="Прозрачный шифер" imgSrc={logoSvg}/>
           </div>
-        )
-      }
-      <Pagination currentPage={pageCount} onChangePage={setCurrentPage}/>
+        {/* ) */}
+      {/* } */}
+      {/* <Pagination currentPage={pageCount} onChangePage={setCurrentPage}/> */}
     </div>
   );
 };

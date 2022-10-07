@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { useAppDispatch } from "../redux/hooks/redux";
-import { setCategoryId } from "../redux/slices/filterSlice";
+// import { useAppDispatch } from "../redux/hooks/redux";
+// import { setCategoryId } from "../redux/slices/filterSlice";
 
 interface IProps {
   categoryId: number;
@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const CategoriesItem: FC<IProps> =({categoryId}) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const categories: string[] = [
     'Поликарбонат',
@@ -22,7 +22,7 @@ const CategoriesItem: FC<IProps> =({categoryId}) => {
       <ul>
         {categories.map((item, index) => 
           <li
-            onClick={() => dispatch(setCategoryId(index))}
+            // onClick={() => dispatch(setCategoryId(index))}
             key={item + index}
             className={categoryId === index ? 'active' : ''}>{item}
           </li>  

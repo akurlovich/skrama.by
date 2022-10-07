@@ -2,12 +2,12 @@ import React, { FC, useCallback, useRef } from 'react';
 // @ts-ignore
 import styles from './Search.module.scss';
 import debounce from 'lodash.debounce';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks/redux';
-import { setSearchValue } from '../../redux/slices/filterSlice';
+// import { useAppDispatch, useAppSelector } from '../../redux/hooks/redux';
+// import { setSearchValue } from '../../redux/slices/filterSlice';
 
 export const Search: FC = () => {
-  const { searchValue } = useAppSelector(state => state.filterReducer);
-  const dispatch = useAppDispatch();
+  // const { searchValue } = useAppSelector(state => state.filterReducer);
+  // const dispatch = useAppDispatch();
 
   const [value, setValue] = React.useState<string>('');
   // const inputRef = React.useRef<HTMLInputElement>(null);
@@ -15,7 +15,7 @@ export const Search: FC = () => {
 
   const onClickClear = () => {
     // dispatch(setSearchValue(''));
-    dispatch(setSearchValue(''));
+    // dispatch(setSearchValue(''));
     setValue('');
     inputRef.current?.focus();
     // inputRef.current?.focus();
@@ -29,7 +29,7 @@ export const Search: FC = () => {
   // );
   const updateWithDebounce = useCallback(
     debounce((str) => {
-      dispatch(setSearchValue(str));
+      // dispatch(setSearchValue(str));
       // console.log(str);
     }, 250),
     [],
@@ -85,7 +85,7 @@ export const Search: FC = () => {
         className={styles.input}
         placeholder="Поиск пиццы..."
       />
-      {searchValue && (
+      {/* {searchValue && ( */}
         <svg
           onClick={onClickClear}
           className={styles.clearIcon}
@@ -93,7 +93,7 @@ export const Search: FC = () => {
           xmlns="http://www.w3.org/2000/svg">
           <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
         </svg>
-      )}
+      {/* )} */}
     </div>
   );
 };

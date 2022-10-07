@@ -1,16 +1,25 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 // @ts-ignore
 import logoSvg from '../../assets/img/logo.png';
-import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { getProducts } from "../../store/reducers/ProductReducer/ProductActionCreatores";
 import { Search } from "../Search";
 
 export const Header: FC = () => {
-  const { totalPrice, items } = useAppSelector(state => state.cartReducer);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const { products } = useAppSelector(state => state.productReducer);
+  // const { totalPrice, items } = useAppSelector(state => state.cartReducer);
+  // const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const location = useLocation();
   // const { searchValue } = useAppSelector(state => state.filterReducer);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts())
+  
+    
+  }, [])
+  
 
   return (
     <div className="header">
@@ -24,11 +33,14 @@ export const Header: FC = () => {
             </div>
           </div>
         </Link>
+        <button onClick={() => console.log(products)}>
+          !!!!!!!
+        </button>
         <Search />
         <div className="header__cart">
           {location.pathname !== '/cart' && (
             <Link to="/cart" className="button button--cart">
-              <span>{totalPrice} ₽</span>
+              <span>0 ₽</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"
@@ -59,7 +71,7 @@ export const Header: FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{totalCount}</span>
+              <span>0</span>
             </Link>
           )}
         </div>

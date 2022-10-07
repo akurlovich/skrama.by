@@ -5,6 +5,7 @@ import bookReducer from './reducers/BookReducer/BookSlice';
 import bookedReducer from './reducers/BookedReducer/BookedSlice';
 import issuedReducer from './reducers/IssuedReducer/IssuedSlice';
 import commentReducer from './reducers/CommentReducer/CommentSlice';
+import productReducer from './reducers/ProductReducer/ProductSlice';
 
 const rootReducer = combineReducers({
   userReducer,
@@ -13,6 +14,8 @@ const rootReducer = combineReducers({
   bookedReducer,
   issuedReducer,
   commentReducer,
+
+  productReducer,
 })
 
 export const setupStore = () => {

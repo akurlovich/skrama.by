@@ -1,7 +1,7 @@
 import React from "react";
 import { FC, useEffect, useRef, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks/redux";
-import { setSortType } from "../redux/slices/filterSlice";
+// import { useAppDispatch, useAppSelector } from "../redux/hooks/redux";
+// import { setSortType } from "../redux/slices/filterSlice";
 
 interface IProps {
   sortType: string;
@@ -13,8 +13,8 @@ type PopupClick = MouseEvent & {
 };
 
 const SortItem: FC<IProps> = ({}) => {
-  const { sort: sortType} = useAppSelector(state => state.filterReducer);
-  const dispatch = useAppDispatch();
+  // const { sort: sortType} = useAppSelector(state => state.filterReducer);
+  // const dispatch = useAppDispatch();
   const [open, setOpen] = useState<boolean>(false);
   const sortList = [
     { name: 'rating', sortProperty: 'rating'},
@@ -25,7 +25,7 @@ const SortItem: FC<IProps> = ({}) => {
   const sortRef = useRef<HTMLDivElement>(null);
 
   const onClickSorted = (index: string) => {
-    dispatch(setSortType(index));
+    // dispatch(setSortType(index));
     setOpen(false);
   };
 
@@ -61,7 +61,7 @@ const SortItem: FC<IProps> = ({}) => {
           />
         </svg>
         <b>Sort by:</b>
-        <span onClick={() => setOpen(prev => !prev)}>{sortType.name}</span>
+        {/* <span onClick={() => setOpen(prev => !prev)}>{sortType.name}</span> */}
       </div>
       {
         open && (
@@ -70,7 +70,7 @@ const SortItem: FC<IProps> = ({}) => {
               {sortList.map((item, index) => (
                 <li
                   key={item.name + index}
-                  className={sortType.name === item.sortProperty ? 'active' : ''}
+                  // className={sortType.name === item.sortProperty ? 'active' : ''}
                   onClick={() => onClickSorted(item.sortProperty)}
                 >
                   {item.name}
