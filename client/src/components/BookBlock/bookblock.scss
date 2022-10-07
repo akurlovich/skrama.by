@@ -1,0 +1,113 @@
+.bookblock {
+  max-width: 500px;
+  width: 100%;
+  height: 310px;
+  margin-top: 40px;
+  font-family: 'Poppins', sans-serif;
+  color: #FFFFFF;
+
+  &__container {
+    display: flex;
+    height: 272px;
+    background: #733F55;
+    box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+  }
+
+  &__cover {
+    display: flex;
+    width: 210px;
+    height: 300px;
+    transform: rotate(-8deg);
+    box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.25);
+
+    &_block {
+      width: 200px;
+      height: 300px;
+    }
+
+    &_image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    &_line {
+      width: 10px;
+      height: 300px;
+      background: rgb(209,170,157);
+      background: radial-gradient(10deg, rgba(209,170,157,1) 0%, rgba(204,204,204,1) 100%);
+      box-shadow: -3px 0px 18px 2px rgba(34, 60, 80, 0.14);
+      border-radius: 2px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  &__header {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    color: #FFFFFF;
+    padding-right: 10px;
+  }
+
+  &__discription {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    font-size: 18px;
+    padding: 0 15px 0 15px;
+    color: #D2D2D2;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 16px;
+    padding: 0 20px 0 20px;
+    color: #E2E2E2;
+
+    &_author {
+
+    }
+
+    &_year {
+
+    }
+  }
+
+  &__button {
+    width: 148px;
+    height: 33px;
+    font-size: 24px;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: rgb(52, 16, 31);
+      background-color: #FFFFFF;
+      // border: 2px solid rgba(244, 113, 168, 1);;
+    }
+  }
+}

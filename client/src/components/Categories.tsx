@@ -11,12 +11,10 @@ const CategoriesItem: FC<IProps> =({categoryId}) => {
   const dispatch = useAppDispatch();
 
   const categories: string[] = [
-    'All',
-    'Meat',
-    'Vegetarian',
-    'Grill',
-    'Spicy',
-    'Closed'
+    'Поликарбонат',
+    'Штакетник',
+    'Профнастил',
+    'Прозрачные шифер',
   ];
 
   return (

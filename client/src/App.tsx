@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import MainLayout from "./layouts/MainLayout";
 import Cart from "./pages/Cart";
 import FullPizza from "./pages/FullPizza";
-import Home from "./pages/Home";
+import Home from "./components/Home/Home";
 import NotFound from "./pages/NotFound";
 import { useAppDispatch, useAppSelector } from "./redux/hooks/redux";
 import "./scss/app.scss";
