@@ -5,11 +5,13 @@ import logoSvg from '../../assets/img/logo.png';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { getBrands } from "../../store/reducers/BrandReducer/BrandActionCreators";
 import { getProducts } from "../../store/reducers/ProductReducer/ProductActionCreators";
+import { getTypes } from "../../store/reducers/TypeReducer/TypeActionCreators";
 import { Search } from "../Search";
 
 export const Header: FC = () => {
   const { products } = useAppSelector(state => state.productReducer);
   const { brands } = useAppSelector(state => state.brandReducer);
+  const { types } = useAppSelector(state => state.typeReducer);
   // const { totalPrice, items } = useAppSelector(state => state.cartReducer);
   // const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const location = useLocation();
@@ -18,8 +20,8 @@ export const Header: FC = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(getBrands())
-    
+    dispatch(getBrands());
+    dispatch(getTypes());
   }, [])
   
 
@@ -35,7 +37,7 @@ export const Header: FC = () => {
             </div>
           </div>
         </Link>
-        <button onClick={() => console.log(products, brands)}>
+        <button onClick={() => console.log('product', products, 'brand', brands, 'types', types)}>
           !!!!!!!
         </button>
         <Search />
