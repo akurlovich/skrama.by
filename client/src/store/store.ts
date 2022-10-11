@@ -6,6 +6,7 @@ import bookedReducer from './reducers/BookedReducer/BookedSlice';
 import issuedReducer from './reducers/IssuedReducer/IssuedSlice';
 import commentReducer from './reducers/CommentReducer/CommentSlice';
 import productReducer from './reducers/ProductReducer/ProductSlice';
+import filterReducer from "./reducers/FilterReducer/filterSlice";
 
 const rootReducer = combineReducers({
   userReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   commentReducer,
 
   productReducer,
+  filterReducer,
 })
 
 export const setupStore = () => {

@@ -9,8 +9,8 @@ import { Pagination } from "../Pagination";
 import PizzaBlock from "../PizzaBlock";
 import Skeleton from "../PizzaBlock/Skeleton";
 import { Sort } from "../Sort";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
-import { setFilters, setPageCount } from "../../redux/slices/filterSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { setCategoryId, setFilters, setPageCount } from "../../store/reducers/FilterReducer/filterSlice";
 import { fetchPizzas } from "../../redux/slices/PizzasReducer/ActionCreators";
 import { setItems } from "../../redux/slices/PizzasReducer/pizzasSlice";
 import { IPizza } from "../../types/IPizza";
@@ -30,7 +30,7 @@ interface IParams {
 
 const Home: FC<IProps> = ({searchValue}) => {
   const navigate = useNavigate();
-  // const { categoryId, sort: sortType, pageCount } = useAppSelector(state => state.filterReducer);
+  const { categoryId, sort: sortType, pageCount } = useAppSelector(state => state.filterReducer);
   // const { items, status } = useAppSelector(state => state.pizzasReducer);
   // const [items, setItems] = useState<IPizza[]>([]);
   // const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -112,7 +112,7 @@ const Home: FC<IProps> = ({searchValue}) => {
       <div className="content__top">
         <Categories
           // onClickCategory={setCategoryId}
-          categoryId={5}
+          // categoryId={5}
         />
         {/* <Sort
           // onClickSortType={setSortType}
