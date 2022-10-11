@@ -10,7 +10,7 @@ import PizzaBlock from "../PizzaBlock";
 import Skeleton from "../PizzaBlock/Skeleton";
 import { Sort } from "../Sort";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { setCategoryId, setFilters, setPageCount } from "../../store/reducers/FilterReducer/filterSlice";
+import { setCategoryId, setFilters, setPageCount } from "../../store/reducers/FilterReducer/FilterSlice";
 import { fetchPizzas } from "../../redux/slices/PizzasReducer/ActionCreators";
 import { setItems } from "../../redux/slices/PizzasReducer/pizzasSlice";
 import { IPizza } from "../../types/IPizza";

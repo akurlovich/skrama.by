@@ -3,11 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 // @ts-ignore
 import logoSvg from '../../assets/img/logo.png';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { getProducts } from "../../store/reducers/ProductReducer/ProductActionCreatores";
+import { getBrands } from "../../store/reducers/BrandReducer/BrandActionCreators";
+import { getProducts } from "../../store/reducers/ProductReducer/ProductActionCreators";
 import { Search } from "../Search";
 
 export const Header: FC = () => {
   const { products } = useAppSelector(state => state.productReducer);
+  const { brands } = useAppSelector(state => state.brandReducer);
   // const { totalPrice, items } = useAppSelector(state => state.cartReducer);
   // const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const location = useLocation();
@@ -15,8 +17,8 @@ export const Header: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getProducts())
-  
+    dispatch(getProducts());
+    dispatch(getBrands())
     
   }, [])
   
@@ -33,7 +35,7 @@ export const Header: FC = () => {
             </div>
           </div>
         </Link>
-        <button onClick={() => console.log(products)}>
+        <button onClick={() => console.log(products, brands)}>
           !!!!!!!
         </button>
         <Search />

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 // import { useAppDispatch } from "../hooks/redux";
 // import { useAppDispatch, useAppSelector } from "../redux/hooks/redux";
-import { setCategoryId } from "../store/reducers/FilterReducer/filterSlice";
+import { setCategoryId } from "../store/reducers/FilterReducer/FilterSlice";
 // import { useAppDispatch } from "../redux/hooks/redux";
 // import { setCategoryId } from "../redux/slices/filterSlice";
 

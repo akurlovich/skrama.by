@@ -1,69 +1,61 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import { IBook } from "../../../types/IBook";
-import { IProductResponse } from "../../../types/IProductResponse";
-import { addProduct, getProductByID, getProducts } from "./ProductActionCreators";
-// import { IGenreResponse } from "../../../types/IGenreResponse";
-// import { addBook, getAllGenres, getBookByID, getBooks, updateBookAmountByID } from "./ProductActionCreatores";
+import { IBrandResponse } from "../../../types/IBrandResponse";
+import { addBrand, getBrandByID, getBrands } from "./BrandActionCreators";
 
-interface IProductState {
-  product: IProductResponse,
-  products: IProductResponse[],
-  // genres: IProductResponse[],
+interface IBrandState {
+  brand: IBrandResponse,
+  brands: IBrandResponse[],
   isLoading: boolean,
   error: string,
 };
 
-const initialState: IProductState = {
-  product: {} as IProductResponse,
-  products: [],
-  // genres: [],
+const initialState: IBrandState = {
+  brand: {} as IBrandResponse,
+  brands: [],
   isLoading: false,
   error: '',
 };
 
-export const productSlice = createSlice({
-  name: 'PRODUCT',
+export const brandSlice = createSlice({
+  name: 'BRAND',
   initialState,
   reducers: {
 
   },
   extraReducers: {
-    [addProduct.pending.type]: (state) => {
+    [addBrand.pending.type]: (state) => {
       state.isLoading = true;
     },
-    [addProduct.fulfilled.type]: (state, action: PayloadAction<IProductResponse>) => {
+    [addBrand.fulfilled.type]: (state, action: PayloadAction<IBrandResponse>) => {
       state.isLoading = false;
-      // @ts-ignore
-      state.product = action.payload;
+      state.brand = action.payload;
       state.error = '';
     },
-    [addProduct.rejected.type]: (state, action: PayloadAction<string>) => {
+    [addBrand.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    [getProducts.pending.type]: (state) => {
+    [getBrands.pending.type]: (state) => {
       state.isLoading = true;
     },
-    [getProducts.fulfilled.type]: (state, action: PayloadAction<IProductResponse[]>) => {
+    [getBrands.fulfilled.type]: (state, action: PayloadAction<IBrandResponse[]>) => {
       state.isLoading = false;
-      // @ts-ignore
-      state.products = action.payload;
+      state.brands = action.payload;
       state.error = '';
     },
-    [getProducts.rejected.type]: (state, action: PayloadAction<string>) => {
+    [getBrands.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    [getProductByID.pending.type]: (state) => {
+    [getBrandByID.pending.type]: (state) => {
       state.isLoading = true;
     },
-    [getProductByID.fulfilled.type]: (state, action: PayloadAction<IProductResponse>) => {
+    [getBrandByID.fulfilled.type]: (state, action: PayloadAction<IBrandResponse>) => {
       state.isLoading = false;
-      // @ts-ignore
-      state.product = action.payload;
+      state.brand = action.payload;
       state.error = '';
     },
-    [getProductByID.rejected.type]: (state, action: PayloadAction<string>) => {
+    [getBrandByID.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -94,4 +86,4 @@ export const productSlice = createSlice({
   }
 });
 
-export default productSlice.reducer;
+export default brandSlice.reducer;

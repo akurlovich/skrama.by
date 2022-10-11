@@ -20,7 +20,7 @@ const initialState: IFilterSliceState = {
 };
 // @ts-ignore
 const filterSlice = createSlice({
-  name: 'filters',
+  name: 'FILTERS',
   initialState,
   reducers: {
     setCategoryId: (state, action: PayloadAction<number>) => {

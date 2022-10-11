@@ -1,4 +1,4 @@
-export interface IProductResponse extends Document {
+export interface IProductResponse {
   _id: string,
   name: string,
   price: number,
