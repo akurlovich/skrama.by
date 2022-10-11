@@ -7,6 +7,11 @@ const TypeSchema: Schema = new Schema<IType>({
     required: true,
     unique: true,
   },
+  coverImage: {
+    type: String,
+    required: true,
+    default: '',
+  },
 },
 { timestamps: true },
 );

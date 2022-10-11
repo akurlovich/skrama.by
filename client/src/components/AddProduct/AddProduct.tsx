@@ -6,7 +6,7 @@ import { USER_AVATAR } from '../../constants/user';
 import './addproduct.scss';
 import { UserErrorWarning } from '../UI/UserErrorWarning/UserErrorWarning';
 
-const AddBookInner: FC = () => {
+const AddProductInner: FC = () => {
   const { error } = useAppSelector(state => state.bookReducer);
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -158,4 +158,4 @@ const AddBookInner: FC = () => {
   );
 };
 
-export const AddBook = React.memo(AddBookInner);
+export const AddProduct = React.memo(AddProductInner);

@@ -57,7 +57,7 @@ const BookBlockItem: FC<IProps> = ({title, imgSrc}) => {
             // onClick={handlerMore}
             className="bookblock__button"
           >
-            More
+            Далее
           </div>
         </div>
       </div>

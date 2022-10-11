@@ -17,6 +17,8 @@ import { IPizza } from "../../types/IPizza";
 // @ts-ignore
 import logoSvg from '../../assets/img/building.png';
 import './home.scss';
+import { getTypes } from "../../store/reducers/TypeReducer/TypeActionCreators";
+import { SERVER_URL } from "../../constants/http";
 
 interface IProps {
   searchValue?: string;
@@ -31,6 +33,7 @@ interface IParams {
 const Home: FC<IProps> = ({searchValue}) => {
   const navigate = useNavigate();
   const { categoryId, sort: sortType, pageCount } = useAppSelector(state => state.filterReducer);
+  const { types } = useAppSelector(state => state.typeReducer);
   // const { items, status } = useAppSelector(state => state.pizzasReducer);
   // const [items, setItems] = useState<IPizza[]>([]);
   // const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -41,6 +44,7 @@ const Home: FC<IProps> = ({searchValue}) => {
 
   const setCurrentPage = (page: number) => {
     dispatch(setPageCount(page));
+    dispatch(getTypes());
   };
 
   // const pizzas = items.filter(item => {
@@ -130,11 +134,14 @@ const Home: FC<IProps> = ({searchValue}) => {
         : ( */}
           <div className="content__items">
             {/* {status === 'loading' ? skeletons : pizzas} */}
-            <BookBlock title="Поликарбонат" imgSrc={logoSvg}/>
+            {types.map((type) => 
+              <BookBlock title={type.name} imgSrc={SERVER_URL + type.coverImage} />
+            )}
+            {/* <BookBlock title="Поликарбонат" imgSrc={logoSvg}/>
             <BookBlock title="Штакетник" imgSrc={logoSvg}/>
-            <BookBlock title="Профнастил" imgSrc={logoSvg}/>
-            <BookBlock title="Металлочерепича" imgSrc={logoSvg}/>
-            <BookBlock title="Прозрачный шифер" imgSrc={logoSvg}/>
+            <BookBlock title="Профнастил" imgSrc={logoSvg}/> */}
+            {/* <BookBlock title="Металлочерепича" imgSrc={logoSvg}/>
+            <BookBlock title="Прозрачный шифер" imgSrc={logoSvg}/> */}
           </div>
         {/* ) */}
       {/* } */}
