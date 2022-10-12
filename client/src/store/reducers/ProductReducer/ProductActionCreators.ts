@@ -2,10 +2,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import ProductService from "../../../services/ProductService";
 import GenreService from "../../../services/GenreService";
 import { IProduct } from "../../../types/IProduct";
+import { IProductNew } from "../../../types/IProductNew";
 
 export const addProduct = createAsyncThunk(
   'PRODUCT/addProduct',
-  async (product: IProduct, {rejectWithValue}) => {
+  async (product: FormData, {rejectWithValue}) => {
     try {
       return await (await ProductService.addProduct(product)).data;
     } catch (error: any) {

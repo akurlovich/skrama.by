@@ -135,7 +135,7 @@ const Home: FC<IProps> = ({searchValue}) => {
           <div className="content__items">
             {/* {status === 'loading' ? skeletons : pizzas} */}
             {types.map((type) => 
-              <BookBlock title={type.name} imgSrc={SERVER_URL + type.coverImage} />
+              <BookBlock key={type._id} title={type.name} imgSrc={SERVER_URL + type.coverImage} />
             )}
             {/* <BookBlock title="Поликарбонат" imgSrc={logoSvg}/>
             <BookBlock title="Штакетник" imgSrc={logoSvg}/>

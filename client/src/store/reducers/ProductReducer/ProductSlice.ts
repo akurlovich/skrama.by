@@ -33,7 +33,6 @@ export const productSlice = createSlice({
     },
     [addProduct.fulfilled.type]: (state, action: PayloadAction<IProductResponse>) => {
       state.isLoading = false;
-      // @ts-ignore
       state.product = action.payload;
       state.error = '';
     },
@@ -46,7 +45,6 @@ export const productSlice = createSlice({
     },
     [getProducts.fulfilled.type]: (state, action: PayloadAction<IProductResponse[]>) => {
       state.isLoading = false;
-      // @ts-ignore
       state.products = action.payload;
       state.error = '';
     },

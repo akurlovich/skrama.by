@@ -17,7 +17,7 @@ const AddProductInner: FC = () => {
   const [price, setPrice] = useState(0);
   const [rating, setRating] = useState(0);
   const [count, setCount] = useState(1);
-  const [coverImage, setcoverImage] = useState('');
+  const [coverImage, setcoverImage] = useState<File | null>(null);
   const [typeID, setTypeID] = useState('');
   const [brandID, setBrandID] = useState('');
   // const [description, setDescription] = useState('');
@@ -47,7 +47,8 @@ const AddProductInner: FC = () => {
   // }
  
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    // const file: File = (event.target.files as FileList)[0];
+    const file: File = (event.currentTarget.files as FileList)[0];
+    setcoverImage(file);
     // if (file.size > 60000) {
     //   alert('File is too big! File must be less then 60kb!')
     // } else {
@@ -59,8 +60,12 @@ const AddProductInner: FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getTypes());
-    dispatch(getBrands());
+    (async () => {
+      await dispatch(getTypes());
+      await dispatch(getBrands());
+      setTypeID(types[0]._id);
+      setBrandID(brands[0]._id);
+    })()
   }, [])
   
   useEffect(() => {
@@ -76,14 +81,25 @@ const AddProductInner: FC = () => {
 
   const handlerAddProduct = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await dispatch(addProduct({name, price, rating, count, coverImage, typeID, brandID}));
-    setName('');
-    setPrice(0);
-    setRating(0);
-    setCount(1);
-    setTypeID('');
-    setBrandID('');
-    setcoverImage(USER_AVATAR);
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('price', `${price}`);
+    formData.append('rating', `${rating}`);
+    formData.append('count', `${count}`);
+    formData.append('typeID', typeID);
+    formData.append('brandID', brandID);
+    formData.append('coverImage', coverImage as File);
+    console.log(brandID);
+    await dispatch(addProduct(formData))
+
+    // await dispatch(addProduct({name, price, rating, count, coverImage, typeID, brandID}));
+    // setName('');
+    // setPrice(0);
+    // setRating(0);
+    // setCount(1);
+    // setTypeID('');
+    // setBrandID('');
+    // setcoverImage('');
   };
 
   return (
@@ -124,6 +140,7 @@ const AddProductInner: FC = () => {
             value={typeID}
             className='inputs__item__name'
             name="inputs__item__name">
+            <option value=""></option>
             {types.map((type) => 
               <option key={type._id} value={type._id}>{type.name}</option>
             )}
@@ -144,6 +161,7 @@ const AddProductInner: FC = () => {
             value={brandID}
             className='inputs__item__name'
             name="inputs__item__name">
+            <option value=""></option>
             {brands.map((brand) => 
               <option key={brand._id} value={brand._id}>{brand.name}</option>
             )}
@@ -170,7 +188,7 @@ const AddProductInner: FC = () => {
             <label className='inputs__files__label' htmlFor="label_for_file">Select file</label>
           </div>
           <div className="inputs__files__view">
-            <img  className='inputs__files__view_img' src={coverImage}/>
+            <img  className='inputs__files__view_img' src=''/>
           </div>
         </div>
       </div>

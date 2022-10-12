@@ -1,12 +1,13 @@
 import { AxiosResponse } from "axios";
 import serverApi from "../http";
 import { IProduct } from "../types/IProduct";
+import { IProductNew } from "../types/IProductNew";
 import { IProductResponse } from "../types/IProductResponse";
 // import { IProduct, IProductUpdate } from "../types/IProduct";
 // import { IProductResponse } from "../types/IProductResponse";
 
 export default class ProductService {
-  static async addProduct(product: IProduct): Promise<AxiosResponse<IProductResponse>> {
+  static async addProduct(product: FormData): Promise<AxiosResponse<IProductResponse>> {
     return serverApi.post<IProductResponse>('/product', product);
   };
 
