@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DEFAULT_TYPE_ID } from '../../../constants/user';
+import { DEFAULT_TYPE_ID_POLIKARBONAT } from '../../../constants/user';
 import { ISort } from '../../../types/ISort';
 
 interface IFilterSliceState {
@@ -10,7 +10,7 @@ interface IFilterSliceState {
 };
 
 const initialState: IFilterSliceState = {
-  categoryId: DEFAULT_TYPE_ID,
+  categoryId: DEFAULT_TYPE_ID_POLIKARBONAT,
   pageCount: 1,
   searchValue: '',
   sort: { 

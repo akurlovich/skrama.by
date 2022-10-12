@@ -20,6 +20,7 @@ const AddProductInner: FC = () => {
   const [coverImage, setcoverImage] = useState<File | null>(null);
   const [typeID, setTypeID] = useState('');
   const [brandID, setBrandID] = useState('');
+  const [showImg, setShowImg] = useState('');
   // const [description, setDescription] = useState('');
   const [addBookError, setAddBookError] = useState(false);
   const dispatch = useAppDispatch();
@@ -49,22 +50,14 @@ const AddProductInner: FC = () => {
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file: File = (event.currentTarget.files as FileList)[0];
     setcoverImage(file);
-    // if (file.size > 60000) {
-    //   alert('File is too big! File must be less then 60kb!')
-    // } else {
-    //   const urlImage = await base64(file);
-    //   if (urlImage) {
-    //     setcoverImage(urlImage as string)
-    //   }
-    // }
+    const urlImage = await base64(file);
+    setShowImg(urlImage as string);
   };
 
   useEffect(() => {
     (async () => {
       await dispatch(getTypes());
       await dispatch(getBrands());
-      setTypeID(types[0]._id);
-      setBrandID(brands[0]._id);
     })()
   }, [])
   
@@ -188,7 +181,7 @@ const AddProductInner: FC = () => {
             <label className='inputs__files__label' htmlFor="label_for_file">Select file</label>
           </div>
           <div className="inputs__files__view">
-            <img  className='inputs__files__view_img' src=''/>
+            <img  className='inputs__files__view_img' src={showImg}/>
           </div>
         </div>
       </div>

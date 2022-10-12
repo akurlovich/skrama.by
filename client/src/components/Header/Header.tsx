@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 // @ts-ignore
 import logoSvg from '../../assets/img/logo.png';
+import { DEFAULT_TYPE_ID_POLIKARBONAT } from "../../constants/user";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { getBrands } from "../../store/reducers/BrandReducer/BrandActionCreators";
 import { getProducts } from "../../store/reducers/ProductReducer/ProductActionCreators";
@@ -19,11 +20,14 @@ export const Header: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getProducts());
-    dispatch(getBrands());
-    dispatch(getTypes());
+    (async () => {
+      await dispatch(getProducts());
+      await dispatch(getBrands());
+      await dispatch(getTypes());
+    })()
   }, [])
   
+  const sortByType = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT)
 
   return (
     <div className="header">
@@ -37,7 +41,7 @@ export const Header: FC = () => {
             </div>
           </div>
         </Link>
-        <button onClick={() => console.log('product', products, 'brand', brands, 'types', types)}>
+        <button onClick={() => console.log('product', products, 'brand', brands, 'types', types, 'sorted', sortByType)}>
           !!!!!!!
         </button>
         <Search />

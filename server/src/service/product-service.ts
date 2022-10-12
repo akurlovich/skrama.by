@@ -31,7 +31,11 @@ class ProductService {
     if (brandID && typeID) {
       return await productModel.find({typeID, brandID}).limit(Number(limit)).skip(offset);
     }
-  };    
+  };
+
+  async deleteProduct(id: string) {
+    return await productModel.findByIdAndDelete(id);
+  };
 };
 
 export default new ProductService();
