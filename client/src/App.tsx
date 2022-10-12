@@ -10,6 +10,8 @@ import NotFound from "./pages/NotFound";
 // import { useAppDispatch, useAppSelector } from "./redux/hooks/redux";
 import "./scss/app.scss";
 import { AddProduct } from "./components/AddProduct/AddProduct";
+import { ProductsList } from "./components/ProductsList/ProductsList";
+import { ProductItem } from "./components/ProductItem/ProductItem";
 
 const App: FC = () => {
   // const [searchValue, setSearchValue] = useState<string>('');
@@ -23,6 +25,8 @@ const App: FC = () => {
         <Route path="/" element={<Home />}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/admin" element={<AddProduct/>}/>
+        <Route path="/products" element={<ProductsList/>}/>
+        <Route path="/product/:id" element={<ProductItem/>}/>
         <Route path="/pizza/:id" element={<FullPizza/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Route>

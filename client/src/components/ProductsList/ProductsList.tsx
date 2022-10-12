@@ -16,10 +16,12 @@ import { setItems } from "../../redux/slices/PizzasReducer/pizzasSlice";
 import { IPizza } from "../../types/IPizza";
 // @ts-ignore
 import logoSvg from '../../assets/img/building.png';
-import './home.scss';
+// import './home.scss';
 import { getTypes } from "../../store/reducers/TypeReducer/TypeActionCreators";
 import { SERVER_URL } from "../../constants/http";
 import { ProductBlock } from "../ProductBlock/ProductBlock";
+import { ProductCard } from "../ProductCard/ProductCard";
+import { getProducts } from "../../store/reducers/ProductReducer/ProductActionCreators";
 
 interface IProps {
   searchValue?: string;
@@ -31,94 +33,41 @@ interface IParams {
   sortProperty: string,
 };
 
-const Home: FC<IProps> = ({searchValue}) => {
+const ProductsListInner: FC<IProps> = ({searchValue}) => {
   const navigate = useNavigate();
+  const { products } = useAppSelector(state => state.productReducer)
   const { categoryId, sort: sortType, pageCount } = useAppSelector(state => state.filterReducer);
   const { types } = useAppSelector(state => state.typeReducer);
-  // const { items, status } = useAppSelector(state => state.pizzasReducer);
-  // const [items, setItems] = useState<IPizza[]>([]);
-  // const [isLoading, setIsLoading] = useState<boolean>(true);
-  // const [categoryId, setCategoryId] = useState<number>(0);
-  // const [sortType, setSortType] = useState<string>('rating');
-  // const [currentPage, setCurrentPage] = useState<number>(1);
   const dispatch = useAppDispatch();
 
-  const setCurrentPage = (page: number) => {
-    dispatch(setPageCount(page));
-    dispatch(getTypes());
-  };
+  // const setCurrentPage = (page: number) => {
+  //   dispatch(setPageCount(page));
+  //   dispatch(getTypes());
+  // };
 
-  // const pizzas = items.filter(item => {
-  //   if (item.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
-  //     return true;
-  //   }
-  //   return false;
-  // }).map((item) => (
-  //   <Link key={item.id} to={`/pizza/${item.id}`}>
-  //     <PizzaBlock
-  //       id={Number(item.id)}
-  //       name={item.title}
-  //       price={item.price}
-  //       imageUrl={item.imageUrl}
-  //       size={item.sizes}
-  //       type={item.types}
-  //     />
-  //   </Link>
-  // ));
+  const productByType = products.filter(item => item.typeID === categoryId);
 
-  // const skeletons = [...new Array(12)].map((_, index) => <Skeleton key={index} />);
+  useEffect(() => {
+    (async () => {
+      await dispatch(getProducts())
+    })()
+  }, [])
 
-  // useEffect(() => {
-  //   const fetch_Pizzas = async () => {
-  //     const order = sortType.name.includes('-') ? 'asc' : 'desc';
-  //     const sortBy = sortType.name.replace('-', '');
-  //     const category = categoryId > 0 ? `category=${categoryId}` : '';
-  //     const search = searchValue ? `&search=${searchValue}` : '';
-  //     // setIsLoading(true);
-  //     dispatch(fetchPizzas({order, sortBy, category, search, pageCount}));
-  //     // setIsLoading(false);
-  //     // try {
-  //     //   const res = await axios.get(`https://626d16545267c14d5677d9c2.mockapi.io/items?page=${pageCount}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`);
-  //     //   // setItems(res.data);
-  //     //   dispatch(setItems(res.data));
-  //     // } catch (error) {
-  //     //   console.log('ERROR', error);
-  //     // } finally {
-  //     //   setIsLoading(false);
-  //     // };
-  //     window.scrollTo(0, 0);
-  //   };
-
-  //   fetch_Pizzas();
-    
-  // }, [categoryId, sortType, searchValue, pageCount]);
-
-  // useEffect(() => {
-  //   const queryString = qs.stringify({
-  //     sortProperty: sortType.name,
-  //     categoryId,
-  //     pageCount,
-  //   })
-  //   navigate(`?${queryString}`);
-  // }, [categoryId, sortType, pageCount]);
 
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      // @ts-ignore
-      // dispatch(setFilters({pageCount: params.pageCount, categoryId: params.categoryId, pageCount: params.pageCount}));
     }
   
   }, [])
   
-
   return (
     <div className="container">
       <div className="content__top">
-        {/* <Categories
+        <Categories
           // onClickCategory={setCategoryId}
           // categoryId={5}
-        /> */}
+        />
         {/* <Sort
           // onClickSortType={setSortType}
           sortType={sortType.name}
@@ -135,8 +84,8 @@ const Home: FC<IProps> = ({searchValue}) => {
         : ( */}
           <div className="content__items">
             {/* {status === 'loading' ? skeletons : pizzas} */}
-            {types.map((type) => 
-              <ProductBlock key={type._id} title={type.name} imgSrc={SERVER_URL + type.coverImage} typeID={type._id}/>
+            {productByType.map((type) => 
+              <ProductCard key={type._id} productID={type._id} />
             )}
             {/* <BookBlock title="Поликарбонат" imgSrc={logoSvg}/>
             <BookBlock title="Штакетник" imgSrc={logoSvg}/>
@@ -151,4 +100,4 @@ const Home: FC<IProps> = ({searchValue}) => {
   );
 };
 
-export default Home;
+export const ProductsList = React.memo(ProductsListInner);
