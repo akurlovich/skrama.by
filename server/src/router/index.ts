@@ -4,6 +4,7 @@ import brandRouter from './brandRouter';
 import productRouter from './productRouter';
 import roleRouter from './roleRouter';
 import typeRouter from './typeRouter';
+import productColorRouter from './productColorRouter';
 
 import userController from '../controllers/user-controller';
 import { body } from 'express-validator';
@@ -22,6 +23,7 @@ router.use('/', typeRouter);
 router.use('/', brandRouter);
 router.use('/', productRouter);
 router.use('/', roleRouter);
+router.use('/', productColorRouter);
 
 // router.post('/registration',
 //   body('email').isEmail(),
