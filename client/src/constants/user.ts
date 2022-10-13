@@ -1,4 +1,4 @@
-const ADMIN_ROLE = 'moderator';
+const ADMIN_ROLE = 'admin';
 const BOOKING_TIME_MILLISECONDS = 86400000;
 const DEFAULT_COMMENT = 'Removed by moderator';
 const BOOKS_BG_COLORS = ['#405F71', '#563E70', '#733F55', '#121d80'];

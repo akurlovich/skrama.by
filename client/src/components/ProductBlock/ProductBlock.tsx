@@ -35,7 +35,7 @@ const ProductBlockItem: FC<IProps> = ({title, imgSrc, typeID}) => {
           <div className="productblock__header">
             {title}
           </div>
-          <div className="productblock__discription">
+          {/* <div className="productblock__discription">
             4 мм
           </div>
           <div className="productblock__info">
@@ -48,7 +48,7 @@ const ProductBlockItem: FC<IProps> = ({title, imgSrc, typeID}) => {
           </div>
           <div className="bookBlock__info_genre">
             дл.6м
-          </div>
+          </div> */}
           <div 
             onClick={handlerMore}
             className="productblock__button"

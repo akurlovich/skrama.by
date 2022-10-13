@@ -1,25 +1,8 @@
-import axios from "axios";
-import qs, { ParsedQs } from "qs";
-import React, { FC, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { setTextRange } from "typescript";
-// import { ProductBlock } from "../ProductBlock/ProductBlock";
+import qs from "qs";
+import React, { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Categories } from "../Categories";
-import { Pagination } from "../Pagination";
-import PizzaBlock from "../PizzaBlock";
-import Skeleton from "../PizzaBlock/Skeleton";
-import { Sort } from "../Sort";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { setCategoryId, setFilters, setPageCount } from "../../store/reducers/FilterReducer/FilterSlice";
-import { fetchPizzas } from "../../redux/slices/PizzasReducer/ActionCreators";
-import { setItems } from "../../redux/slices/PizzasReducer/pizzasSlice";
-import { IPizza } from "../../types/IPizza";
-// @ts-ignore
-import logoSvg from '../../assets/img/building.png';
-// import './home.scss';
-import { getTypes } from "../../store/reducers/TypeReducer/TypeActionCreators";
-import { SERVER_URL } from "../../constants/http";
-import { ProductBlock } from "../ProductBlock/ProductBlock";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { getProducts } from "../../store/reducers/ProductReducer/ProductActionCreators";
 
@@ -27,17 +10,15 @@ interface IProps {
   searchValue?: string;
 };
 
-interface IParams {
-  pageCount: number,
-  categoryId: number,
-  sortProperty: string,
-};
+// interface IParams {
+//   pageCount: number,
+//   categoryId: number,
+//   sortProperty: string,
+// };
 
 const ProductsListInner: FC<IProps> = ({searchValue}) => {
-  const navigate = useNavigate();
   const { products } = useAppSelector(state => state.productReducer)
-  const { categoryId, sort: sortType, pageCount } = useAppSelector(state => state.filterReducer);
-  const { types } = useAppSelector(state => state.typeReducer);
+  const { categoryId } = useAppSelector(state => state.filterReducer);
   const dispatch = useAppDispatch();
 
   // const setCurrentPage = (page: number) => {

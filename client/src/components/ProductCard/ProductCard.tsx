@@ -17,21 +17,21 @@ const ProductCardInner:FC<IProps> = ({productID}) => {
   
   return (
     <>
-      <div className="bookcard" onClick={() => navigate(`/product/${productID}`)}>
-        <div className="bookcard__wrapper">
-          <div className="bookcard__container">
-            <img className="bookcard__image" src={SERVER_URL + foundProduct?.coverImage} alt="book cover"/>
-            <div className="bookcard__info">
-              <div className="bookcard__title">{foundProduct?.name}</div>
-              <div className="bookcard__author">{foundProduct?.price}</div>
-              <div className="bookcard__alarm">
+      <div className="prodactcard" onClick={() => navigate(`/product/${productID}`)}>
+        <div className="prodactcard__wrapper">
+          <div className="prodactcard__container">
+            <img className="prodactcard__image" src={SERVER_URL + foundProduct?.coverImage} alt="book cover"/>
+            <div className="prodactcard__info">
+              <div className="prodactcard__title">{foundProduct?.name}</div>
+              <div className="prodactcard__author">{foundProduct?.price}</div>
+              <div className="prodactcard__alarm">
                 {/* <FcAlarmClock size={50}/> */}
-                {/* <div className="bookcard__timer">{`${timer.hours}h ${timer.minuts}m`}</div> */}
+                {/* <div className="prodactcard__timer">{`${timer.hours}h ${timer.minuts}m`}</div> */}
               </div>
             </div>
             {/* <div
               // onClick={canselHandler}
-              className="bookcard__cansel">
+              className="prodactcard__cansel">
               <FcCancel size={60}/>
             </div> */}
           </div>

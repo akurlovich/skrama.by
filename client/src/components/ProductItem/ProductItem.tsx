@@ -19,6 +19,7 @@ const ProductItemInner:FC = () => {
               <div className="productitem__title">{foundProduct?.name}</div>
               <div className="productitem__price">Плотность 0,46кг/м2</div>
               <div className="productitem__price">Размер листа 6000х2100мм</div>
+              <div className="productitem__price">Цвет: прозрачный</div>
               <div className="productitem__price">{`${foundProduct?.price} руб.`}</div>
               <div className="productitem__alarm">
                 {/* <FcAlarmClock size={50}/> */}

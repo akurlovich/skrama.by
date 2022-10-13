@@ -34,10 +34,11 @@ export const Header: FC = () => {
       <div className="container">
         <Link to="/">
           <div className="header__logo">
-            <img width="51" src={logoSvg} alt="Pizza logo" />
+            <img width="75" src={logoSvg} alt="Pizza logo" />
             <div>
               <h1>ООО "СКРАМ Материалы"</h1>
               <p>Кровельные и строительные материалы</p>
+              <p>+375(44)-984-67-46</p>
             </div>
           </div>
         </Link>

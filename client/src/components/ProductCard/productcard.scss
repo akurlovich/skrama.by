@@ -1,4 +1,4 @@
-.bookcard {
+.prodactcard {
   width: 45%;
   font-family: 'Poppins', sans-serif;
   min-height: 130px;
@@ -11,6 +11,7 @@
   border-radius: 30.7584px;
   border: 1.23px solid white;
   overflow: hidden;
+  cursor: pointer;
 
   &__wrapper {
     width: 100%;
