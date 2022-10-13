@@ -5,6 +5,7 @@ import productRouter from './productRouter';
 import roleRouter from './roleRouter';
 import typeRouter from './typeRouter';
 import productColorRouter from './productColorRouter';
+import productInfoRouter from './productInfoRouter';
 
 import userController from '../controllers/user-controller';
 import { body } from 'express-validator';
@@ -24,6 +25,7 @@ router.use('/', brandRouter);
 router.use('/', productRouter);
 router.use('/', roleRouter);
 router.use('/', productColorRouter);
+router.use('/', productInfoRouter);
 
 // router.post('/registration',
 //   body('email').isEmail(),
