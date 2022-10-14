@@ -14,9 +14,9 @@ class ProductInfoController {
 
   async getProductInfo(req: Request, res: Response, next: NextFunction) {
     try {
-      const { value } = req.body;
-      const brand = await product_infoService.getProductInfo(value);
-      return res.json(brand);
+      const { productID } = req.body;
+      const productInfo = await product_infoService.getProductInfo(productID);
+      return res.json(productInfo);
     } catch (error) {
       next(error);
     }
@@ -35,6 +35,15 @@ class ProductInfoController {
     try {
       const brands = await product_infoService.getAllProductInfo();
       return res.json(brands);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  async getAllProductInfoByProductID(req: Request<{ productID: string }>, res: Response, next: NextFunction) {
+    try {
+      const productInfo = await product_infoService.getAllProductInfoByProductID(req.params.productID);
+      return res.json(productInfo);
     } catch (error) {
       next(error);
     }

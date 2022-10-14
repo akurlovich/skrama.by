@@ -1,14 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import ProductInfoService from "../../../services/ProductInfoService";
 import ProductService from "../../../services/ProductService";
-import GenreService from "../../../services/GenreService";
-import { IProduct } from "../../../types/IProduct";
-import { IProductNew } from "../../../types/IProductNew";
+import { IProductInfoResponse } from "../../../types/IProductInfoResponse";
+
+interface IProductAdd {
+  product: FormData,
+  productInfo: IProductInfoResponse,
+}
 
 export const addProduct = createAsyncThunk(
   'PRODUCT/addProduct',
-  async (product: FormData, {rejectWithValue}) => {
+  async (data: IProductAdd, {rejectWithValue}) => {
     try {
-      return await (await ProductService.addProduct(product)).data;
+      const newProduct = await (await ProductService.addProduct(data.product)).data;
+      await ProductInfoService.addProductInfo({...data.productInfo, productID: newProduct._id});
+      return newProduct;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }
@@ -32,6 +38,18 @@ export const getProductByID = createAsyncThunk(
   async (id: string, {rejectWithValue}) => {
     try {
       return await (await ProductService.getProductByID(id)).data;
+      
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
+
+export const getProductInfoByProductID = createAsyncThunk(
+  'PRODUCT/getProductInfoByProductID',
+  async (id: string, {rejectWithValue}) => {
+    try {
+      return await (await ProductInfoService.getProductsInfoByProductID(id)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)

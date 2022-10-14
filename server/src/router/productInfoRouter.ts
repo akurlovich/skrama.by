@@ -4,7 +4,7 @@ import product_infoController from '../controllers/product_info-controller';
 
 const router = Router();
 router.post('/productinfo', product_infoController.addProductInfo);
-router.get('/productinfo', product_infoController.getProductInfo);
+router.get('/productinfo/:productID', product_infoController.getAllProductInfoByProductID);
 router.get('/productinfo/:id', product_infoController.getProductInfoByID);
 router.get('/productinfos', product_infoController.getAllProductInfos);
 

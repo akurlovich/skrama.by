@@ -1,26 +1,26 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import BookedService from "../../../services/BookedService";
+// import BookedService from "../../../services/BookedService";
 import BookService from "../../../services/BookService";
 import IssuedService from "../../../services/IssuedService";
 import { IBookResponse } from "../../../types/IBookResponse";
 import { IIssued } from "../../../types/IIssued";
 
-export const addIssued = createAsyncThunk(
-  'ISSUED/addIssued',
-  async (issued: IIssued, {rejectWithValue}) => {
-    try {
-      const response = await IssuedService.addIssued(issued);
-      const bookeds = await (await BookedService.getAllBookedsByBookID(issued.bookID)).data;
-      const foundByUser = bookeds.find(booked => booked.userID === issued.userID);
-      if (foundByUser) {
-        await BookedService.deleteBooked(foundByUser?._id);
-      }
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.message)
-    }
-  }
-);
+// export const addIssued = createAsyncThunk(
+//   'ISSUED/addIssued',
+//   async (issued: IIssued, {rejectWithValue}) => {
+//     try {
+//       const response = await IssuedService.addIssued(issued);
+//       const bookeds = await (await BookedService.getAllBookedsByBookID(issued.bookID)).data;
+//       const foundByUser = bookeds.find(booked => booked.userID === issued.userID);
+//       if (foundByUser) {
+//         await BookedService.deleteBooked(foundByUser?._id);
+//       }
+//       return response.data;
+//     } catch (error: any) {
+//       return rejectWithValue(error.message)
+//     }
+//   }
+// );
 
 export const getIssueds = createAsyncThunk(
   'ISSUED/getIssueds',

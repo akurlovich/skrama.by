@@ -17,6 +17,10 @@ class ProductInfoService {
   async getAllProductInfo() {
     return await product_infoModel.find();
   };
+
+  async getAllProductInfoByProductID(productID: string) {
+    return await product_infoModel.find({productID});
+  };
     
 };
 

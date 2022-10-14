@@ -15,6 +15,11 @@ const ProductInfoSchema: Schema = new Schema<IProductInfo>({
     ref: 'Product',
     required: true,
   },
+  typeID: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product',
+    required: true,
+  },
 },
 { timestamps: true },
 );
