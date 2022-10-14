@@ -1,10 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from './reducers/UserReducer/UserSlice';
 import authReducer from './reducers/AuthReducer/AuthSlice';
-import bookReducer from './reducers/BookReducer/BookSlice';
-import bookedReducer from './reducers/BookedReducer/BookedSlice';
-import issuedReducer from './reducers/IssuedReducer/IssuedSlice';
-import commentReducer from './reducers/CommentReducer/CommentSlice';
 import productReducer from './reducers/ProductReducer/ProductSlice';
 
 import filterReducer from "./reducers/FilterReducer/FilterSlice";
@@ -14,10 +10,10 @@ import typeReducer from "./reducers/TypeReducer/TypeSlice";
 const rootReducer = combineReducers({
   userReducer,
   authReducer,
-  bookReducer,
-  bookedReducer,
-  issuedReducer,
-  commentReducer,
+  // bookReducer,
+  // bookedReducer,
+  // issuedReducer,
+  // commentReducer,
 
   productReducer,
   filterReducer,

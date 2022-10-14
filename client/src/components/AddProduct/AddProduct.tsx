@@ -8,6 +8,7 @@ import { UserErrorWarning } from '../UI/UserErrorWarning/UserErrorWarning';
 import { addProduct } from '../../store/reducers/ProductReducer/ProductActionCreators';
 import { getTypes } from '../../store/reducers/TypeReducer/TypeActionCreators';
 import { getBrands } from '../../store/reducers/BrandReducer/BrandActionCreators';
+import { IProductInfoNew } from '../../types/IProductInfoNew';
 
 const AddProductInner: FC = () => {
   const { error } = useAppSelector(state => state.productReducer);
@@ -21,6 +22,8 @@ const AddProductInner: FC = () => {
   const [typeID, setTypeID] = useState('');
   const [brandID, setBrandID] = useState('');
   const [showImg, setShowImg] = useState('');
+  const [infoTitle, setInfoTitle] = useState('');
+  const [infoDescription, setInfoDescription] = useState('');
   // const [description, setDescription] = useState('');
   const [addBookError, setAddBookError] = useState(false);
   const dispatch = useAppDispatch();
@@ -42,6 +45,12 @@ const AddProductInner: FC = () => {
   }
   const brandHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setBrandID(event.target.value);
+  }
+  const infoTitleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInfoTitle(event.target.value);
+  }
+  const infoDescriptionHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInfoDescription(event.target.value);
   }
   // const descriptionHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
   //   setDescription(event.target.value);
@@ -82,8 +91,8 @@ const AddProductInner: FC = () => {
     formData.append('typeID', typeID);
     formData.append('brandID', brandID);
     formData.append('coverImage', coverImage as File);
-    console.log(brandID);
-    await dispatch(addProduct(formData))
+    const productInfo: IProductInfoNew = { typeID: typeID, title: infoTitle, description: infoDescription};
+    await dispatch(addProduct({product: formData, productInfo: [productInfo]}))
 
     // await dispatch(addProduct({name, price, rating, count, coverImage, typeID, brandID}));
     // setName('');
@@ -126,6 +135,20 @@ const AddProductInner: FC = () => {
             value={count}
             className='inputs__item__name' type="number" name="inputs__item__name"/>
           <label className='inputs__item__label' htmlFor="inputs__item__name">Количество:</label>
+        </div>
+        <div className="inputs__item">
+          <input
+            onChange={infoTitleHandler}
+            value={infoTitle}
+            className='inputs__item__name' type="text" name="inputs__item__name"/>
+          <label className='inputs__item__label' htmlFor="inputs__item__name">Характеристика:</label>
+        </div>
+        <div className="inputs__item">
+          <input
+            onChange={infoDescriptionHandler}
+            value={infoDescription}
+            className='inputs__item__name' type="text" name="inputs__item__name"/>
+          <label className='inputs__item__label' htmlFor="inputs__item__name">Описание характеристики:</label>
         </div>
         <div className="inputs__item">
           <select
