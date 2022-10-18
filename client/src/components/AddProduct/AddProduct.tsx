@@ -1,14 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import base64 from '../../services/ClientServices/Base64';
-import { addBook } from '../../store/reducers/BookReducer/BookActionCreatores';
-import { USER_AVATAR } from '../../constants/user';
 import './addproduct.scss';
 import { UserErrorWarning } from '../UI/UserErrorWarning/UserErrorWarning';
 import { addProduct } from '../../store/reducers/ProductReducer/ProductActionCreators';
 import { getTypes } from '../../store/reducers/TypeReducer/TypeActionCreators';
 import { getBrands } from '../../store/reducers/BrandReducer/BrandActionCreators';
 import { IProductInfoNew } from '../../types/IProductInfoNew';
+import { PrimaryButton } from '@fluentui/react';
 
 interface IInfoBlock {
   title: string,
@@ -32,7 +31,7 @@ const AddProductInner: FC = () => {
   // const [infoDescription, setInfoDescription] = useState('');
   const [infoBlock, setInfoBlock] = useState<IInfoBlock[]>([]);
   // const [description, setDescription] = useState('');
-  const [addBookError, setAddBookError] = useState(false);
+  const [addProductError, setAddProductError] = useState(false);
   const dispatch = useAppDispatch();
 
   const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +79,7 @@ const AddProductInner: FC = () => {
   };
 
   const canselHandler = () => {
-    setAddBookError(false);
+    setAddProductError(false);
   };
   
   const handlerAddProduct = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -101,13 +100,15 @@ const AddProductInner: FC = () => {
     await dispatch(addProduct({product: formData, productInfo: productInfo}))
     
     // await dispatch(addProduct({name, price, rating, count, coverImage, typeID, brandID}));
-    // setName('');
-    // setPrice(0);
-    // setRating(0);
-    // setCount(1);
-    // setTypeID('');
-    // setBrandID('');
-    // setcoverImage('');
+    setName('');
+    setPrice(0);
+    setRating(0);
+    setCount(1);
+    setTypeID('');
+    setBrandID('');
+    setcoverImage(null);
+    setShowImg('');
+    setInfoBlock([]);
   };
 
   useEffect(() => {
@@ -119,7 +120,7 @@ const AddProductInner: FC = () => {
   
   return (
     <form onSubmit={handlerAddProduct} className='addproduct'>
-      {addBookError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>}
+      {addProductError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>}
       <div className="addproduct__inputs">
         <div className="inputs__item">
           <input
@@ -155,6 +156,7 @@ const AddProductInner: FC = () => {
           >
             Добавить новую характеристику
         </button>
+        <PrimaryButton text="Primary" color='white' />
           {
             infoBlock.map(item => (
               <div key={item.id} className='inputs__addDescription'>
