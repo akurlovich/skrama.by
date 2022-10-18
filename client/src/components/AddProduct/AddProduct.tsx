@@ -10,6 +10,12 @@ import { getTypes } from '../../store/reducers/TypeReducer/TypeActionCreators';
 import { getBrands } from '../../store/reducers/BrandReducer/BrandActionCreators';
 import { IProductInfoNew } from '../../types/IProductInfoNew';
 
+interface IInfoBlock {
+  title: string,
+  description: string,
+  id: number,
+}
+
 const AddProductInner: FC = () => {
   const { error } = useAppSelector(state => state.productReducer);
   const { types } = useAppSelector(state => state.typeReducer);
@@ -22,8 +28,9 @@ const AddProductInner: FC = () => {
   const [typeID, setTypeID] = useState('');
   const [brandID, setBrandID] = useState('');
   const [showImg, setShowImg] = useState('');
-  const [infoTitle, setInfoTitle] = useState('');
-  const [infoDescription, setInfoDescription] = useState('');
+  // const [infoTitle, setInfoTitle] = useState('');
+  // const [infoDescription, setInfoDescription] = useState('');
+  const [infoBlock, setInfoBlock] = useState<IInfoBlock[]>([]);
   // const [description, setDescription] = useState('');
   const [addBookError, setAddBookError] = useState(false);
   const dispatch = useAppDispatch();
@@ -46,15 +53,24 @@ const AddProductInner: FC = () => {
   const brandHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setBrandID(event.target.value);
   }
-  const infoTitleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInfoTitle(event.target.value);
-  }
-  const infoDescriptionHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInfoDescription(event.target.value);
-  }
-  // const descriptionHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-  //   setDescription(event.target.value);
+  // const infoTitleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setInfoTitle(event.target.value);
   // }
+  // const infoDescriptionHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setInfoDescription(event.target.value);
+  // }
+
+  const addInfo = () => {
+    setInfoBlock([...infoBlock, {title: '', description: '', id: Date.now()}]);
+  }
+
+  const removeInfo = (id: number) => {
+    setInfoBlock(infoBlock.filter(info => info.id !== id));
+  }
+
+  const changeInfoBlock = (id: number, key: string, value: string) => {
+    setInfoBlock(infoBlock.map(i => i.id === id ? {...i, [key]: value} : i));
+  }
  
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file: File = (event.currentTarget.files as FileList)[0];
@@ -63,24 +79,10 @@ const AddProductInner: FC = () => {
     setShowImg(urlImage as string);
   };
 
-  useEffect(() => {
-    (async () => {
-      await dispatch(getTypes());
-      await dispatch(getBrands());
-    })()
-  }, [])
-  
-  useEffect(() => {
-    if (error) {
-      setAddBookError(true);
-    }
-  
-  }, [error]);
-
   const canselHandler = () => {
     setAddBookError(false);
   };
-
+  
   const handlerAddProduct = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData();
@@ -91,9 +93,13 @@ const AddProductInner: FC = () => {
     formData.append('typeID', typeID);
     formData.append('brandID', brandID);
     formData.append('coverImage', coverImage as File);
-    const productInfo: IProductInfoNew = { typeID: typeID, title: infoTitle, description: infoDescription};
-    await dispatch(addProduct({product: formData, productInfo: [productInfo]}))
-
+    // const productInfo: IProductInfoNew = { typeID: typeID, title: infoTitle, description: infoDescription};
+    const productInfo: IProductInfoNew[] = [] as IProductInfoNew[];
+    for (let i = 0; i < infoBlock.length; i++) {
+      productInfo.push({typeID, title: infoBlock[i].title, description: infoBlock[i].description});
+    }
+    await dispatch(addProduct({product: formData, productInfo: productInfo}))
+    
     // await dispatch(addProduct({name, price, rating, count, coverImage, typeID, brandID}));
     // setName('');
     // setPrice(0);
@@ -104,6 +110,13 @@ const AddProductInner: FC = () => {
     // setcoverImage('');
   };
 
+  useEffect(() => {
+    (async () => {
+      await dispatch(getTypes());
+      await dispatch(getBrands());
+    })()
+  }, [])
+  
   return (
     <form onSubmit={handlerAddProduct} className='addproduct'>
       {addBookError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>}
@@ -136,20 +149,39 @@ const AddProductInner: FC = () => {
             className='inputs__item__name' type="number" name="inputs__item__name"/>
           <label className='inputs__item__label' htmlFor="inputs__item__name">Количество:</label>
         </div>
-        <div className="inputs__item">
-          <input
-            onChange={infoTitleHandler}
-            value={infoTitle}
-            className='inputs__item__name' type="text" name="inputs__item__name"/>
-          <label className='inputs__item__label' htmlFor="inputs__item__name">Характеристика:</label>
-        </div>
-        <div className="inputs__item">
-          <input
-            onChange={infoDescriptionHandler}
-            value={infoDescription}
-            className='inputs__item__name' type="text" name="inputs__item__name"/>
-          <label className='inputs__item__label' htmlFor="inputs__item__name">Описание характеристики:</label>
-        </div>
+        <button
+          className='inputs__addButton'
+          onClick={addInfo}
+          >
+            Добавить новую характеристику
+        </button>
+          {
+            infoBlock.map(item => (
+              <div key={item.id} className='inputs__addDescription'>
+                <div className="inputs__item">
+                  <input
+                    value={item.title}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeInfoBlock(item.id, 'title', event.target.value)}
+                    className='inputs__item__name' type="text" name="inputs__item__name"/>
+                  <label className='inputs__item__label' htmlFor="inputs__item__name">Характеристика:</label>
+                </div>
+                <div className="inputs__item">
+                  <input
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeInfoBlock(item.id, 'description', event.target.value)}
+                    value={item.description}
+                    className='inputs__item__name' type="text" name="inputs__item__name"/>
+                  <label className='inputs__item__label' htmlFor="inputs__item__name">Описание:</label>
+                </div>
+                <button
+                  className='inputs__addButton'
+                  onClick={() => removeInfo(item.id)}
+                  >
+                    Удалить
+                </button>
+              </div>
+              )
+            )
+          }
         <div className="inputs__item">
           <select
             onChange={typeHandler}
