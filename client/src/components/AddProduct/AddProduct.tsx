@@ -3,11 +3,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import base64 from '../../services/ClientServices/Base64';
 import './addproduct.scss';
 import { UserErrorWarning } from '../UI/UserErrorWarning/UserErrorWarning';
-import { addProduct } from '../../store/reducers/ProductReducer/ProductActionCreators';
+import { addProduct, getAllProductsInfo } from '../../store/reducers/ProductReducer/ProductActionCreators';
 import { getTypes } from '../../store/reducers/TypeReducer/TypeActionCreators';
 import { getBrands } from '../../store/reducers/BrandReducer/BrandActionCreators';
 import { IProductInfoNew } from '../../types/IProductInfoNew';
-import { PrimaryButton } from '@fluentui/react';
+import { CommandBarButton, IIconProps, PrimaryButton, Stack, initializeIcons } from '@fluentui/react';
+import { IProductInfoResponse } from '../../types/IProductInfoResponse';
+
+initializeIcons();
 
 interface IInfoBlock {
   title: string,
@@ -15,8 +18,11 @@ interface IInfoBlock {
   id: number,
 }
 
+const addIcon: IIconProps = { iconName: 'Add' };
+
+
 const AddProductInner: FC = () => {
-  const { error } = useAppSelector(state => state.productReducer);
+  const { error, productsAllInfo } = useAppSelector(state => state.productReducer);
   const { types } = useAppSelector(state => state.typeReducer);
   const { brands } = useAppSelector(state => state.brandReducer);
   const [name, setName] = useState('');
@@ -27,6 +33,8 @@ const AddProductInner: FC = () => {
   const [typeID, setTypeID] = useState('');
   const [brandID, setBrandID] = useState('');
   const [showImg, setShowImg] = useState('');
+  const [productInfoByTypeID, setProductInfoByTypeID] = useState<IProductInfoResponse[]>([]);
+  const [productInfoTitle, setProductInfoTitle] = useState('');
   // const [infoTitle, setInfoTitle] = useState('');
   // const [infoDescription, setInfoDescription] = useState('');
   const [infoBlock, setInfoBlock] = useState<IInfoBlock[]>([]);
@@ -58,6 +66,10 @@ const AddProductInner: FC = () => {
   // const infoDescriptionHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setInfoDescription(event.target.value);
   // }
+
+  const productInfoTitleHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setProductInfoTitle(event.target.value);
+  }
 
   const addInfo = () => {
     setInfoBlock([...infoBlock, {title: '', description: '', id: Date.now()}]);
@@ -115,8 +127,15 @@ const AddProductInner: FC = () => {
     (async () => {
       await dispatch(getTypes());
       await dispatch(getBrands());
+      await dispatch(getAllProductsInfo());
     })()
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    setProductInfoByTypeID(productsAllInfo.filter(item => item.typeID === typeID))
+  
+  }, [typeID])
+  
   
   return (
     <form onSubmit={handlerAddProduct} className='addproduct'>
@@ -150,40 +169,14 @@ const AddProductInner: FC = () => {
             className='inputs__item__name' type="number" name="inputs__item__name"/>
           <label className='inputs__item__label' htmlFor="inputs__item__name">Количество:</label>
         </div>
-        <button
+        {/* <button
           className='inputs__addButton'
           onClick={addInfo}
           >
             Добавить новую характеристику
         </button>
         <PrimaryButton text="Primary" color='white' />
-          {
-            infoBlock.map(item => (
-              <div key={item.id} className='inputs__addDescription'>
-                <div className="inputs__item">
-                  <input
-                    value={item.title}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeInfoBlock(item.id, 'title', event.target.value)}
-                    className='inputs__item__name' type="text" name="inputs__item__name"/>
-                  <label className='inputs__item__label' htmlFor="inputs__item__name">Характеристика:</label>
-                </div>
-                <div className="inputs__item">
-                  <input
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeInfoBlock(item.id, 'description', event.target.value)}
-                    value={item.description}
-                    className='inputs__item__name' type="text" name="inputs__item__name"/>
-                  <label className='inputs__item__label' htmlFor="inputs__item__name">Описание:</label>
-                </div>
-                <button
-                  className='inputs__addButton'
-                  onClick={() => removeInfo(item.id)}
-                  >
-                    Удалить
-                </button>
-              </div>
-              )
-            )
-          }
+        <ButtonCommandBarExample/> */}
         <div className="inputs__item">
           <select
             onChange={typeHandler}
@@ -193,7 +186,7 @@ const AddProductInner: FC = () => {
             <option value=""></option>
             {types.map((type) => 
               <option key={type._id} value={type._id}>{type.name}</option>
-            )}
+              )}
             {/* <option value=""></option>
             <option value="Computer Science">Computer Science</option>
             <option value="Deteсtive">Deteсtive</option>
@@ -225,17 +218,66 @@ const AddProductInner: FC = () => {
             className='inputs__item__textarea'
             rows={8}
             name="inputs__item__name"/>
-          <label className='inputs__item__label' htmlFor="inputs__item__name">Description:</label>
-        </div> */}
+            <label className='inputs__item__label' htmlFor="inputs__item__name">Description:</label>
+          </div> */}
+        <CommandBarButton
+          iconProps={addIcon}
+          text="Добавить новую характеристику"
+          onClick={addInfo}
+        />
+        {
+          infoBlock.map(item => (
+            <div key={item.id} className='inputs__addDescription'>
+              {/* <div className="inputs__item">
+                <input
+                  value={item.title}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeInfoBlock(item.id, 'title', event.target.value)}
+                  className='inputs__item__name' type="text" name="inputs__item__name"/>
+                <label className='inputs__item__label' htmlFor="inputs__item__name">Характеристика:</label>
+              </div> */}
+              <div className="inputs__item">
+                <select
+                  // onChange={productInfoTitleHandler}
+                  onChange={(event: React.ChangeEvent<HTMLSelectElement>) => changeInfoBlock(item.id, 'title', event.target.value)}
+                  // value={productInfoTitle}
+                  value={item.title}
+                  className='inputs__item__name'
+                  name="inputs__item__name">
+                  <option value=""></option>
+                  {productInfoByTypeID.map((type) => 
+                    <option key={type._id} value={type.title}>{type.title}</option>
+                  )}
+                </select>
+                <label className='inputs__item__label' htmlFor="inputs__item__name">Виды характеристик:</label>
+              </div>
+              <div className="inputs__item">
+                <input
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeInfoBlock(item.id, 'description', event.target.value)}
+                  value={item.description}
+                  className='inputs__item__name' type="text" name="inputs__item__name"/>
+                <label className='inputs__item__label' htmlFor="inputs__item__name">Описание:</label>
+              </div>
+              <button
+                className='inputs__addButton'
+                onClick={() => removeInfo(item.id)}
+                >
+                  Удалить
+              </button>
+            </div>
+            )
+          )
+        }
+
+
         <div className="inputs__files">
           <div className="inputs__files_block">
             <div className="inputs__files__title">
-              Book cover:
+              Изображение продукта:
             </div>
             <input
               onChange={imageHandler}
               className='inputs__files_display' type="file" name="label_for_file" id="label_for_file" />
-            <label className='inputs__files__label' htmlFor="label_for_file">Select file</label>
+            <label className='inputs__files__label' htmlFor="label_for_file">Виберите файл</label>
           </div>
           <div className="inputs__files__view">
             <img  className='inputs__files__view_img' src={showImg}/>
@@ -247,7 +289,7 @@ const AddProductInner: FC = () => {
           type="submit"
           className='addproduct__button_add'
         >
-          Add Product
+          Добавить товар
         </button>
       </div>
     </form>

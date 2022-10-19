@@ -17,7 +17,7 @@ const ProductInfoSchema: Schema = new Schema<IProductInfo>({
   },
   typeID: {
     type: Schema.Types.ObjectId,
-    ref: 'Product',
+    ref: 'Type',
     required: true,
   },
 },

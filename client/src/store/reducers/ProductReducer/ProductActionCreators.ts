@@ -13,6 +13,7 @@ interface IProductAdd {
 export const addProduct = createAsyncThunk(
   'PRODUCT/addProduct',
   async (data: IProductAdd, {rejectWithValue}) => {
+    console.log(data)
     try {
       const newProduct = await (await ProductService.addProduct(data.product)).data;
       const addInfo = async (array: IProductInfoNew[]) => {
@@ -46,6 +47,18 @@ export const getProductByID = createAsyncThunk(
   async (id: string, {rejectWithValue}) => {
     try {
       return await (await ProductService.getProductByID(id)).data;
+      
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
+
+export const getAllProductsInfo = createAsyncThunk(
+  'PRODUCT/getAllProductsInfo',
+  async (_, {rejectWithValue}) => {
+    try {
+      return await (await ProductInfoService.getAllProductsInfo()).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)
