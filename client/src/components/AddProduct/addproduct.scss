@@ -43,12 +43,18 @@
 
 .inputs {
   &__addButton {
+    width: 220px;
     padding: 5px;
     border: 1px solid grey;
   }
 
-  &__addDescription {
-
+  &__addInfoBlock {
+    display: flex;
+    width: 100%;
+    padding-top: 30px;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
   }
 }
 

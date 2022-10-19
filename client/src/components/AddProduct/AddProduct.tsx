@@ -227,7 +227,7 @@ const AddProductInner: FC = () => {
         />
         {
           infoBlock.map(item => (
-            <div key={item.id} className='inputs__addDescription'>
+            <div key={item.id} className='inputs__addInfoBlock'>
               {/* <div className="inputs__item">
                 <input
                   value={item.title}
@@ -261,7 +261,7 @@ const AddProductInner: FC = () => {
                 className='inputs__addButton'
                 onClick={() => removeInfo(item.id)}
                 >
-                  Удалить
+                  Удалить характеристику
               </button>
             </div>
             )
@@ -272,7 +272,7 @@ const AddProductInner: FC = () => {
         <div className="inputs__files">
           <div className="inputs__files_block">
             <div className="inputs__files__title">
-              Изображение продукта:
+              Изображение:
             </div>
             <input
               onChange={imageHandler}
@@ -285,12 +285,18 @@ const AddProductInner: FC = () => {
         </div>
       </div>
       <div className='addproduct__button'>
-        <button
+        <PrimaryButton 
+          text='Добавить товар' 
+          type="submit" 
+          size={300}
+          iconProps={addIcon}
+        />
+        {/* <button
           type="submit"
           className='addproduct__button_add'
         >
           Добавить товар
-        </button>
+        </button> */}
       </div>
     </form>
     
