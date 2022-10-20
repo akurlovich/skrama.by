@@ -15,15 +15,15 @@ export const addProduct = createAsyncThunk(
   async (data: IProductAdd, {rejectWithValue}) => {
     console.log(data)
     try {
-      const newProduct = await (await ProductService.addProduct(data.product)).data;
-      const addInfo = async (array: IProductInfoNew[]) => {
-        for (const item of array) {
-          await ProductInfoService.addProductInfo({...item, productID: newProduct._id})
-        }
-      }
-      addInfo(data.productInfo);
-      // await ProductInfoService.addProductInfo({productInfo: data.productInfo, productID: newProduct._id});
-      return newProduct;
+      // const newProduct = await (await ProductService.addProduct(data.product)).data;
+      // const addInfo = async (array: IProductInfoNew[]) => {
+      //   for (const item of array) {
+      //     await ProductInfoService.addProductInfo({...item, productID: newProduct._id})
+      //   }
+      // }
+      // await addInfo(data.productInfo);
+      // // await ProductInfoService.addProductInfo({productInfo: data.productInfo, productID: newProduct._id});
+      // return newProduct;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }
@@ -72,6 +72,20 @@ export const getProductInfoByProductID = createAsyncThunk(
     try {
       return await (await ProductInfoService.getProductsInfoByProductID(id)).data;
       
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
+
+export const addProductInfoType = createAsyncThunk(
+  'PRODUCT/addProductInfoType',
+  async (productInfo: IProductInfoNew, {rejectWithValue}) => {
+    console.log(productInfo)
+    try {
+      const newProductInfo = await (await ProductInfoService.addProductInfo({...productInfo, productID: productInfo.typeID, description: ''})).data;
+      
+      return newProductInfo;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }

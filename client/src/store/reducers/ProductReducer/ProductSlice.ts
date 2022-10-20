@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProductInfoResponse } from "../../../types/IProductInfoResponse";
 // import { IBook } from "../../../types/IBook";
 import { IProductResponse } from "../../../types/IProductResponse";
-import { addProduct, getAllProductsInfo, getProductByID, getProductInfoByProductID, getProducts } from "./ProductActionCreators";
+import { addProduct, addProductInfoType, getAllProductsInfo, getProductByID, getProductInfoByProductID, getProducts } from "./ProductActionCreators";
 // import { IGenreResponse } from "../../../types/IGenreResponse";
 // import { addBook, getAllGenres, getBookByID, getBooks, updateBookAmountByID } from "./ProductActionCreatores";
 
@@ -10,6 +10,7 @@ interface IProductState {
   product: IProductResponse,
   products: IProductResponse[],
   productInfo: IProductInfoResponse[],
+  productInfoNewType: IProductInfoResponse,
   productsAllInfo: IProductInfoResponse[],
   isLoading: boolean,
   error: string,
@@ -19,6 +20,7 @@ const initialState: IProductState = {
   product: {} as IProductResponse,
   products: [],
   productInfo: [],
+  productInfoNewType: {} as IProductInfoResponse,
   productsAllInfo: [],
   isLoading: false,
   error: '',
@@ -79,10 +81,6 @@ export const productSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    [getProductByID.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
     [getAllProductsInfo.pending.type]: (state) => {
       state.isLoading = true;
     },
@@ -92,6 +90,18 @@ export const productSlice = createSlice({
       state.error = '';
     },
     [getAllProductsInfo.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [addProductInfoType.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [addProductInfoType.fulfilled.type]: (state, action: PayloadAction<IProductInfoResponse>) => {
+      state.isLoading = false;
+      state.productInfoNewType = action.payload;
+      state.error = '';
+    },
+    [addProductInfoType.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },

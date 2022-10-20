@@ -9,10 +9,13 @@ import { getBrands } from '../../store/reducers/BrandReducer/BrandActionCreators
 import { IProductInfoNew } from '../../types/IProductInfoNew';
 import { CommandBarButton, IIconProps, PrimaryButton, Stack, initializeIcons } from '@fluentui/react';
 import { IProductInfoResponse } from '../../types/IProductInfoResponse';
+import { AddProductInfo } from './AddProductInfo';
+import { SelectOption } from '../UI/SelectOption';
+import { AddProductInfoType } from './AddProductInfoType';
 
 initializeIcons();
 
-interface IInfoBlock {
+export interface IInfoBlock {
   title: string,
   description: string,
   id: number,
@@ -22,7 +25,8 @@ const addIcon: IIconProps = { iconName: 'Add' };
 
 
 const AddProductInner: FC = () => {
-  const { error, productsAllInfo } = useAppSelector(state => state.productReducer);
+  //!
+  const { productsAllInfo } = useAppSelector(state => state.productReducer);
   const { types } = useAppSelector(state => state.typeReducer);
   const { brands } = useAppSelector(state => state.brandReducer);
   const [name, setName] = useState('');
@@ -33,12 +37,10 @@ const AddProductInner: FC = () => {
   const [typeID, setTypeID] = useState('');
   const [brandID, setBrandID] = useState('');
   const [showImg, setShowImg] = useState('');
-  const [productInfoByTypeID, setProductInfoByTypeID] = useState<IProductInfoResponse[]>([]);
-  const [productInfoTitle, setProductInfoTitle] = useState('');
-  // const [infoTitle, setInfoTitle] = useState('');
-  // const [infoDescription, setInfoDescription] = useState('');
+  //!-----------------------
+  // const [productInfoByTypeID, setProductInfoByTypeID] = useState<IProductInfoResponse[]>([]);
+  // const [productInfoTitle, setProductInfoTitle] = useState('');
   const [infoBlock, setInfoBlock] = useState<IInfoBlock[]>([]);
-  // const [description, setDescription] = useState('');
   const [addProductError, setAddProductError] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -60,16 +62,10 @@ const AddProductInner: FC = () => {
   const brandHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setBrandID(event.target.value);
   }
-  // const infoTitleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setInfoTitle(event.target.value);
-  // }
-  // const infoDescriptionHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setInfoDescription(event.target.value);
-  // }
 
-  const productInfoTitleHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setProductInfoTitle(event.target.value);
-  }
+  // const productInfoTitleHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setProductInfoTitle(event.target.value);
+  // }
 
   const addInfo = () => {
     setInfoBlock([...infoBlock, {title: '', description: '', id: Date.now()}]);
@@ -131,16 +127,18 @@ const AddProductInner: FC = () => {
     })()
   }, []);
 
-  useEffect(() => {
-    setProductInfoByTypeID(productsAllInfo.filter(item => item.typeID === typeID))
+  //!
+  // useEffect(() => {
+  //   setProductInfoByTypeID(productsAllInfo.filter(item => item.typeID === typeID))
   
-  }, [typeID])
+  // }, [typeID])
   
   
   return (
     <form onSubmit={handlerAddProduct} className='addproduct'>
       {addProductError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>}
       <div className="addproduct__inputs">
+        <AddProductInfoType/>
         <div className="inputs__item">
           <input
             onChange={nameHandler}
@@ -169,15 +167,9 @@ const AddProductInner: FC = () => {
             className='inputs__item__name' type="number" name="inputs__item__name"/>
           <label className='inputs__item__label' htmlFor="inputs__item__name">Количество:</label>
         </div>
-        {/* <button
-          className='inputs__addButton'
-          onClick={addInfo}
-          >
-            Добавить новую характеристику
-        </button>
-        <PrimaryButton text="Primary" color='white' />
-        <ButtonCommandBarExample/> */}
-        <div className="inputs__item">
+        <SelectOption label='Тип' value={typeID} onChangeHandler={typeHandler} optionArray={types}/>
+        <SelectOption label='Бренд' value={brandID} onChangeHandler={brandHandler} optionArray={brands}/>
+        {/* <div className="inputs__item">
           <select
             onChange={typeHandler}
             value={typeID}
@@ -187,18 +179,10 @@ const AddProductInner: FC = () => {
             {types.map((type) => 
               <option key={type._id} value={type._id}>{type.name}</option>
               )}
-            {/* <option value=""></option>
-            <option value="Computer Science">Computer Science</option>
-            <option value="Deteсtive">Deteсtive</option>
-            <option value="Dramma">Dramma</option>
-            <option value="Fantasy">Fantasy</option>
-            <option value="History">History</option>
-            <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Thriller">Thrillers</option> */}
           </select>
           <label className='inputs__item__label' htmlFor="inputs__item__name">Тип:</label>
-        </div>
-        <div className="inputs__item">
+        </div> */}
+        {/* <div className="inputs__item">
           <select
             onChange={brandHandler}
             value={brandID}
@@ -210,61 +194,53 @@ const AddProductInner: FC = () => {
             )}
           </select>
           <label className='inputs__item__label' htmlFor="inputs__item__name">Бренд:</label>
-        </div>
-        {/* <div className="inputs__item">
-          <textarea
-            onChange={descriptionHandler}
-            value={description}
-            className='inputs__item__textarea'
-            rows={8}
-            name="inputs__item__name"/>
-            <label className='inputs__item__label' htmlFor="inputs__item__name">Description:</label>
-          </div> */}
+        </div> */}
         <CommandBarButton
           iconProps={addIcon}
           text="Добавить новую характеристику"
           onClick={addInfo}
         />
         {
-          infoBlock.map(item => (
-            <div key={item.id} className='inputs__addInfoBlock'>
-              {/* <div className="inputs__item">
-                <input
-                  value={item.title}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeInfoBlock(item.id, 'title', event.target.value)}
-                  className='inputs__item__name' type="text" name="inputs__item__name"/>
-                <label className='inputs__item__label' htmlFor="inputs__item__name">Характеристика:</label>
-              </div> */}
-              <div className="inputs__item">
-                <select
-                  // onChange={productInfoTitleHandler}
-                  onChange={(event: React.ChangeEvent<HTMLSelectElement>) => changeInfoBlock(item.id, 'title', event.target.value)}
-                  // value={productInfoTitle}
-                  value={item.title}
-                  className='inputs__item__name'
-                  name="inputs__item__name">
-                  <option value=""></option>
-                  {productInfoByTypeID.map((type) => 
-                    <option key={type._id} value={type.title}>{type.title}</option>
-                  )}
-                </select>
-                <label className='inputs__item__label' htmlFor="inputs__item__name">Виды характеристик:</label>
-              </div>
-              <div className="inputs__item">
-                <input
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeInfoBlock(item.id, 'description', event.target.value)}
-                  value={item.description}
-                  className='inputs__item__name' type="text" name="inputs__item__name"/>
-                <label className='inputs__item__label' htmlFor="inputs__item__name">Описание:</label>
-              </div>
-              <button
-                className='inputs__addButton'
-                onClick={() => removeInfo(item.id)}
-                >
-                  Удалить характеристику
-              </button>
-            </div>
-            )
+          infoBlock.map(item => 
+            <AddProductInfo 
+              key={item.id}
+              item={item}
+              typeID={typeID}
+              productsAllInfo={productsAllInfo}
+              removeInfo={removeInfo}
+              changeInfoBlock={changeInfoBlock}
+            />
+            // <div key={item.id} className='inputs__addInfoBlock'>
+            //   <div className="inputs__item">
+            //     <select
+            //       // onChange={productInfoTitleHandler}
+            //       onChange={(event: React.ChangeEvent<HTMLSelectElement>) => changeInfoBlock(item.id, 'title', event.target.value)}
+            //       // value={productInfoTitle}
+            //       value={item.title}
+            //       className='inputs__item__name'
+            //       name="inputs__item__name">
+            //       <option value=""></option>
+            //       {productInfoByTypeID.map((type) => 
+            //         <option key={type._id} value={type.title}>{type.title}</option>
+            //       )}
+            //     </select>
+            //     <label className='inputs__item__label' htmlFor="inputs__item__name">Виды характеристик:</label>
+            //   </div>
+            //   <div className="inputs__item">
+            //     <input
+            //       onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeInfoBlock(item.id, 'description', event.target.value)}
+            //       value={item.description}
+            //       className='inputs__item__name' type="text" name="inputs__item__name"/>
+            //     <label className='inputs__item__label' htmlFor="inputs__item__name">Описание:</label>
+            //   </div>
+            //   <button
+            //     className='inputs__addButton'
+            //     onClick={() => removeInfo(item.id)}
+            //     >
+            //       Удалить характеристику
+            //   </button>
+            // </div>
+            
           )
         }
 

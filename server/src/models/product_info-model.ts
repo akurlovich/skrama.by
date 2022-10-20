@@ -8,7 +8,7 @@ const ProductInfoSchema: Schema = new Schema<IProductInfo>({
   },
   description: {
     type: String,
-    required: true,
+    // required: true,
   },
   productID: {
     type: Schema.Types.ObjectId,
