@@ -30,21 +30,21 @@ const AddProductInfoTypeInner: FC<IProps> = ({types}) => {
   }
   
   return (
-    <>
+    <div className='addproduct__infotype'>
       <SelectOption label='Тип' value={typeID} onChangeHandler={typeHandler} optionArray={types}/>
       <TextField 
         value={title}
         onChange={titleHandler}
         label="Характеристика:" 
-        underlined 
-        required 
-        placeholder="Введите название" />
+        underlined  
+        placeholder="Введите название" 
+      />
       <CommandBarButton
         iconProps={addIcon}
         text="Добавить тип"
         onClick={infoTypeHandler}
       />
-  </>
+  </div>
   )
 }
 
