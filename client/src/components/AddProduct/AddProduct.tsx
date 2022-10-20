@@ -23,9 +23,7 @@ export interface IInfoBlock {
 
 const addIcon: IIconProps = { iconName: 'Add' };
 
-
 const AddProductInner: FC = () => {
-  //!
   const { productsAllInfo } = useAppSelector(state => state.productReducer);
   const { types } = useAppSelector(state => state.typeReducer);
   const { brands } = useAppSelector(state => state.brandReducer);
@@ -37,9 +35,6 @@ const AddProductInner: FC = () => {
   const [typeID, setTypeID] = useState('');
   const [brandID, setBrandID] = useState('');
   const [showImg, setShowImg] = useState('');
-  //!-----------------------
-  // const [productInfoByTypeID, setProductInfoByTypeID] = useState<IProductInfoResponse[]>([]);
-  // const [productInfoTitle, setProductInfoTitle] = useState('');
   const [infoBlock, setInfoBlock] = useState<IInfoBlock[]>([]);
   const [addProductError, setAddProductError] = useState(false);
   const dispatch = useAppDispatch();
@@ -138,7 +133,7 @@ const AddProductInner: FC = () => {
     <form onSubmit={handlerAddProduct} className='addproduct'>
       {addProductError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>}
       <div className="addproduct__inputs">
-        <AddProductInfoType/>
+        <AddProductInfoType types={types}/>
         <div className="inputs__item">
           <input
             onChange={nameHandler}
