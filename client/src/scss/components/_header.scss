@@ -3,6 +3,7 @@
 .header {
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
+  background: #FAFAFB;
 
   .container {
     display: flex;
@@ -20,6 +21,12 @@
 
   &__logo {
     display: flex;
+
+    &_info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
     img {
       margin-right: 15px;

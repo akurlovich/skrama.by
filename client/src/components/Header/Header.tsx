@@ -35,16 +35,16 @@ export const Header: FC = () => {
         <Link to="/">
           <div className="header__logo">
             <img width="75" src={logoSvg} alt="Pizza logo" />
-            <div>
+            <div className="header__logo_info">
               <h1>ООО "СКРАМ Материалы"</h1>
               <p>Кровельные и строительные материалы</p>
               <p>+375(44)-984-67-46</p>
             </div>
           </div>
         </Link>
-        <button onClick={() => console.log('product', products, 'brand', brands, 'types', types, 'sorted', sortByType)}>
+        {/* <button onClick={() => console.log('product', products, 'brand', brands, 'types', types, 'sorted', sortByType)}>
           !!!!!!!
-        </button>
+        </button> */}
         <Search />
         <div className="header__cart">
           {location.pathname !== '/cart' && (
