@@ -20,17 +20,7 @@ interface IProps {
 }
 
 const AddProductInfoInner: FC<IProps> = ({typeID, removeInfo, item, productsAllInfo,changeInfoBlock}) => {
-  // const { productsAllInfo } = useAppSelector(state => state.productReducer);
   const [productInfoByTypeID, setProductInfoByTypeID] = useState<IProductInfoResponse[]>([]);
-  // const dispatch = useAppDispatch();
-
-  console.log(typeID)
-
-  // useEffect(() => {
-  //   (async () => {
-  //     await dispatch(getAllProductsInfo());
-  //   })()
-  // }, []);
 
   useEffect(() => {
     setProductInfoByTypeID(productsAllInfo.filter(item => item.typeID === typeID))

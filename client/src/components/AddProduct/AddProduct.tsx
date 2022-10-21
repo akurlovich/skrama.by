@@ -7,8 +7,7 @@ import { addProduct, getAllProductsInfo } from '../../store/reducers/ProductRedu
 import { getTypes } from '../../store/reducers/TypeReducer/TypeActionCreators';
 import { getBrands } from '../../store/reducers/BrandReducer/BrandActionCreators';
 import { IProductInfoNew } from '../../types/IProductInfoNew';
-import { CommandBarButton, IIconProps, PrimaryButton, Stack, initializeIcons, TextField } from '@fluentui/react';
-import { IProductInfoResponse } from '../../types/IProductInfoResponse';
+import { CommandBarButton, IIconProps, PrimaryButton, initializeIcons, TextField } from '@fluentui/react';
 import { AddProductInfo } from './AddProductInfo';
 import { SelectOption } from '../UI/SelectOption';
 import { AddProductInfoType } from './AddProductInfoType';
@@ -59,10 +58,6 @@ const AddProductInner: FC = () => {
   const brandHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setBrandID(event.target.value);
   }
-
-  // const productInfoTitleHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setProductInfoTitle(event.target.value);
-  // }
 
   const addInfo = () => {
     setInfoBlock([...infoBlock, {title: '', description: '', id: Date.now()}]);
@@ -130,110 +125,85 @@ const AddProductInner: FC = () => {
   
   return (
     <div className="addproduct__wrapper">
+      {addProductError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>}
       <AddProductNavButtons setShowAddBlock={showAddBlockHandler}/>
-      {showAddBlock.type && <div>TYPE</div>}
-      {showAddBlock.infoType && <AddProductInfoType types={types}/>}
-      {showAddBlock.product && (
-        <form onSubmit={handlerAddProduct} className='addproduct'>
-          {addProductError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>}
-          <div className="addproduct__inputs">
-            <TextField 
-              value={name}
-              onChange={nameHandler}
-              label="Название:" 
-              underlined  
-            />
-            <TextField 
-              value={price}
-              onChange={priceHandler}
-              label="Цена:" 
-              underlined  
-            />
-            <TextField 
-              value={rating}
-              onChange={ratingHandler}
-              label="Рейтинг:" 
-              underlined  
-            />
-            <TextField 
-              value={count}
-              onChange={countHandler}
-              label="Количество:" 
-              underlined  
-            />
-            {/* <div className="inputs__item">
-              <input
-                onChange={nameHandler}
+      <div className="addproduct__container">
+        {showAddBlock.type && <div>TYPE</div>}
+        {showAddBlock.infoType && <AddProductInfoType types={types}/>}
+        {showAddBlock.product && (
+          <form onSubmit={handlerAddProduct} className='addproduct'>
+            <div className="addproduct__inputs">
+              <TextField 
                 value={name}
-                className='inputs__item__name' type="text" name="inputs__item__name"  />
-              <label className='inputs__item__label' htmlFor="inputs__item__name">Название:</label>
-            </div> */}
-            {/* <div className="inputs__item">
-              <input
-                onChange={priceHandler}
+                onChange={nameHandler}
+                label="Название:" 
+                underlined  
+              />
+              <TextField 
                 value={price}
-                className='inputs__item__name' type="number" name="inputs__item__name"  />
-              <label className='inputs__item__label' htmlFor="inputs__item__name">Цена</label>
-            </div> */}
-            {/* <div className="inputs__item">
-              <input
-                onChange={ratingHandler}
+                onChange={priceHandler}
+                label="Цена:" 
+                underlined  
+              />
+              <TextField 
                 value={rating}
-                className='inputs__item__name' type="number" name="inputs__item__name"/>
-              <label className='inputs__item__label' htmlFor="inputs__item__name">Рейтинг:</label>
-            </div> */}
-            {/* <div className="inputs__item">
-              <input
-                onChange={countHandler}
+                onChange={ratingHandler}
+                label="Рейтинг:" 
+                underlined  
+              />
+              <TextField 
                 value={count}
-                className='inputs__item__name' type="number" name="inputs__item__name"/>
-              <label className='inputs__item__label' htmlFor="inputs__item__name">Количество:</label>
-            </div> */}
-            <SelectOption label='Тип' value={typeID} onChangeHandler={typeHandler} optionArray={types}/>
-            <SelectOption label='Бренд' value={brandID} onChangeHandler={brandHandler} optionArray={brands}/>
-            <CommandBarButton
-              iconProps={addIcon}
-              text="Добавить новую характеристику"
-              onClick={addInfo}
-            />
-            {
-              infoBlock.map(item => 
-                <AddProductInfo 
-                  key={item.id}
-                  item={item}
-                  typeID={typeID}
-                  productsAllInfo={productsAllInfo}
-                  removeInfo={removeInfo}
-                  changeInfoBlock={changeInfoBlock}
-                />
-              )
-            }
+                onChange={countHandler}
+                label="Количество:" 
+                underlined  
+              />
+              <SelectOption label='Тип' value={typeID} onChangeHandler={typeHandler} optionArray={types}/>
+              <SelectOption label='Бренд' value={brandID} onChangeHandler={brandHandler} optionArray={brands}/>
 
-            <div className="inputs__files">
-              <div className="inputs__files_block">
-                <div className="inputs__files__title">
-                  Изображение:
+              <CommandBarButton
+                iconProps={addIcon}
+                text="Добавить новую характеристику"
+                onClick={addInfo}
+              />
+              {
+                infoBlock.map(item => 
+                  <AddProductInfo 
+                    key={item.id}
+                    item={item}
+                    typeID={typeID}
+                    productsAllInfo={productsAllInfo}
+                    removeInfo={removeInfo}
+                    changeInfoBlock={changeInfoBlock}
+                  />
+                )
+              }
+
+              <div className="inputs__files">
+                <div className="inputs__files_block">
+                  <div className="inputs__files__title">
+                    Изображение:
+                  </div>
+                  <input
+                    onChange={imageHandler}
+                    className='inputs__files_display' type="file" name="label_for_file" id="label_for_file" />
+                  <label className='inputs__files__label' htmlFor="label_for_file">Виберите файл</label>
                 </div>
-                <input
-                  onChange={imageHandler}
-                  className='inputs__files_display' type="file" name="label_for_file" id="label_for_file" />
-                <label className='inputs__files__label' htmlFor="label_for_file">Виберите файл</label>
-              </div>
-              <div className="inputs__files__view">
-                <img  className='inputs__files__view_img' src={showImg}/>
+                <div className="inputs__files__view">
+                  <img  className='inputs__files__view_img' src={showImg}/>
+                </div>
               </div>
             </div>
-          </div>
-          <div className='addproduct__button'>
-            <PrimaryButton 
-              text='Добавить товар' 
-              type="submit" 
-              size={3000}
-              iconProps={addIcon}
-            />
-          </div>
-        </form>
-      )}
+            <div className='addproduct__button'>
+              <PrimaryButton 
+                text='Добавить товар' 
+                type="submit" 
+                size={3000}
+                iconProps={addIcon}
+              />
+            </div>
+          </form>
+        )}
+      </div>
     </div>
     
   );

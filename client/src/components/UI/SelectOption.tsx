@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { IBrandResponse } from '../../types/IBrandResponse';
-import { IProductInfoResponse } from '../../types/IProductInfoResponse';
 import { ITypeResponse } from '../../types/ITypeResponse';
 
 interface IProps {
@@ -18,12 +17,11 @@ const SelectOptionInner: FC<IProps> = ({label, onChangeHandler, value, optionArr
         value={value}
         className='inputs__item__name'
         name="inputs__item__name">
-        <option value=""></option>
+        <option value='' disabled>{`Выберите ${label}`}</option>
         {optionArray.map((type) => 
           <option key={type._id} value={type._id}>{type.name}</option>
           )}
       </select>
-      <label className='inputs__item__label' htmlFor="inputs__item__name">{label}:</label>
     </div>
   )
 }
