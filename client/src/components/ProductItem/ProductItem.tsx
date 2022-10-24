@@ -23,7 +23,7 @@ const ProductItemInner:FC = () => {
         <div className="productitem__wrapper">
           <div className="productitem__container">
             <div className="productitem__imageblock">
-              <img className="productitem__image" src={SERVER_URL + foundProduct?.coverImage} alt="book cover"/>
+              <img className="productitem__image" src={SERVER_URL + foundProduct?.coverImage} alt="product cover"/>
             </div>
             <div className="productitem__info">
               <div className="productitem__title">{foundProduct?.name}</div>

@@ -3,7 +3,7 @@ import React, { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Categories } from "../Categories";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { ProductCard } from "../ProductCard/ProductCard";
+import { ProductCard } from "../ProductCard_/ProductCard";
 import { getProducts } from "../../store/reducers/ProductReducer/ProductActionCreators";
 
 interface IProps {
@@ -45,35 +45,19 @@ const ProductsListInner: FC<IProps> = ({searchValue}) => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          // onClickCategory={setCategoryId}
-          // categoryId={5}
-        />
-        {/* <Sort
-          // onClickSortType={setSortType}
-          sortType={sortType.name}
-        /> */}
+        <Categories/>
       </div>
-      {/* <h2 className="content__title">All Pizza</h2> */}
-      {/* {status === 'error' ? (
-        <div className="content__error-info">
-          <h2>Have some error...</h2>
-          <p>Please, try late.</p>
+        <div className="content__items">
+          {/* {status === 'loading' ? skeletons : pizzas} */}
+          {productByType.map((type) => 
+            <ProductCard key={type._id} productID={type._id} />
+          )}
+          {/* <BookBlock title="Поликарбонат" imgSrc={logoSvg}/>
+          <BookBlock title="Штакетник" imgSrc={logoSvg}/>
+          <BookBlock title="Профнастил" imgSrc={logoSvg}/> */}
+          {/* <BookBlock title="Металлочерепича" imgSrc={logoSvg}/>
+          <BookBlock title="Прозрачный шифер" imgSrc={logoSvg}/> */}
         </div>
-      )
-
-        : ( */}
-          <div className="content__items">
-            {/* {status === 'loading' ? skeletons : pizzas} */}
-            {productByType.map((type) => 
-              <ProductCard key={type._id} productID={type._id} />
-            )}
-            {/* <BookBlock title="Поликарбонат" imgSrc={logoSvg}/>
-            <BookBlock title="Штакетник" imgSrc={logoSvg}/>
-            <BookBlock title="Профнастил" imgSrc={logoSvg}/> */}
-            {/* <BookBlock title="Металлочерепича" imgSrc={logoSvg}/>
-            <BookBlock title="Прозрачный шифер" imgSrc={logoSvg}/> */}
-          </div>
         {/* ) */}
       {/* } */}
       {/* <Pagination currentPage={pageCount} onChangePage={setCurrentPage}/> */}

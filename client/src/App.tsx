@@ -10,6 +10,7 @@ import { ProductsList } from "./components/ProductsList/ProductsList";
 import { ProductItem } from "./components/ProductItem/ProductItem";
 import { PageNotFound } from "./components/PageNotFound/PageNotFound";
 import { AdminAuthRouter } from "./components/RoutersComponents/AdminAuth/AdminAuthRouter";
+import { ProductListItems } from "./components/ProductListItems";
 
 const App: FC = () => {
 
@@ -23,7 +24,8 @@ const App: FC = () => {
             <AddProduct/>
           </AdminAuthRouter>
         }/>
-        <Route path="products" element={<ProductsList/>}/>
+        {/* <Route path="products" element={<ProductsList/>}/> */}
+        <Route path="products" element={<ProductListItems/>}/>
         <Route path="product/:id" element={<ProductItem/>}/>
         <Route path="*" element={<PageNotFound/>}/>
       </Route>
