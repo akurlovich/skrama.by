@@ -34,12 +34,12 @@ const ProductSortItemsInner:FC<IProps> = ({item}) => {
   return (
     <div className="productsortitems" onClick={() => navigate(`/product/${item._id}`)}>
       <div className="productsortitems__wrapper">
+        <div className="productsortitems__title">{item.name}</div>
         <div className="productsortitems__container">
           <div className="productsortitems__imageblock">
             <img className="productsortitems__image" src={SERVER_URL + item.coverImage} alt="product cover"/>
           </div>
           <div className="productsortitems__info">
-            <div className="productsortitems__title">Поликарбонат</div>
             <div className="productsortitems__rating">
               <img src={starRatingSvg}/>
               <img src={starRatingSvg}/>
@@ -50,7 +50,10 @@ const ProductSortItemsInner:FC<IProps> = ({item}) => {
                 8 просмотров
               </div>
             </div>
-            <div className="productsortitems__price">{`${item.price} руб.`}</div>
+            {/* <div className="productsortitems__addinfo">
+              <div className="">Толщина:</div>
+              <div className="">4мм</div>
+            </div> */}
             <div className="productsortitems__addinfo">
               <div className="">Плотность:</div>
               <div className="">0,46кг/м2</div>
@@ -63,6 +66,7 @@ const ProductSortItemsInner:FC<IProps> = ({item}) => {
               <div className="">Цвет:</div>
               <div className="">прозрачный</div>
             </div>
+            <div className="productsortitems__price">{`${item.price} руб.`}</div>
             {/* <div className="productsortitems__cartinfo">
               <div className="productsortitems__cartinfo_count">
                 <div className="productsortitems__cartinfo_block">
