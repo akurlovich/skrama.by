@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import './productitem.scss';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SERVER_URL } from '../../constants/http';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // @ts-ignore
 import starRatingSvg from '../../assets/img/star_rating.png';
 // @ts-ignore
@@ -11,11 +11,29 @@ import minusSvg from '../../assets/img/minus.png';
 import plusSvg from '../../assets/img/plus.png';
 // @ts-ignore
 import cartSvg from '../../assets/img/cart.svg';
+import { CommandBarButton, IIconProps, initializeIcons } from '@fluentui/react';
+import { deleteProductByID } from '../../store/reducers/ProductReducer/ProductActionCreators';
+
+initializeIcons();
+
+const deleteIcon: IIconProps = { iconName: 'Cancel' };
+const editIcon: IIconProps = { iconName: 'Edit' };
 
 const ProductItemInner:FC = () => {
-  const { products } = useAppSelector(state => state.productReducer)
+  const { products } = useAppSelector(state => state.productReducer);
+  const admin = true;
   let params = useParams();
   const foundProduct = products.find(item => item._id === params.id);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const deleteProductHandler = async () => {
+    if (params.id) {
+      await dispatch(deleteProductByID(params.id));
+      alert(`Товар ${foundProduct?.name} удален!`)
+      navigate(`/products`);
+    }
+  }
   
   return (
     <>
@@ -26,7 +44,23 @@ const ProductItemInner:FC = () => {
               <img className="productitem__image" src={SERVER_URL + foundProduct?.coverImage} alt="product cover"/>
             </div>
             <div className="productitem__info">
-              <div className="productitem__title">{foundProduct?.name}</div>
+              <div className="productitem__titleblock">
+                <div className="productitem__title">{foundProduct?.name}</div>
+                {admin && (
+                  <div className="productitem__title_btns">
+                  <CommandBarButton
+                    iconProps={editIcon}
+                    text="Редактировать"
+                    
+                  />
+                  <CommandBarButton
+                    iconProps={deleteIcon}
+                    text="Удалить"
+                    onClick={deleteProductHandler}
+                  />
+                </div>)
+              }
+              </div>
               <div className="productitem__rating">
                 <img src={starRatingSvg}/>
                 <img src={starRatingSvg}/>

@@ -19,6 +19,10 @@ export default class ProductService {
     return serverApi.get<IProductResponse>(`/product/${id}`);
   };
 
+  static async deleteProductByID(id: string): Promise<AxiosResponse<IProductResponse>> {
+    return serverApi.delete<IProductResponse>(`/product/${id}`);
+  };
+
   // static async updateProductAmountByID(newProduct: IProductUpdate): Promise<AxiosResponse<IProductResponse>> {
   //   return serverApi.put<IProductResponse>(`/product`, newProduct);
   // };

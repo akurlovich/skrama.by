@@ -92,6 +92,18 @@ export const addProductInfoType = createAsyncThunk(
   }
 );
 
+export const deleteProductByID = createAsyncThunk(
+  'PRODUCT/deleteProductByID',
+  async (id: string, {rejectWithValue}) => {
+    try {
+      return await (await ProductService.deleteProductByID(id)).data;
+      
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
+
 // export const updateProductAmountByID = createAsyncThunk(
 //   'PRODUCT/updateProductAmountByID',
 //   async (newProduct: IProductUpdate, {rejectWithValue}) => {
