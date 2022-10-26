@@ -1,14 +1,16 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom';
 import CartEmpty from './CartEmpty';
 import CartItem from './CartItem';
 // import { ICartItem } from '../types/ICartItem';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { clearItems } from '../../store/reducers/CartReducer/CartSlice';
+import { ConfirmOrder } from '../ConfirmOrder/ConfirmOrder';
 
 const Cart: FC = () => {
   const dispatch = useAppDispatch();
   const { items, totalPrice } = useAppSelector(state => state.cartReducer);
+  const [modal, setModal] = useState(false);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
   const onClickClear = () => {
@@ -21,6 +23,7 @@ const Cart: FC = () => {
 
   return (
     <div className="container container--cart">
+      {modal && <ConfirmOrder setModal={setModal} onClickClear={onClickClear}/>}
       <div className="cart">
         <div className="cart__top">
           <h2 className="content__title">
@@ -123,13 +126,16 @@ const Cart: FC = () => {
 
               <span>Вернуться назад</span>
             </Link>
-            <div className="button pay-btn">
-              <span>Оплатить сейчас</span>
+            <div 
+              className="button pay-btn"
+              onClick={() => setModal(true)}
+              >
+              <span>Оформить заказ</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> 
   )
 }
 

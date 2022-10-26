@@ -10,7 +10,7 @@ import { IProductInfoNew } from '../../types/IProductInfoNew';
 import { CommandBarButton, IIconProps, PrimaryButton, initializeIcons, TextField } from '@fluentui/react';
 import { AddProductInfo } from './AddProductInfo';
 import { SelectOption } from '../UI/SelectOption';
-import { AddProductInfoType } from './AddProductInfoType';
+import { AddProductInfoType } from './AddProductInfoType/AddProductInfoType';
 import { AddProductNavButtons, IShowProps } from './AddProductNavButtons';
 
 initializeIcons();
