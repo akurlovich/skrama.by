@@ -5,29 +5,27 @@ import { SERVER_URL } from '../../constants/http';
 import { useNavigate, useParams } from 'react-router-dom';
 // @ts-ignore
 import starRatingSvg from '../../assets/img/star_rating.png';
-// @ts-ignore
-import minusSvg from '../../assets/img/minus.png';
-// @ts-ignore
-import plusSvg from '../../assets/img/plus.png';
-// @ts-ignore
-import cartSvg from '../../assets/img/cart.svg';
-import { getProducts } from '../../store/reducers/ProductReducer/ProductActionCreators';
+import { getAllProductsInfo, getProductInfoByProductID, getProducts } from '../../store/reducers/ProductReducer/ProductActionCreators';
 import { IProductResponse } from '../../types/IProductResponse';
+import { IProductInfoResponse } from '../../types/IProductInfoResponse';
 
 interface IProps {
   item: IProductResponse;
+  productsInfo: IProductInfoResponse[];
 }
 
-const ProductSortItemsInner:FC<IProps> = ({item}) => {
+const ProductSortItemsInner:FC<IProps> = ({item, productsInfo}) => {
   const navigate = useNavigate();
-  // const { products } = useAppSelector(state => state.productReducer)
+  // const { productsAllInfo } = useAppSelector(state => state.productReducer);
   // let params = useParams();
-  // const foundProduct = products.find(item => item._id === params.id);
-  // const dispatch = useAppDispatch();
+  const foundProductInfo = productsInfo.filter(i => i.productID === item._id);
+  const dispatch = useAppDispatch();
+  console.log(foundProductInfo);
+  console.log(productsInfo);
 
   // useEffect(() => {
   //   (async () => {
-  //     await dispatch(getProducts());
+  //     await dispatch(getAllProductsInfo());
   //   })()
   // }, []);
   
@@ -50,11 +48,14 @@ const ProductSortItemsInner:FC<IProps> = ({item}) => {
                 8 просмотров
               </div>
             </div>
+            {foundProductInfo.map(item => (
+              <div className="productsortitems__addinfo">
+                <div className="">{item.title}</div>
+                <div className="">{item.description}</div>
+              </div>
+              )) 
+            }
             {/* <div className="productsortitems__addinfo">
-              <div className="">Толщина:</div>
-              <div className="">4мм</div>
-            </div> */}
-            <div className="productsortitems__addinfo">
               <div className="">Плотность:</div>
               <div className="">0,46кг/м2</div>
             </div>
@@ -65,7 +66,7 @@ const ProductSortItemsInner:FC<IProps> = ({item}) => {
             <div className="productsortitems__addinfo">
               <div className="">Цвет:</div>
               <div className="">прозрачный</div>
-            </div>
+            </div> */}
             <div className="productsortitems__price">{`${item.price} руб.`}</div>
             {/* <div className="productsortitems__cartinfo">
               <div className="productsortitems__cartinfo_count">
@@ -86,24 +87,7 @@ const ProductSortItemsInner:FC<IProps> = ({item}) => {
             </div> */}
             
           </div>
-          {/* <div
-            // onClick={canselHandler}
-            className="productsortitems__cansel">
-            <FcCancel size={60}/>
-          </div> */}
         </div>
-        {/* <div className="productsortitems__description">
-          <div className="productsortitems__description_title">
-            Описание
-          </div>
-          <div className="productsortitems__description_line"></div>
-          <div className="productsortitems__description_main">
-            лучший в мире поликарбонта
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor nesciunt, et aliquid corrupti eligendi expedita accusamus officiis temporibus saepe laudantium. Accusamus laborum iste recusandae molestias perspiciatis porro consectetur nisi odio.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo quas architecto sed eligendi ullam, illo fugit temporibus dignissimos quisquam delectus perspiciatis ipsum soluta odit reprehenderit, fugiat consequuntur blanditiis! A, praesentium.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis provident doloremque aperiam ipsam doloribus. Labore laboriosam rerum provident earum numquam quam repellat, nesciunt at esse, nam eaque molestias deserunt quos.
-          </div>
-        </div> */}
       </div>
     </div>
 );

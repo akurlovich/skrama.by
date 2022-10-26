@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import './productitem.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SERVER_URL } from '../../constants/http';
@@ -12,7 +12,7 @@ import plusSvg from '../../assets/img/plus.png';
 // @ts-ignore
 import cartSvg from '../../assets/img/cart.svg';
 import { CommandBarButton, IIconProps, initializeIcons } from '@fluentui/react';
-import { deleteProductByID } from '../../store/reducers/ProductReducer/ProductActionCreators';
+import { deleteProductByID, getProductByID, getProductInfoByProductID } from '../../store/reducers/ProductReducer/ProductActionCreators';
 
 initializeIcons();
 
@@ -20,20 +20,29 @@ const deleteIcon: IIconProps = { iconName: 'Cancel' };
 const editIcon: IIconProps = { iconName: 'Edit' };
 
 const ProductItemInner:FC = () => {
-  const { products } = useAppSelector(state => state.productReducer);
+  const { product, productInfo } = useAppSelector(state => state.productReducer);
   const admin = true;
   let params = useParams();
-  const foundProduct = products.find(item => item._id === params.id);
+  // const foundProduct = products.find(item => item._id === params.id);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const deleteProductHandler = async () => {
     if (params.id) {
       await dispatch(deleteProductByID(params.id));
-      alert(`Товар ${foundProduct?.name} удален!`)
+      alert(`Товар ${product?.name} удален!`);
       navigate(`/products`);
     }
-  }
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (params.id) {
+        await dispatch(getProductInfoByProductID(params.id));
+        await dispatch(getProductByID(params.id));
+      }
+    })()
+  }, []);
   
   return (
     <>
@@ -41,11 +50,11 @@ const ProductItemInner:FC = () => {
         <div className="productitem__wrapper">
           <div className="productitem__container">
             <div className="productitem__imageblock">
-              <img className="productitem__image" src={SERVER_URL + foundProduct?.coverImage} alt="product cover"/>
+              <img className="productitem__image" src={SERVER_URL + product?.coverImage} alt="product cover"/>
             </div>
             <div className="productitem__info">
               <div className="productitem__titleblock">
-                <div className="productitem__title">{foundProduct?.name}</div>
+                <div className="productitem__title">{product?.name}</div>
                 {admin && (
                   <div className="productitem__title_btns">
                   <CommandBarButton
@@ -71,8 +80,16 @@ const ProductItemInner:FC = () => {
                   8 просмотров
                 </div>
               </div>
-              <div className="productitem__price">{`${foundProduct?.price} руб.`}</div>
-              <div className="productitem__addinfo">
+              <div className="productitem__price">{`${product?.price} руб.`}</div>
+              {
+                productInfo.map(item => (
+                  <div className="productitem__addinfo">
+                    <div className="">{item.title}:</div>
+                    <div className="">{item.description}</div>
+                  </div>
+                ))
+              }
+              {/* <div className="productitem__addinfo">
                 <div className="">Плотность:</div>
                 <div className="">0,46кг/м2</div>
               </div>
@@ -83,7 +100,7 @@ const ProductItemInner:FC = () => {
               <div className="productitem__addinfo">
                 <div className="">Цвет:</div>
                 <div className="">прозрачный</div>
-              </div>
+              </div> */}
               <div className="productitem__cartinfo">
                 <div className="productitem__cartinfo_count">
                   <div className="productitem__cartinfo_block">

@@ -1,12 +1,12 @@
 import React, { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getProducts } from '../../store/reducers/ProductReducer/ProductActionCreators';
+import { getAllProductsInfo, getProducts } from '../../store/reducers/ProductReducer/ProductActionCreators';
 import { ProductItem } from '../ProductItem/ProductItem';
 import { ProductSortItems } from '../ProductSortItems';
 import './productlistitems.scss';
 
 const ProductListItemsInner:FC = () => {
-  const { products } = useAppSelector(state => state.productReducer)
+  const { products, productsAllInfo } = useAppSelector(state => state.productReducer);
   // let params = useParams();
   // const foundProduct = products.find(item => item._id === params.id);
   const dispatch = useAppDispatch();
@@ -14,6 +14,7 @@ const ProductListItemsInner:FC = () => {
   useEffect(() => {
     (async () => {
       await dispatch(getProducts());
+      await dispatch(getAllProductsInfo());
     })()
   }, []);
   
@@ -67,7 +68,7 @@ const ProductListItemsInner:FC = () => {
         </div>
         {
           products.map(item => 
-            <ProductSortItems key={item._id} item={item}/>
+            <ProductSortItems key={item._id} item={item} productsInfo={productsAllInfo}/>
             )
         }
           {/* <ProductSortItems/>

@@ -72,7 +72,7 @@ const AddProductInner: FC = () => {
       acc.cities.push(city);
       return acc;
     }, {map: {}, cities: []}).cities;
-    console.log(newFiltered);
+    // console.log(newFiltered);
     const newArr: IInfoBlock[] = [];
     for (let i = 0; i < newFiltered.length; i++) {
       // @ts-ignore
@@ -80,7 +80,7 @@ const AddProductInner: FC = () => {
       // setInfoBlock([...infoBlock, {title: '', description: '', id: Date.now()}]);
     }
     setInfoBlock(newArr)
-    console.log(infoBlock);
+    // console.log(infoBlock);
   }
 
   const removeInfo = (id: number) => {
