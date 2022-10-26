@@ -83,7 +83,7 @@ const ProductItemInner:FC = () => {
               <div className="productitem__price">{`${product?.price} руб.`}</div>
               {
                 productInfo.map(item => (
-                  <div className="productitem__addinfo">
+                  <div key={item._id} className="productitem__addinfo">
                     <div className="">{item.title}:</div>
                     <div className="">{item.description}</div>
                   </div>

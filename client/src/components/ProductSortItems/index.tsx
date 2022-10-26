@@ -49,7 +49,7 @@ const ProductSortItemsInner:FC<IProps> = ({item, productsInfo}) => {
               </div>
             </div>
             {foundProductInfo.map(item => (
-              <div className="productsortitems__addinfo">
+              <div key={item._id} className="productsortitems__addinfo">
                 <div className="">{item.title}</div>
                 <div className="">{item.description}</div>
               </div>
