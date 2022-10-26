@@ -2,7 +2,7 @@
 
 .button {
   display: inline-block;
-  background-color: $orange;
+  background-color: #40BFFF;
   border-radius: 30px;
   padding: 10px 20px;
   min-width: 100px;
@@ -25,11 +25,11 @@
   }
 
   &:hover {
-    background-color: darken($orange, 8%);
+    background-color: darken(#33A0FF, 8%);
   }
 
   &:active {
-    background-color: darken($orange, 12%);
+    background-color: darken(#33A0FF, 12%);
     transform: translateY(1px);
   }
 
