@@ -13,6 +13,8 @@ import plusSvg from '../../assets/img/plus.png';
 import cartSvg from '../../assets/img/cart.svg';
 import { CommandBarButton, IIconProps, initializeIcons } from '@fluentui/react';
 import { deleteProductByID, getProductByID, getProductInfoByProductID } from '../../store/reducers/ProductReducer/ProductActionCreators';
+import { addItem } from '../../store/reducers/CartReducer/CartSlice';
+import { ICartItem } from '../../types/ICartItem';
 
 initializeIcons();
 
@@ -33,6 +35,19 @@ const ProductItemInner:FC = () => {
       alert(`Товар ${product?.name} удален!`);
       navigate(`/products`);
     }
+  };
+
+  const addToCartHandler = () => {
+    const item: ICartItem = {
+      id: product._id,
+      title: product.name,
+      price: product.price,
+      imageUrl: SERVER_URL + product.coverImage,
+      type: product.typeID,
+      size: +product.rating,
+      count: 0,
+    };
+    dispatch(addItem(item));
   };
 
   useEffect(() => {
@@ -113,7 +128,7 @@ const ProductItemInner:FC = () => {
                   <img src={plusSvg} alt="" />
                   </div>
                 </div>
-                <div className="productitem__cart">
+                <div onClick={addToCartHandler} className="productitem__cart">
                   <img className="productitem__cart_img" src={cartSvg} alt="" />
                   <div className="productitem__cart_btn">В корзину</div>
                 </div>

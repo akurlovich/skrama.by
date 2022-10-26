@@ -1,7 +1,10 @@
-import React from 'react';
-import { useAppDispatch } from '../redux/hooks/redux';
-import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
-import { ICartItem } from '../types/ICartItem';
+import React, { FC } from 'react';
+import { useAppDispatch } from '../../hooks/redux';
+import { addItem, minusItem, removeItem } from '../../store/reducers/CartReducer/CartSlice';
+import { ICartItem } from '../../types/ICartItem';
+// import { useAppDispatch } from '../redux/hooks/redux';
+// import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
+// import { ICartItem } from '../types/ICartItem';
 
 interface CartItemProps {
   id: string;
@@ -13,7 +16,7 @@ interface CartItemProps {
   imageUrl: string;
 };
 
-const CartItem: React.FC<CartItemProps> = ({
+const CartItem: FC<CartItemProps> = ({
   id,
   title,
   type,

@@ -20,8 +20,8 @@ const ProductSortItemsInner:FC<IProps> = ({item, productsInfo}) => {
   // let params = useParams();
   const foundProductInfo = productsInfo.filter(i => i.productID === item._id);
   const dispatch = useAppDispatch();
-  console.log(foundProductInfo);
-  console.log(productsInfo);
+  // console.log(foundProductInfo);
+  // console.log(productsInfo);
 
   // useEffect(() => {
   //   (async () => {

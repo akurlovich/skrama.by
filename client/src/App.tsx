@@ -1,8 +1,6 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./components/RoutersComponents/MainLayout/MainLayout";
-import Cart from "./pages/Cart";
-import FullPizza from "./pages/FullPizza";
 import Home from "./components/Home/Home";
 import "./scss/app.scss";
 import { AddProduct } from "./components/AddProduct/AddProduct";
@@ -11,6 +9,7 @@ import { ProductItem } from "./components/ProductItem/ProductItem";
 import { PageNotFound } from "./components/PageNotFound/PageNotFound";
 import { AdminAuthRouter } from "./components/RoutersComponents/AdminAuth/AdminAuthRouter";
 import { ProductListItems } from "./components/ProductListItems";
+import Cart from "./components/Cart/Cart";
 
 const App: FC = () => {
 

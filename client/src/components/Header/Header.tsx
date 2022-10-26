@@ -1,33 +1,14 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 // @ts-ignore
 import logoSvg from '../../assets/img/logo.png';
-import { DEFAULT_TYPE_ID_POLIKARBONAT } from "../../constants/user";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { getBrands } from "../../store/reducers/BrandReducer/BrandActionCreators";
-import { getProducts } from "../../store/reducers/ProductReducer/ProductActionCreators";
-import { getTypes } from "../../store/reducers/TypeReducer/TypeActionCreators";
 import { Search } from "../Search";
 
 export const Header: FC = () => {
-  const { products } = useAppSelector(state => state.productReducer);
-  const { brands } = useAppSelector(state => state.brandReducer);
-  const { types } = useAppSelector(state => state.typeReducer);
-  // const { totalPrice, items } = useAppSelector(state => state.cartReducer);
-  // const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const { totalPrice, items } = useAppSelector(state => state.cartReducer);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const location = useLocation();
-  // const { searchValue } = useAppSelector(state => state.filterReducer);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    (async () => {
-      await dispatch(getProducts());
-      await dispatch(getBrands());
-      await dispatch(getTypes());
-    })()
-  }, [])
-  
-  const sortByType = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT)
 
   return (
     <div className="header">
@@ -42,14 +23,11 @@ export const Header: FC = () => {
             </div>
           </div>
         </Link>
-        {/* <button onClick={() => console.log('product', products, 'brand', brands, 'types', types, 'sorted', sortByType)}>
-          !!!!!!!
-        </button> */}
         <Search />
         <div className="header__cart">
           {location.pathname !== '/cart' && (
             <Link to="/cart" className="button button--cart">
-              <span>0 ₽</span>
+              <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"
@@ -80,7 +58,7 @@ export const Header: FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>0</span>
+              <span>{totalCount}</span>
             </Link>
           )}
         </div>
