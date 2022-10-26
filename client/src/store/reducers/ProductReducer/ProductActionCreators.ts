@@ -13,17 +13,19 @@ interface IProductAdd {
 export const addProduct = createAsyncThunk(
   'PRODUCT/addProduct',
   async (data: IProductAdd, {rejectWithValue}) => {
-    console.log(data)
+    // console.log(data)
     try {
-      // const newProduct = await (await ProductService.addProduct(data.product)).data;
-      // const addInfo = async (array: IProductInfoNew[]) => {
-      //   for (const item of array) {
-      //     await ProductInfoService.addProductInfo({...item, productID: newProduct._id})
-      //   }
-      // }
-      // await addInfo(data.productInfo);
-      // // await ProductInfoService.addProductInfo({productInfo: data.productInfo, productID: newProduct._id});
-      // return newProduct;
+      const newProduct = await (await ProductService.addProduct(data.product)).data;
+      if (newProduct) {
+        const addInfo = async (array: IProductInfoNew[]) => {
+          for (const item of array) {
+            await ProductInfoService.addProductInfo({...item, productID: newProduct._id})
+          }
+        }
+        await addInfo(data.productInfo);
+      }
+      // await ProductInfoService.addProductInfo({productInfo: data.productInfo, productID: newProduct._id});
+      return newProduct;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }

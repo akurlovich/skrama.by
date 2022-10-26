@@ -4,7 +4,7 @@ import { getAllProductsInfo } from '../../../store/reducers/ProductReducer/Produ
 import { IProductInfoResponse } from '../../../types/IProductInfoResponse';
 import { SelectOption } from '../../UI/SelectOption';
 import { IInfoBlock } from '../AddProduct';
-import { CommandBarButton, IIconProps, PrimaryButton, Stack, initializeIcons, CommandButton } from '@fluentui/react';
+import { CommandBarButton, IIconProps, PrimaryButton, Stack, initializeIcons, CommandButton, TextField } from '@fluentui/react';
 
 initializeIcons();
 
@@ -12,28 +12,32 @@ const cancelIcon: IIconProps = { iconName: 'Cancel' };
 
 interface IProps {
   typeID: string,
-  item: IInfoBlock,
+  items: IInfoBlock[],
   productsAllInfo: IProductInfoResponse[],
   removeInfo: (id: number) => void;
   changeInfoBlock: (id: number, key: string, value: string) => void;
 
 }
 
-const AddProductInfoInner: FC<IProps> = ({typeID, removeInfo, item, productsAllInfo,changeInfoBlock}) => {
+const AddProductInfoInner: FC<IProps> = ({typeID, removeInfo, items, productsAllInfo,changeInfoBlock}) => {
   const [productInfoByTypeID, setProductInfoByTypeID] = useState<IProductInfoResponse[]>([]);
+
+  const titleHandler = (event: string, title: string, id: number) => {
+    // setTitle(newValue || '');
+    // console.log(newValue)
+    changeInfoBlock(id, 'description', event);
+    // console.log(item.id)
+    
+  }
 
   useEffect(() => {
     setProductInfoByTypeID(productsAllInfo.filter(item => item.typeID === typeID))
-    console.log(productInfoByTypeID)
-    console.log(productsAllInfo)
   }, [typeID])
 
   return (
     <div className='inputs__addInfoBlock'>
-      <div className="inputs__item">
-        {/* <SelectOption label='Виды хараетеристик' value={item.title} optionArray={productInfoByTypeID} onChangeHandler={(event: React.ChangeEvent<HTMLSelectElement>) => changeInfoBlock(item.id, 'title', event.target.value)}/> */}
+      {/* <div className="inputs__item">
         <select
-          // onChange={productInfoTitleHandler}
           onChange={(event: React.ChangeEvent<HTMLSelectElement>) => changeInfoBlock(item.id, 'title', event.target.value)}
           // value={productInfoTitle}
           value={item.title}
@@ -52,8 +56,19 @@ const AddProductInfoInner: FC<IProps> = ({typeID, removeInfo, item, productsAllI
           value={item.description}
           className='inputs__item__name' type="text" name="inputs__item__name"/>
         <label className='inputs__item__label' htmlFor="inputs__item__name">Описание:</label>
-      </div>
-      <CommandButton iconProps={cancelIcon} text="Удалить характеристику" onClick={() => removeInfo(item.id)}/>
+      </div> */}
+      {items.map((type) => 
+        <TextField 
+          key={type.id}
+          // value={type.title}
+          onChange={(event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => (titleHandler(event.currentTarget.value, type.title, type.id))}
+          label={type.title}
+          underlined  
+          placeholder="Введите параметры" 
+        />
+        )
+      }
+      {/* <CommandButton iconProps={cancelIcon} text="Удалить характеристику" onClick={() => removeInfo(item.id)}/> */}
       {/* <button
         className='inputs__addButton'
         onClick={() => removeInfo(item.id)}

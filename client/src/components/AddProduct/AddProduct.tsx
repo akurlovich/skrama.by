@@ -60,7 +60,27 @@ const AddProductInner: FC = () => {
   }
 
   const addInfo = () => {
-    setInfoBlock([...infoBlock, {title: '', description: '', id: Date.now()}]);
+    const filltered = productsAllInfo.filter(item => item.typeID === typeID);
+    // const newFiltered = [...new Set(filltered.map(o => JSON.stringify(o)))].map(s => JSON.parse(s));
+    // @ts-ignore
+    const newFiltered = filltered.reduce((acc, city) => {
+      // @ts-ignore
+      if (acc.map[city.title]) return acc;
+      // @ts-ignore
+      acc.map[city.title] = true;
+      // @ts-ignore
+      acc.cities.push(city);
+      return acc;
+    }, {map: {}, cities: []}).cities;
+    console.log(newFiltered);
+    const newArr: IInfoBlock[] = [];
+    for (let i = 0; i < newFiltered.length; i++) {
+      // @ts-ignore
+      newArr.push({title: newFiltered[i].title, description: '', id: Date.now() + i})
+      // setInfoBlock([...infoBlock, {title: '', description: '', id: Date.now()}]);
+    }
+    setInfoBlock(newArr)
+    console.log(infoBlock);
   }
 
   const removeInfo = (id: number) => {
@@ -69,6 +89,7 @@ const AddProductInner: FC = () => {
 
   const changeInfoBlock = (id: number, key: string, value: string) => {
     setInfoBlock(infoBlock.map(i => i.id === id ? {...i, [key]: value} : i));
+    // console.log(infoBlock)
   }
  
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -165,7 +186,7 @@ const AddProductInner: FC = () => {
                 text="Добавить новую характеристику"
                 onClick={addInfo}
               />
-              {
+              {/* {
                 infoBlock.map(item => 
                   <AddProductInfo 
                     key={item.id}
@@ -176,7 +197,15 @@ const AddProductInner: FC = () => {
                     changeInfoBlock={changeInfoBlock}
                   />
                 )
-              }
+              } */}
+                  <AddProductInfo 
+                    // key={item.id}
+                    items={infoBlock}
+                    typeID={typeID}
+                    productsAllInfo={productsAllInfo}
+                    removeInfo={removeInfo}
+                    changeInfoBlock={changeInfoBlock}
+                  />
 
               <div className="inputs__files">
                 <div className="inputs__files_block">
