@@ -8,7 +8,7 @@ import { ProductsList } from "./components/ProductsList/ProductsList";
 import { ProductItem } from "./components/ProductItem/ProductItem";
 import { PageNotFound } from "./components/PageNotFound/PageNotFound";
 import { AdminAuthRouter } from "./components/RoutersComponents/AdminAuth/AdminAuthRouter";
-import { ProductListItems } from "./components/ProductListItems";
+import { ProductListItems } from "./components/ProductListItems/ProductListItems";
 import Cart from "./components/Cart/Cart";
 
 const App: FC = () => {

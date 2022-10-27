@@ -50,7 +50,6 @@ const Home: FC<IProps> = ({searchValue}) => {
 
   return (
     <div className="container">
-      <SuccessModal title='Заказ отправлен!'/>
       <div className="content__top">
         
       </div>

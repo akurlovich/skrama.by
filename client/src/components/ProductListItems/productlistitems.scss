@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');
 .productlistitems {
 
   &__wrapper {
@@ -21,10 +22,13 @@
       padding: 20px;
       
       &_title {
-        font-weight: 500;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
         font-size: 18px;
         line-height: 27px;
         color: #22262A;
+        text-decoration: underline;
       }
 
       &_text {
@@ -35,8 +39,12 @@
         color: #22262A;
         cursor: pointer;
 
-        &:active {
+        &:hover {
           color: #33A0FF;
+        }
+
+        &.active {
+          color:#33A0FF;
         }
       }
     }
