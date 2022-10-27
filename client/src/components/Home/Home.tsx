@@ -7,6 +7,7 @@ import './home.scss';
 import { getTypes } from "../../store/reducers/TypeReducer/TypeActionCreators";
 import { SERVER_URL } from "../../constants/http";
 import { ProductBlock } from "../ProductBlock/ProductBlock";
+import { SuccessModal } from "../UI/SuccessModal/SuccessModal";
 
 interface IProps {
   searchValue?: string;
@@ -49,6 +50,7 @@ const Home: FC<IProps> = ({searchValue}) => {
 
   return (
     <div className="container">
+      <SuccessModal title='Заказ отправлен!'/>
       <div className="content__top">
         
       </div>
