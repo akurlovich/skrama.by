@@ -29,6 +29,29 @@
         line-height: 27px;
         color: #22262A;
         text-decoration: underline;
+
+        &_btn {
+          padding: 10px;
+          border: 1px solid grey;
+          border-radius: 3px;
+          transition: 0.5s ease;
+          font-family: 'Raleway';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 27px;
+          // color: #22262A;
+
+          &:hover {
+            background-color: #F6F7F8;
+            transition: 0.5s ease;
+          }
+
+          &:active {
+            transform: scale(0.9);
+            transition: 0.5s ease;
+          }
+        }
       }
 
       &_text {

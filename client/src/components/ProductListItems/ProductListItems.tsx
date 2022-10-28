@@ -20,8 +20,8 @@ const ProductListItemsInner:FC = () => {
   // let params = useParams();
   // const foundProduct = products.find(item => item._id === params.id);
   const dispatch = useAppDispatch();
-  const [thicknessValue, setThicknessValue] = useState('');
-  const [densityValue, setDensityValue] = useState('');
+  // const [thicknessValue, setThicknessValue] = useState('');
+  // const [densityValue, setDensityValue] = useState('');
   const [searchBlockValue, setSearchBlockValue] = useState<ISearchBlockValue[]>([])
   
   const searchBlockValueHandler = (title: string, description: string) => {
@@ -33,7 +33,7 @@ const ProductListItemsInner:FC = () => {
       setSearchBlockValue([...searchBlockValue, {title, description, id: Date.now()}]);
 
     }
-    console.log(searchBlockValue)
+    // console.log(searchBlockValue)
   }
 
   const productsFillter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT);
@@ -135,6 +135,13 @@ const newFilteredItems: IProductInfoResponse[] = uniqItemsFilter(filltered, 'des
             </div>
           ))
         }
+        <div className="productlistitems__searchblock_item">
+          <button
+            onClick={() => setSearchBlockValue([])} 
+            className="productlistitems__searchblock_item_title_btn">
+            Очистить
+          </button>
+        </div>
         {/* <div className="productlistitems__searchblock_item">
           <div className="productlistitems__searchblock_item_title">
             Толщина
