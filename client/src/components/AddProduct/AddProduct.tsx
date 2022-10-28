@@ -8,10 +8,11 @@ import { getTypes } from '../../store/reducers/TypeReducer/TypeActionCreators';
 import { getBrands } from '../../store/reducers/BrandReducer/BrandActionCreators';
 import { IProductInfoNew } from '../../types/IProductInfoNew';
 import { CommandBarButton, IIconProps, PrimaryButton, initializeIcons, TextField } from '@fluentui/react';
-import { AddProductInfo } from './AddProductInfo';
+import { AddProductInfo } from './AddProductInfo/AddProductInfo';
 import { SelectOption } from '../UI/SelectOption';
 import { AddProductInfoType } from './AddProductInfoType/AddProductInfoType';
 import { AddProductNavButtons, IShowProps } from './AddProductNavButtons';
+import { uniqItemsFilter } from '../../services/ClientServices/UniqItemsFilter';
 
 initializeIcons();
 
@@ -63,15 +64,16 @@ const AddProductInner: FC = () => {
     const filltered = productsAllInfo.filter(item => item.typeID === typeID);
     // const newFiltered = [...new Set(filltered.map(o => JSON.stringify(o)))].map(s => JSON.parse(s));
     // @ts-ignore
-    const newFiltered = filltered.reduce((acc, city) => {
-      // @ts-ignore
-      if (acc.map[city.title]) return acc;
-      // @ts-ignore
-      acc.map[city.title] = true;
-      // @ts-ignore
-      acc.cities.push(city);
-      return acc;
-    }, {map: {}, cities: []}).cities;
+    const newFiltered = uniqItemsFilter(productsAllInfo, 'title');
+    // productsAllInfo.reduce((acc, item) => {
+    //   // @ts-ignore
+    //   if (acc.map[item.title]) return acc;
+    //   // @ts-ignore
+    //   acc.map[item.title] = true;
+    //   // @ts-ignore
+    //   acc.items.push(item);
+    //   return acc;
+    // }, {map: {}, items: []}).items;
     // console.log(newFiltered);
     const newArr: IInfoBlock[] = [];
     for (let i = 0; i < newFiltered.length; i++) {

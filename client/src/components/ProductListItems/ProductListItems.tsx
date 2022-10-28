@@ -1,7 +1,10 @@
 import { current } from '@reduxjs/toolkit';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
+import { DEFAULT_TYPE_ID_POLIKARBONAT } from '../../constants/user';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { uniqItemsFilter } from '../../services/ClientServices/UniqItemsFilter';
 import { getAllProductsInfo, getProducts } from '../../store/reducers/ProductReducer/ProductActionCreators';
+import { IProductInfoResponse } from '../../types/IProductInfoResponse';
 import { ProductItem } from '../ProductItem/ProductItem';
 import { ProductSortItems } from '../ProductSortItems';
 import './productlistitems.scss';
@@ -14,22 +17,76 @@ const ProductListItemsInner:FC = () => {
   const [thicknessValue, setThicknessValue] = useState('');
   const [densityValue, setDensityValue] = useState('');
 
-  const thickness: string[] = [
-    '4мм',
-    '6мм',
-    '8мм',
-    '10мм',
-  ];
+  const productsFillter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT);
 
-  const density: string[] = [
-    '0.46кг/м2',
-    '0.51кг/м2',
-    '0.60кг/м2',
-    '0.70кг/м2',
-    '0.88кг/м2',
-    '0.96кг/м2',
-    '1,10кг/м2',
-  ];
+  const filltered = productsAllInfo.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT);
+
+  const newFiltered: IProductInfoResponse[] = uniqItemsFilter(filltered, 'title');
+
+
+
+  // filltered.reduce((acc, item) => {
+  //  // @ts-ignore
+  //   if (acc.map[item.title]) return acc;
+  //   // @ts-ignore
+  //   acc.map[item.title] = true;
+   
+  //   acc.items.push(item);
+  //   return acc;
+  // }, {map: {}, items: [] as IProductInfoResponse[]}).items;
+
+//!--------------------------------------  
+const newFilteredItems: IProductInfoResponse[] = uniqItemsFilter(filltered, 'description');
+
+// filltered.reduce((acc, item) => {
+//   // @ts-ignore
+//    if (acc.map[item.description]) return acc;
+//    // @ts-ignore
+//    acc.map[item.description] = true;
+  
+//    acc.items.push(item);
+//    return acc;
+//  }, {map: {}, items: [] as IProductInfoResponse[]}).items;
+
+  interface ISorted {
+    title: string;
+    uniqItems: string[];
+  }
+
+  const sortedObject = [] as ISorted[];
+
+  for (let i = 0; i < newFiltered.length; i++) {
+    const title = newFiltered[i].title;
+    const description: string[] = [];
+    const filterItem = newFilteredItems.filter(item => item.title === title);
+    // console.log(description);
+    for (let j = 0; j < filterItem.length; j++) {
+      description.push(filterItem[j].description)
+    }
+    sortedObject.push({title: title, uniqItems: description});
+
+  }
+
+
+
+
+
+  // const thickness: string[] = [
+  //   '4мм',
+  //   '6мм',
+  //   '8мм',
+  //   '10мм',
+  // ];
+
+  // const density: string[] = [
+  //   '0.46кг/м2',
+  //   '0.51кг/м2',
+  //   '0.60кг/м2',
+  //   '0.70кг/м2',
+  //   '0.88кг/м2',
+  //   '0.96кг/м2',
+  //   '1,10кг/м2',
+  // ];
 
   useEffect(() => {
     (async () => {
@@ -41,7 +98,26 @@ const ProductListItemsInner:FC = () => {
   return (
     <div className="productlistitems__wrapper">
       <div className="productlistitems__searchblock">
-        <div className="productlistitems__searchblock_item">
+        {
+          sortedObject.map(item => (
+            <div key={item.title} className="productlistitems__searchblock_item">
+              <div className="productlistitems__searchblock_item_title">
+                {item.title}
+              </div>
+              {
+                item.uniqItems.map(item => (
+                  <div 
+                    onClick={() => setThicknessValue(item)}
+                    key={item}
+                    className={item === thicknessValue ? "productlistitems__searchblock_item_text active" : "productlistitems__searchblock_item_text"}>
+                    {item}
+                  </div>
+                ))
+              }
+            </div>
+          ))
+        }
+        {/* <div className="productlistitems__searchblock_item">
           <div className="productlistitems__searchblock_item_title">
             Толщина
           </div>
@@ -70,14 +146,14 @@ const ProductListItemsInner:FC = () => {
               </div>
             ))
           }
-        </div>
+        </div> */}
       </div>
       <div className="productlistitems__itemsblock">
         {/* <div className="productlistitems__itemsblock_title">
           Поликарбонат
         </div> */}
         {
-          products.map(item => 
+          productsFillter.map(item => 
             <ProductSortItems key={item._id} item={item} productsInfo={productsAllInfo}/>
             )
         }
