@@ -9,6 +9,12 @@ import { ProductItem } from '../ProductItem/ProductItem';
 import { ProductSortItems } from '../ProductSortItems';
 import './productlistitems.scss';
 
+interface ISearchBlockValue {
+  title: string,
+  description: string,
+  id: number,
+}
+
 const ProductListItemsInner:FC = () => {
   const { products, productsAllInfo } = useAppSelector(state => state.productReducer);
   // let params = useParams();
@@ -16,13 +22,25 @@ const ProductListItemsInner:FC = () => {
   const dispatch = useAppDispatch();
   const [thicknessValue, setThicknessValue] = useState('');
   const [densityValue, setDensityValue] = useState('');
+  const [searchBlockValue, setSearchBlockValue] = useState<ISearchBlockValue[]>([])
+  
+  const searchBlockValueHandler = (title: string, description: string) => {
+    const foundValue = searchBlockValue.find(item => item.title === title);
+    if (foundValue) {
+      setSearchBlockValue(searchBlockValue.map(item => item.id === foundValue.id ? {...item, title, description} : item));
+    } else {
+
+      setSearchBlockValue([...searchBlockValue, {title, description, id: Date.now()}]);
+
+    }
+    console.log(searchBlockValue)
+  }
 
   const productsFillter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT);
 
   const filltered = productsAllInfo.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT);
 
   const newFiltered: IProductInfoResponse[] = uniqItemsFilter(filltered, 'title');
-
 
 
   // filltered.reduce((acc, item) => {
@@ -99,17 +117,17 @@ const newFilteredItems: IProductInfoResponse[] = uniqItemsFilter(filltered, 'des
     <div className="productlistitems__wrapper">
       <div className="productlistitems__searchblock">
         {
-          sortedObject.map(item => (
-            <div key={item.title} className="productlistitems__searchblock_item">
+          sortedObject.map(data => (
+            <div key={data.title} className="productlistitems__searchblock_item">
               <div className="productlistitems__searchblock_item_title">
-                {item.title}
+                {data.title}
               </div>
               {
-                item.uniqItems.map(item => (
+                data.uniqItems.map(item => (
                   <div 
-                    onClick={() => setThicknessValue(item)}
+                    onClick={() => searchBlockValueHandler(data.title, item)}
                     key={item}
-                    className={item === thicknessValue ? "productlistitems__searchblock_item_text active" : "productlistitems__searchblock_item_text"}>
+                    className={searchBlockValue.find(value => value.description === item) ? "productlistitems__searchblock_item_text active" : "productlistitems__searchblock_item_text"}>
                     {item}
                   </div>
                 ))
