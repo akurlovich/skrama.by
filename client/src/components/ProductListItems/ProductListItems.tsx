@@ -5,8 +5,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { uniqItemsFilter } from '../../services/ClientServices/UniqItemsFilter';
 import { getAllProductsInfo, getProducts } from '../../store/reducers/ProductReducer/ProductActionCreators';
 import { IProductInfoResponse } from '../../types/IProductInfoResponse';
+import { IProductResponse } from '../../types/IProductResponse';
 import { ProductItem } from '../ProductItem/ProductItem';
-import { ProductSortItems } from '../ProductSortItems';
+import { ProductSortItems } from '../ProductSortItems/ProductSortItems';
 import './productlistitems.scss';
 
 interface ISearchBlockValue {
@@ -22,7 +23,8 @@ const ProductListItemsInner:FC = () => {
   const dispatch = useAppDispatch();
   // const [thicknessValue, setThicknessValue] = useState('');
   // const [densityValue, setDensityValue] = useState('');
-  const [searchBlockValue, setSearchBlockValue] = useState<ISearchBlockValue[]>([])
+  const [searchBlockValue, setSearchBlockValue] = useState<ISearchBlockValue[]>([]);
+  const [readyProductsArray, setreadyProductsArray] = useState<IProductResponse[]>([]);
   
   const searchBlockValueHandler = (title: string, description: string) => {
     const foundValue = searchBlockValue.find(item => item.title === title);
@@ -36,7 +38,33 @@ const ProductListItemsInner:FC = () => {
     // console.log(searchBlockValue)
   }
 
-  const productsFillter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT);
+  const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+useEffect(() => {
+  // const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
+
+  const infoFilter = productsAllInfo.filter(item => item.description === searchBlockValue[0]?.description);
+
+  setreadyProductsArray(productsFilter);
+
+  console.log(infoFilter);
+  if (infoFilter.length) {
+    setreadyProductsArray([]);
+    for (let i = 0; i < infoFilter.length; i++) {
+      const newProd = productsFilter.find(item => item._id === infoFilter[i].productID);
+      if (newProd) {
+        console.log(newProd)
+        setreadyProductsArray(prev => [...prev, newProd])
+  
+      }
+    }
+  } else {
+    setreadyProductsArray(productsFilter)
+  }
+  
+}, [searchBlockValue])
+
+
 
   const filltered = productsAllInfo.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT);
 
@@ -116,6 +144,7 @@ const newFilteredItems: IProductInfoResponse[] = uniqItemsFilter(filltered, 'des
   return (
     <div className="productlistitems__wrapper">
       <div className="productlistitems__searchblock">
+        <button onClick={() => console.log(readyProductsArray)}>click</button>
         {
           sortedObject.map(data => (
             <div key={data.title} className="productlistitems__searchblock_item">
@@ -142,43 +171,14 @@ const newFilteredItems: IProductInfoResponse[] = uniqItemsFilter(filltered, 'des
             Очистить
           </button>
         </div>
-        {/* <div className="productlistitems__searchblock_item">
-          <div className="productlistitems__searchblock_item_title">
-            Толщина
-          </div>
-          {
-            thickness.map(item => (
-              <div 
-                onClick={() => setThicknessValue(item)}
-                key={item}
-                className={item === thicknessValue ? "productlistitems__searchblock_item_text active" : "productlistitems__searchblock_item_text"}>
-                {item}
-              </div>
-            ))
-          }
-        </div>
-        <div className="productlistitems__searchblock_item">
-          <div className="productlistitems__searchblock_item_title">
-              Плотность
-            </div>
-        {
-            density.map(item => (
-              <div 
-                onClick={() => setDensityValue(item)}
-                key={item}
-                className={item === densityValue ? "productlistitems__searchblock_item_text active" : "productlistitems__searchblock_item_text"}>
-                {item}
-              </div>
-            ))
-          }
-        </div> */}
+        
       </div>
       <div className="productlistitems__itemsblock">
         {/* <div className="productlistitems__itemsblock_title">
           Поликарбонат
         </div> */}
         {
-          productsFillter.map(item => 
+          readyProductsArray.map(item => 
             <ProductSortItems key={item._id} item={item} productsInfo={productsAllInfo}/>
             )
         }
