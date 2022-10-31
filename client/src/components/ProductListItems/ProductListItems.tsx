@@ -1,5 +1,6 @@
 import { current } from '@reduxjs/toolkit';
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { DEFAULT_TYPE_ID_POLIKARBONAT } from '../../constants/user';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { uniqItemsFilter } from '../../services/ClientServices/UniqItemsFilter';
@@ -38,14 +39,21 @@ const ProductListItemsInner:FC = () => {
     // console.log(searchBlockValue)
   }
 
-  const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-useEffect(() => {
   // const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// useEffect(() => {
+//   const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
+//   console.log(productsFilter);
+//   setreadyProductsArray(productsFilter);
+// }, [])
+
+useEffect(() => {
+  const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
 
   const infoFilter = productsAllInfo.filter(item => item.description === searchBlockValue[0]?.description);
 
-  setreadyProductsArray(productsFilter);
+  // setreadyProductsArray(productsFilter);
 
   console.log(infoFilter);
   if (infoFilter.length) {
@@ -138,8 +146,18 @@ const newFilteredItems: IProductInfoResponse[] = uniqItemsFilter(filltered, 'des
     (async () => {
       await dispatch(getProducts());
       await dispatch(getAllProductsInfo());
+      // const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
+      // console.log(productsFilter);
+      // setreadyProductsArray(productsFilter);
     })()
   }, []);
+
+  useEffect(() => {
+    const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
+      console.log(productsFilter);
+      setreadyProductsArray(productsFilter);
+  }, [products])
+  
   
   return (
     <div className="productlistitems__wrapper">
