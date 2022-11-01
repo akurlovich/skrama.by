@@ -49,7 +49,7 @@ const ProductListItemsInner:FC = () => {
 // }, [])
 
 useEffect(() => {
-  const productsFilterByID = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
+  const productsFilterByTypeID = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
 
   const infoFilter = productsAllInfo.filter(item => item.description === searchBlockValue[0]?.description);
 
@@ -57,13 +57,45 @@ useEffect(() => {
 
   let ALLinfoFilter: IProductInfoResponse[] = [];
 
-  for (let i = 0; i < searchBlockValue.length; i++) {
-    let newProdFilter = productsAllInfo.filter(item => item.description === searchBlockValue[i]?.description);
-    ALLinfoFilter = ([...ALLinfoFilter, ...newProdFilter])
-    // let qqqq = productsAllInfo.filter(item => item.description === searchBlockValue[i]?.description);
-    // ALLinfoFilter.push(qqqq)
-    // console.log(ALLinfoFilter);
+  if (searchBlockValue.length) {
+    setreadyProductsArray([]);
+    for (let i = 0; i < searchBlockValue.length; i++) {
+      let newProdFilter = productsAllInfo.filter(item => item.description === searchBlockValue[i]?.description);
+      ALLinfoFilter = ([...ALLinfoFilter, ...newProdFilter])
+      // let qqqq = productsAllInfo.filter(item => item.description === searchBlockValue[i]?.description);
+      // ALLinfoFilter.push(qqqq)
+      // console.log(ALLinfoFilter);
+    }
+    let prodIDArray: string[] = [];
+  
+    for (let i = 0; i < ALLinfoFilter.length; i++) {
+      prodIDArray.push(ALLinfoFilter[i].productID);
+    }
+  
+    const countItems = prodIDArray.reduce((acc, item) => {
+      // @ts-ignore
+      acc[item] = acc[item] ? acc[item] + 1 : 1; 
+      return acc;
+    }, {});
+  // @ts-ignore
+    const result = Object.keys(countItems).filter((item) => countItems[item] == searchBlockValue.length);
+    console.log(countItems);
+    console.log(result);
+
+    for (let i = 0; i < result.length; i++) {
+      const newProd = productsFilterByTypeID.find(item => item._id === result[i]);
+      if (newProd) {
+        console.log(newProd)
+        setreadyProductsArray(prev => [...prev, newProd])
+  
+      }
+    }
+
+  } else {
+    setreadyProductsArray(productsFilterByTypeID)
   }
+
+
 
   // let ALLinfoFilter2: IProductInfoResponse[] = [];
 
@@ -81,21 +113,6 @@ useEffect(() => {
   // console.log('111', ALLinfoFilter2);
 
 
-  let prodIDArray: string[] = [];
-
-  for (let i = 0; i < ALLinfoFilter.length; i++) {
-    prodIDArray.push(ALLinfoFilter[i].productID);
-  }
-
-  const countItems = prodIDArray.reduce((acc, item) => {
-    // @ts-ignore
-    acc[item] = acc[item] ? acc[item] + 1 : 1; 
-    return acc;
-  }, {});
-// @ts-ignore
-  const result = Object.keys(countItems).filter((item) => countItems[item] == searchBlockValue.length);
-  console.log(countItems);
-  console.log(result);
 
   // console.log(prodIDArray.filter((x, y) => prodIDArray.indexOf(x) == y));
 
@@ -103,19 +120,19 @@ useEffect(() => {
 
 
 
-  if (infoFilter.length) {
-    setreadyProductsArray([]);
-    for (let i = 0; i < infoFilter.length; i++) {
-      const newProd = productsFilterByID.find(item => item._id === infoFilter[i].productID);
-      if (newProd) {
-        console.log(newProd)
-        setreadyProductsArray(prev => [...prev, newProd])
+  // if (infoFilter.length) {
+  //   setreadyProductsArray([]);
+  //   for (let i = 0; i < infoFilter.length; i++) {
+  //     const newProd = productsFilterByTypeID.find(item => item._id === infoFilter[i].productID);
+  //     if (newProd) {
+  //       console.log(newProd)
+  //       setreadyProductsArray(prev => [...prev, newProd])
   
-      }
-    }
-  } else {
-    setreadyProductsArray(productsFilterByID)
-  }
+  //     }
+  //   }
+  // } else {
+  //   setreadyProductsArray(productsFilterByTypeID)
+  // }
   
 }, [searchBlockValue])
 
