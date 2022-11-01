@@ -55,7 +55,24 @@ useEffect(() => {
 
   // setreadyProductsArray(productsFilter);
 
-  console.log(infoFilter);
+  let ALLinfoFilter: IProductInfoResponse[] = [];
+
+  for (let i = 0; i < searchBlockValue.length; i++) {
+    let qqqq = productsAllInfo.filter(item => item.description === searchBlockValue[i]?.description);
+    ALLinfoFilter = ([...ALLinfoFilter, ...qqqq])
+    // let qqqq = productsAllInfo.filter(item => item.description === searchBlockValue[i]?.description);
+    // ALLinfoFilter.push(qqqq)
+    console.log(ALLinfoFilter);
+  }
+
+  let prodIDArray: string[] = [];
+
+  for (let i = 0; i < ALLinfoFilter.length; i++) {
+    prodIDArray.push(ALLinfoFilter[i].productID);
+  }
+// @ts-ignore
+  console.log(prodIDArray.filter((x, y) => prodIDArray.indexOf(x) == y));
+
   if (infoFilter.length) {
     setreadyProductsArray([]);
     for (let i = 0; i < infoFilter.length; i++) {
@@ -154,7 +171,7 @@ const newFilteredItems: IProductInfoResponse[] = uniqItemsFilter(filltered, 'des
 
   useEffect(() => {
     const productsFilter = products.filter(item => item.typeID === DEFAULT_TYPE_ID_POLIKARBONAT).filter(item => item);
-      console.log(productsFilter);
+      // console.log(productsFilter);
       setreadyProductsArray(productsFilter);
   }, [products])
   
