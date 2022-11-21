@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import './productitem.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SERVER_URL } from '../../constants/http';
@@ -28,6 +28,7 @@ const ProductItemInner:FC = () => {
   // const foundProduct = products.find(item => item._id === params.id);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [count, setCount] = useState(1);
 
   const deleteProductHandler = async () => {
     if (params.id) {
@@ -45,10 +46,21 @@ const ProductItemInner:FC = () => {
       imageUrl: SERVER_URL + product.coverImage,
       type: product.typeID,
       size: +product.rating,
-      count: 0,
+      count: count,
     };
     dispatch(addItem(item));
   };
+
+  const handlerMinusCount = () => {
+    if (count > 1) {
+      setCount(prev => prev - 1)
+
+    }
+  }
+
+  const handlerPlusCount = () => {
+    setCount(prev => prev + 1)
+  }
 
   useEffect(() => {
     (async () => {
@@ -118,14 +130,20 @@ const ProductItemInner:FC = () => {
               </div> */}
               <div className="productitem__cartinfo">
                 <div className="productitem__cartinfo_count">
-                  <div className="productitem__cartinfo_block">
+                  <div 
+                    className={count < 2 ? "productitem__cartinfo_block notActive" : "productitem__cartinfo_block"}
+                    onClick={handlerMinusCount}
+                  >
                     <img src={minusSvg} alt="" />
                   </div>
                   <div className="productitem__cartinfo_block nothover">
-                    <div>2</div>
+                    <div>{count}</div>
                   </div>
-                  <div className="productitem__cartinfo_block">
-                  <img src={plusSvg} alt="" />
+                  <div 
+                    className="productitem__cartinfo_block"
+                    onClick={handlerPlusCount}
+                  >
+                    <img src={plusSvg} alt="" />
                   </div>
                 </div>
                 <div onClick={addToCartHandler} className="productitem__cart">

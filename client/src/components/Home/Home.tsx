@@ -51,6 +51,7 @@ const Home: FC<IProps> = ({searchValue}) => {
   return (
     <div className="container">
       <div className="content__top">
+        Купить поликабронат под разные виды использования
         
       </div>
       

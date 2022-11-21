@@ -10,7 +10,7 @@ interface ICartSliceState {
 
 const initialState: ICartSliceState = {
   totalPrice: 0,
-  items: [],
+  items: [] as ICartItem[],
 };
 
 const cartSlice = createSlice({
@@ -24,11 +24,12 @@ const cartSlice = createSlice({
       } else {
         state.items.push({
           ...action.payload,
-          count: 1,
+          // count: 1,
         })
       }
       // state.items.push(action.payload);
-      state.totalPrice += action.payload.price;
+      // state.totalPrice += action.payload.price;
+      state.totalPrice += action.payload.price * action.payload.count;
     },
     
     minusItem(state, action: PayloadAction<{id:string, price: number}>) {

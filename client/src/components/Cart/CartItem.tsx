@@ -35,7 +35,7 @@ const CartItem: FC<CartItemProps> = ({
       imageUrl,
       type,
       size,
-      count: 0,
+      count: 1,
     };
     dispatch(addItem(item))
   };
