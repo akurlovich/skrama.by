@@ -130,21 +130,22 @@ const ProductItemInner:FC = () => {
               </div> */}
               <div className="productitem__cartinfo">
                 <div className="productitem__cartinfo_count">
-                  <div 
+                  <button 
+                    disabled={count === 1}
                     className={count < 2 ? "productitem__cartinfo_block notActive" : "productitem__cartinfo_block"}
                     onClick={handlerMinusCount}
                   >
                     <img src={minusSvg} alt="" />
-                  </div>
+                  </button>
                   <div className="productitem__cartinfo_block nothover">
                     <div>{count}</div>
                   </div>
-                  <div 
+                  <button 
                     className="productitem__cartinfo_block"
                     onClick={handlerPlusCount}
                   >
                     <img src={plusSvg} alt="" />
-                  </div>
+                  </button>
                 </div>
                 <div onClick={addToCartHandler} className="productitem__cart">
                   <img className="productitem__cart_img" src={cartSvg} alt="" />
@@ -164,12 +165,12 @@ const ProductItemInner:FC = () => {
               Описание
             </div>
             <div className="productitem__description_line"></div>
-            <div className="productitem__description_main">
+            <p className="productitem__description_main">
               лучший в мире поликарбонта
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor nesciunt, et aliquid corrupti eligendi expedita accusamus officiis temporibus saepe laudantium. Accusamus laborum iste recusandae molestias perspiciatis porro consectetur nisi odio.
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo quas architecto sed eligendi ullam, illo fugit temporibus dignissimos quisquam delectus perspiciatis ipsum soluta odit reprehenderit, fugiat consequuntur blanditiis! A, praesentium.
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis provident doloremque aperiam ipsam doloribus. Labore laboriosam rerum provident earum numquam quam repellat, nesciunt at esse, nam eaque molestias deserunt quos.
-            </div>
+            </p>
           </div>
         </div>
       </div>

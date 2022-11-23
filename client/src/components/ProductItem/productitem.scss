@@ -1,6 +1,6 @@
 .productitem {
   width: 100%;
-  padding: 0 10%;
+  // padding: 0 10%;
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   min-height: 130px;
@@ -21,7 +21,7 @@
     justify-content: space-between;
     // align-items: center;
     gap: 10px;
-    padding: 10px;
+    padding: 0px 10%;
   }
   
   &__imageblock {
@@ -202,7 +202,7 @@
   &__description {
     width: 100%;
     margin-top: 50px;
-    padding: 35px 30px;
+    padding: 35px 0px;
     background: #FAFAFB;
 
     &_title {
@@ -222,7 +222,7 @@
     }
 
     &_main {
-      padding-top: 21px;
+      padding: 21px 10% 0px 10%;
       font-family: 'Poppins';
       font-style: normal;
       font-weight: 400;
@@ -230,6 +230,7 @@
       line-height: 180%;
       letter-spacing: 0.5px;
       color: #9098B1;
+      text-align: left;
     }
   }
 

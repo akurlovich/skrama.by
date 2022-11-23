@@ -226,7 +226,7 @@ const newFilteredItems: IProductInfoResponse[] = uniqItemsFilter(filltered, 'des
   return (
     <div className="productlistitems__wrapper">
       <div className="productlistitems__searchblock">
-        <button onClick={() => console.log(readyProductsArray)}>click</button>
+        {/* <button onClick={() => console.log(readyProductsArray)}>click</button> */}
         {
           sortedObject.map(data => (
             <div key={data.title} className="productlistitems__searchblock_item">
