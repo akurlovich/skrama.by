@@ -50,21 +50,22 @@ const Home: FC<IProps> = ({searchValue}) => {
   
 
   return (
-    <div className="container">
+    <div className="home__wrapper">
       {/* <div className="content__top">
         Купить поликабронат под разные виды использования
         
       </div> */}
 
-      <TypeBlock/>
+      {/* <TypeBlock/> */}
 
       
       
           {/* <div className="content__items"> */}
             {/* {status === 'loading' ? skeletons : pizzas} */}
-            {/* {types.map((type) => 
-              <ProductBlock key={type._id} title={type.name} imgSrc={SERVER_URL + type.coverImage} typeID={type._id}/>
-            )} */}
+            {types.map((type) => 
+              <TypeBlock key={type._id} title={type.name} imgSrc={SERVER_URL + type.coverImage} />
+              // <ProductBlock key={type._id} title={type.name} imgSrc={SERVER_URL + type.coverImage} typeID={type._id}/>
+            )}
             
           {/* </div> */}
 
