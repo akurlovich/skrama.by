@@ -8,6 +8,7 @@ import { getTypes } from "../../store/reducers/TypeReducer/TypeActionCreators";
 import { SERVER_URL } from "../../constants/http";
 import { ProductBlock } from "../ProductBlock/ProductBlock";
 import { SuccessModal } from "../UI/SuccessModal/SuccessModal";
+import { TypeBlock } from "../TypeBlock/TypeBlock";
 
 interface IProps {
   searchValue?: string;
@@ -50,18 +51,26 @@ const Home: FC<IProps> = ({searchValue}) => {
 
   return (
     <div className="container">
-      <div className="content__top">
+      {/* <div className="content__top">
         Купить поликабронат под разные виды использования
         
-      </div>
+      </div> */}
+
+      <TypeBlock/>
+
       
-          <div className="content__items">
+      
+          {/* <div className="content__items"> */}
             {/* {status === 'loading' ? skeletons : pizzas} */}
-            {types.map((type) => 
+            {/* {types.map((type) => 
               <ProductBlock key={type._id} title={type.name} imgSrc={SERVER_URL + type.coverImage} typeID={type._id}/>
-            )}
+            )} */}
             
-          </div>
+          {/* </div> */}
+
+
+
+
         {/* ) */}
       {/* } */}
       {/* <Pagination currentPage={pageCount} onChangePage={setCurrentPage}/> */}
