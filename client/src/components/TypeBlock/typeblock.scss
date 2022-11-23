@@ -12,7 +12,7 @@
     & .imgBx {
       width: 250px;
       height: 250px;
-      
+
       & img {
         filter: none
       }
@@ -111,7 +111,7 @@
       text-align: center;
       width: 100%;
       transition: 0.5s;
-      transform: translateY(115px);
+      transform: translateY(85px);
 
       & h2 {
         font-size: 1.25em;
@@ -146,6 +146,7 @@
       }
 
       & .actionBtn {
+        margin-top: 45px;
 
         & button {
           padding: 10px 30px;
