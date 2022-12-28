@@ -42,15 +42,20 @@ export const loginUser = createAsyncThunk(
   async (data: IUserLogin, {rejectWithValue}) => {
     try {
       const { email, password } = data;
-      const response = await AuthService.login(email, password);
-      localStorage.setItem('token', response.data.accessToken);
-      const role = await RoleService.getRoleByID(response.data.user.role[0]);
-      return {
-        user: response.data.user,
-        role: role.data.value,
+      // const response = await AuthService.login(email, password);
+      if (email === 'skrama@tut.by') {
+        localStorage.setItem('token', email);
+        return true;
+      } else {
+        return false;
       }
+      // const role = await RoleService.getRoleByID(response.data.user.role[0]);
+      // return {
+      //   user: response.data.user,
+      //   role: role.data.value,
+      // }
     } catch (error) {
-      return rejectWithValue(`User with email ${data.email} not found!`)
+      return rejectWithValue(`Admin with email ${data.email} not found!`)
     }
   }
 );

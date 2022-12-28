@@ -5,7 +5,7 @@ import { checkAuth, loginUser, logoutUser, registerUser, updateUserIsBlocked, up
 interface IResponseData {
   user: IUser,
   role: string,
-}
+};
 
 interface IAuthState {
   user: IUser,
@@ -13,6 +13,7 @@ interface IAuthState {
   isAuth: boolean,
   role: string,
   error: string,
+  isAdminAuth: boolean,
 };
 
 const initialState: IAuthState = {
@@ -21,6 +22,7 @@ const initialState: IAuthState = {
   isAuth: false,
   role: '',
   error: '',
+  isAdminAuth: false,
 };
 
 export const authSlice = createSlice({
@@ -29,6 +31,16 @@ export const authSlice = createSlice({
   reducers: {
     removeRigisterUserError(state) {
       state.error = '';
+    },
+    setAuthAdmin(state) {
+      state.isAdminAuth = true;
+      // state.error = 'Wrong admin auth!';
+      // if (action.payload === 'skrama@tut.by') {
+        // localStorage.setItem('token', 'skrama@tut.by');
+      //   state.isAdminAuth = true;
+      // } else {
+      //   state.isAdminAuth = false;
+      // }
     }
   },
   extraReducers: {
@@ -118,6 +130,7 @@ export const authSlice = createSlice({
 
 export const {
   removeRigisterUserError,
+  setAuthAdmin,
 } = authSlice.actions;
 
 export default authSlice.reducer;

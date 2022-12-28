@@ -1,5 +1,5 @@
 import React, { FC, useState, FocusEvent } from 'react';
-import './forminput.scss';''
+import './forminput.scss';
 
 interface IFormInput {
   errorShow?: boolean,

@@ -13,6 +13,8 @@ import { SelectOption } from '../UI/SelectOption';
 import { AddProductInfoType } from './AddProductInfoType/AddProductInfoType';
 import { AddProductNavButtons, IShowProps } from './AddProductNavButtons';
 import { uniqItemsFilter } from '../../services/ClientServices/UniqItemsFilter';
+import { AdminLogin } from '../AdminLogin/AdminLogin';
+import { setAuthAdmin } from '../../store/reducers/AuthReducer/AuthSlice';
 
 initializeIcons();
 
@@ -25,6 +27,7 @@ export interface IInfoBlock {
 const addIcon: IIconProps = { iconName: 'Add' };
 
 const AddProductInner: FC = () => {
+  const { isAdminAuth } = useAppSelector(state => state.authReducer);
   const { productsAllInfo } = useAppSelector(state => state.productReducer);
   const { types } = useAppSelector(state => state.typeReducer);
   const { brands } = useAppSelector(state => state.brandReducer);
@@ -145,10 +148,19 @@ const AddProductInner: FC = () => {
       await dispatch(getAllProductsInfo());
     })()
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem('token') === 'skrama@tut.by') {
+      // console.log(localStorage.getItem('token'));
+      dispatch(setAuthAdmin());
+      // console.log(isAdminAuth)
+    }
+  }, [])
   
   return (
     <div className="addproduct__wrapper">
-      {addProductError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>}
+      {/* {addProductError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>} */}
+      {!isAdminAuth && <AdminLogin/>}
       <AddProductNavButtons setShowAddBlock={showAddBlockHandler}/>
       <div className="addproduct__container">
         {showAddBlock.type && <div>TYPE</div>}
