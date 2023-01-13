@@ -47,8 +47,10 @@ const ProductItemInner:FC = () => {
       type: product.typeID,
       size: +product.rating,
       count: count,
+      // productInfo: productInfo,
     };
     dispatch(addItem(item));
+    console.log(productInfo);
   };
 
   const handlerMinusCount = () => {

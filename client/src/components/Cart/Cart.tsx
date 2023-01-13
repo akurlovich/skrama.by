@@ -23,7 +23,7 @@ const Cart: FC = () => {
 
   return (
     <div className="container container--cart">
-      {modal && <ConfirmOrder setModal={setModal} onClickClear={onClickClear}/>}
+      {modal && <ConfirmOrder setModal={setModal} onClickClear={onClickClear} items={items}/>}
       <div className="cart">
         <div className="cart__top">
           <h2 className="content__title">

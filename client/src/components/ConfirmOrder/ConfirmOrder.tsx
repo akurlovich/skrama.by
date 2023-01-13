@@ -1,22 +1,53 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import './confirmorder.scss';
 import { TextField } from '@fluentui/react/lib/TextField';
 import { DefaultButton, PrimaryButton } from '@fluentui/react';
 import { useNavigate } from 'react-router-dom';
+import EmailService from '../../services/EmailService';
+import { ICartItem } from '../../types/ICartItem';
 
 interface IProps {
   setModal: (bol: boolean) => void;
   onClickClear: () => void;
+  items: ICartItem[];
 }
 
-const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear}) => {
+const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items}) => {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
   const navigate = useNavigate();
-  const confimHandler = () => {
+  const confirmHandler = async () => {
     alert('Заказ оформлен!');
+    // console.log(items)
+    await EmailService.sendEmail({
+      name,
+      phone,
+      email,
+      address, 
+      items
+    });
     setModal(false);
     navigate('/');
     onClickClear();
   }
+
+  const nameHandler = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
+    setName(newValue || '');
+  };
+
+  const phoneHandler = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
+    setPhone(newValue || '');
+  };
+
+  const emailHandler = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
+    setEmail(newValue || '');
+  };
+
+  const addressHandler = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
+    setAddress(newValue || '');
+  };
 
   return (
     <div className='confirmorder__wrapper'>
@@ -26,32 +57,32 @@ const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear}) => {
         </div>
         <div className="confirmorder__inputs">
           <TextField 
-            // value={title}
-            // onChange={titleHandler}
+            value={name}
+            onChange={nameHandler}
             label="Имя:" 
             required
             underlined  
             // placeholder="Введите Ваше имя" 
           />
           <TextField 
-            // value={title}
-            // onChange={titleHandler}
-            label="Фамилия:" 
+            value={email}
+            onChange={emailHandler}
+            label="E-mail:" 
             // required
             underlined  
             // placeholder="Введите Вашу фамилию" 
           />
           <TextField 
-            // value={title}
-            // onChange={titleHandler}
+            value={phone}
+            onChange={phoneHandler}
             label="Телефон:" 
             required
             underlined  
             // placeholder="Введите Ваш телефон" 
           />
           <TextField 
-            // value={title}
-            // onChange={titleHandler}
+            value={address}
+            onChange={addressHandler}
             label="Адрес доставки:" 
             // required
             underlined  
@@ -65,7 +96,7 @@ const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear}) => {
             text="Отмена"
           />
           <PrimaryButton 
-            onClick={confimHandler}
+            onClick={confirmHandler}
             text="Подтвердить"
           />
         </div>

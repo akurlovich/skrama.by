@@ -48,6 +48,8 @@ app.use('/api', router);
 //   })
 // };
 
+
+
 mongoose
   .connect(config.DB_CONNECT, {})
   .then(() => console.log('Connected to DB'))

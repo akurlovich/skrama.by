@@ -30,5 +30,5 @@
   ],
   "include": [
     "src/**/*.ts"
-  ]
+, "../client/src/types/IEmailMessage.ts", "src/Utils/emailNotification.ts"  ]
 }
