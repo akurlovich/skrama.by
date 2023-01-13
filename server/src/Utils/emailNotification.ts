@@ -17,23 +17,27 @@ export const emailNotification = async (data: IEmailMessage) => {
     title: string,
     price: number,
     count: number,
+    // description: INewInfo[],
     description: string,
   }
 
-  interface InewInfo {
-    title: string,
-    description: string,
+  interface INewInfo {
+    [key: string]: string,
   }
 
   const order: IOrder[] = [];
+  let totalPrice = 0;
 
   for (const item of data.items) {
+    totalPrice += item.price * item.count;
     let newDesc = await product_infoService.getAllProductInfoByProductID(item.id);
-    const newInfo: InewInfo[] = [];
+
+    const newInfo: INewInfo[] = [];
+    
     for (const info of newDesc) {
-      let infoOne: InewInfo = {
-        title: info.title,
-        description: info.description,
+      let infoOne: INewInfo = {
+        [info.title]: info.description,
+        
       }
       newInfo.push(infoOne)
     }
@@ -47,17 +51,19 @@ export const emailNotification = async (data: IEmailMessage) => {
   }
 
   let message = {
-    from: 'skrama@tut.by', // sender address
-    to: "skrama-opt@tut.by", // list of receivers
-    subject: `Заказ от ${data.name}`, // Subject line
-    text: "Hello world?", // plain text body
+    from: 'skrama@tut.by', 
+    to: "skrama@tut.by", 
+    subject: `Заказ от ${data.name} на сумму ${totalPrice}`, 
+    text: "", 
     html: 
       `
       <p>Имя: ${data.name}</p>
       <p>Телефон: ${data.phone}</p>
       <p>Почта: ${data.email}</p>
-      <h3>Товар:</h3> 
+      <p>Адрес доставки: ${data.address}</p>
+      <h4>Товар:</h4> 
       <p>${order.map((item, id) => `${id + 1}. Цена: ${item.price}, количество: ${item.count}, описание: ${item.description}<br>`)}</р>
+      <h3>Сумма заказа: ${totalPrice}</h3> 
       `
       , // html body
   };
