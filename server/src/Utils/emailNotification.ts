@@ -17,7 +17,6 @@ export const emailNotification = async (data: IEmailMessage) => {
     title: string,
     price: number,
     count: number,
-    // description: INewInfo[],
     description: string,
   }
 
@@ -65,10 +64,8 @@ export const emailNotification = async (data: IEmailMessage) => {
       <p>${order.map((item, id) => `${id + 1}. Цена: ${item.price}, количество: ${item.count}, описание: ${item.description}<br>`)}</р>
       <h3>Сумма заказа: ${totalPrice}</h3> 
       `
-      , // html body
+      , 
   };
-
-  // <p>${data.items.map((item, id) => `${id + 1}. Цена: ${item.price}, количество: ${item.count}, наименование: ${item.title}<br>`)}</р>
 
   transporter.sendMail(message, (err) => {
     if (err) {

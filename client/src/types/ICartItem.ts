@@ -4,6 +4,6 @@ export interface ICartItem {
   price: number;
   imageUrl: string;
   type: string;
-  size: number;
+  // size: number;
   count: number;
 }

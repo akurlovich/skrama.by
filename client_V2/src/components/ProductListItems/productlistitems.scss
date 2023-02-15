@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');
+.productlistitems {
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+  }
+
+  &__searchblock {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &_item {
+      width: 100%;
+      // max-width: 270px;
+      display: flex;
+      flex-direction: column;
+      background: #F6F7F8;
+      padding: 20px;
+      
+      &_title {
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 27px;
+        color: #22262A;
+        text-decoration: underline;
+
+        &_btn {
+          padding: 10px;
+          border: 1px solid grey;
+          border-radius: 3px;
+          transition: 0.5s ease;
+          font-family: 'Raleway';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 27px;
+          // color: #22262A;
+
+          &:hover {
+            background-color: #F6F7F8;
+            transition: 0.5s ease;
+          }
+
+          &:active {
+            transform: scale(0.9);
+            transition: 0.5s ease;
+          }
+        }
+      }
+
+      &_text {
+        padding-top: 20px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 27px;
+        color: #22262A;
+        cursor: pointer;
+
+        &:hover {
+          color: #33A0FF;
+        }
+
+        &.active {
+          color:#33A0FF;
+        }
+      }
+    }
+
+  }
+
+  &__itemsblock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

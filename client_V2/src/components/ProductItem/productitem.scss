@@ -1,0 +1,239 @@
+.productitem {
+  width: 100%;
+  // padding: 0 10%;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+  min-height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  
+  &__wrapper {
+    width: 100%;
+  }
+  
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    // align-items: center;
+    gap: 10px;
+    padding: 0px 10%;
+  }
+  
+  &__imageblock {
+    width: 40%;
+    padding-top: 20px;
+  }
+
+  &__info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    // align-items: center;
+    // text-align: center;
+    // justify-content: center;
+  }
+
+  &__image {
+    width: 100%;
+    // height: 100%;
+  }
+
+  &__titleblock {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    color: #22262A;
+
+    &_btns {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  &__rating {
+    padding-top: 10px;
+    font-size: 20px;
+    display: flex;
+    gap: 5px;
+
+    & img {
+      width: 20px;
+    }
+
+    &_review {
+      padding-left: 10px;
+      font-family: 'Proxima Nova';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      color: #C1C8CE;
+    }
+  }
+
+  &__price {
+    padding-top: 35px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 180%;
+    letter-spacing: 0.5px;
+    color: #40BFFF;
+  }
+
+  &__addinfo {
+    padding-top: 15px;
+    max-width: 230px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #262626;
+  }
+
+  &__cartinfo {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+    &_count {
+      display: flex;
+    }
+
+    &_block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 41px;
+      height: 42px;
+      background: #F6F7F8;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      color: #262626;
+      border: 1px solid #e3e3e4;
+      border-radius: 2px;
+      cursor: pointer;
+
+      &:hover {
+        background: #e3e3e4;
+      }
+
+      &.nothover {
+        cursor: default;
+
+        &:hover {
+          background: #F6F7F8;
+        }
+      }
+
+      &.notActive {
+        cursor: default;
+
+        &:hover {
+          background: #F6F7F8;
+        }
+      }
+    }
+  }
+
+  &__cansel {
+    width: 60px;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+
+  &__cart {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 160px;
+    height: 42px;
+    background: #40BFFF;
+    cursor: pointer;
+    margin-right: 100px;
+    border-radius: 2px;
+    // opacity: 0.1;
+    // font-family: 'Proxima Nova';
+    // font-style: normal;
+    // font-weight: 400;
+    // font-size: 16px;
+    // line-height: 19px;
+    // color: #33A0FF;
+    
+    &_img {
+      
+    }
+
+    &_btn {
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      // line-height: 19px;
+    }
+
+    &:hover {
+      background: #33A0FF;
+    }
+  }
+
+  &__description {
+    width: 100%;
+    margin-top: 50px;
+    padding: 35px 0px;
+    background: #FAFAFB;
+
+    &_title {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 27px;
+      color: #2E90E5;
+      padding-bottom: 10px;
+    }
+
+    &_line {
+      width: 100%;
+      height: 4px;
+      background: #E5E8EA;
+      opacity: 0.5;
+    }
+
+    &_main {
+      padding: 21px 10% 0px 10%;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 180%;
+      letter-spacing: 0.5px;
+      color: #9098B1;
+      text-align: left;
+    }
+  }
+
+
+}
+

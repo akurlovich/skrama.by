@@ -1,0 +1,28 @@
+.pagenotfound {
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 40px;
+  font-family: 'Poppins', sans-serif;
+  
+  &__text {
+    font-size: 50px;
+  }
+
+  &__button {
+    background: #97e0e4;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 45px;
+    color: #807b7b;
+    align-self: center;
+    padding: 10px;
+  }
+}
