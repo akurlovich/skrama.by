@@ -3,32 +3,34 @@ import { Link, useLocation } from "react-router-dom";
 // @ts-ignore
 import logoSvg from '../../assets/img/logo.png';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-// import { Search } from "../Search";
+import { BiPhoneCall } from "react-icons/bi"
+import './header.scss';
 
 export const Header: FC = () => {
   const { totalPrice, items } = useAppSelector(state => state.cartReducer);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const location = useLocation();
-
+  
   return (
-    <div className="header">
-      <div className="container">
-        <Link to="/">
-          <div className="header__logo">
-            <img width="75" src={logoSvg} alt="Pizza logo" />
-            <div className="header__logo_info">
-              <h1>ООО "СКРАМ Материалы"</h1>
-              <p>Кровельные и строительные материалы</p>
-              <p>+375(44)-984-67-46</p>
-            </div>
+    <header className="header">
+      <div className="header__toolbar">
+        <div className="header__toolbar__tel">
+          <div className="header__toolbar__tel__icon">
+            <BiPhoneCall size={40}/>
           </div>
-        </Link>
-        {/* <Search /> */}
-        <div className="header__cart">
+          <div className="header__toolbar__tel__text">
+            +375 29 984 67 46
+          </div>
+        </div>
+        <h1 className="header__toolbar__title">
+          <span>Farm</span>
+          Fresh
+        </h1>
+        <div className="header__toolbar__cart">
           {location.pathname !== '/cart' && (
-            <Link to="/cart" className="button button--cart">
-              <span>{totalPrice} ₽</span>
-              <div className="button__delimiter"></div>
+            <Link to="/cart" className="header__toolbar__cart__button">
+              <span>{totalPrice} руб</span>
+              <div className="header__toolbar__cart__button__delimiter"></div>
               <svg
                 width="18"
                 height="18"
@@ -63,7 +65,12 @@ export const Header: FC = () => {
           )}
         </div>
       </div>
-    </div>
+      <div className="header__navbar">
+        <Link to='/' className="header__navbar__item active">О нас</Link>
+        <Link to='/' className="header__navbar__item">Продукция</Link>
+        <Link to='/' className="header__navbar__item">Контакты</Link>
+      </div>
+    </header>
   );
 };
 

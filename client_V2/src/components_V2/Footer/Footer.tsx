@@ -4,7 +4,7 @@ import './footer.scss';
 
 const FooterInner: FC = () => {
   return (
-    <div className="footer__wrapper">
+    <footer className="footer__wrapper">
       <div className='footer'>
         Footer info
       </div>
@@ -22,7 +22,7 @@ const FooterInner: FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

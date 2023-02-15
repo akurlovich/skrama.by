@@ -1,0 +1,120 @@
+.header {
+  width: 100%;
+  font-family: "Roboto",sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #263A4F;
+  font-size: 32px;
+
+  &__toolbar {
+    display: flex;
+    padding: 30px;
+    justify-content: space-between;
+    align-items: center;
+
+    &__tel {
+      flex: 0 0 auto;
+      width: 25%;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+
+      &__icon {
+        display: flex;
+        color: #34AD54;
+      }
+    }
+
+    &__title {
+      flex: 0 0 auto;
+      width: 50%;
+      text-align: center;
+      color: #34AD54;
+      font-size: 56px;
+
+      & span {
+        color: #f93
+      }
+    }
+
+    &__cart {
+      flex: 0 0 auto;
+      width: 25%;
+      text-align: end;
+      display: flex;
+      text-align: end;
+      align-items: end;
+      justify-content: end;
+
+      &__button {
+        background-color: #34AD54;
+        color: #fff;
+        border-radius: 30px;
+        min-width: 100px;
+        // max-width: 180px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid transparent;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        line-height: 23px;
+        padding: 12px 25px;
+        transition: .5s;
+        
+        svg {
+          margin-right: 8px;
+          margin-bottom: 1px;
+        }
+      
+        span {
+          font-weight: 600;
+          font-size: 16px;
+        }
+      
+        &:hover {
+          background-color: #f93;
+          transition: .5s;
+        }
+      
+        &__delimiter {
+          width: 1px;
+          height: 25px;
+          background-color: rgba(255, 255, 255, 0.25);
+          margin-left: 14px;
+          margin-right: 14px;
+        }
+      
+      }
+    }
+
+  }
+
+  &__navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #34AD54;
+    // padding: 30px;
+    color: #fff;
+
+    &__item {
+      padding: 30px 15px;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      color: #fff;
+      transition: .5s;
+
+      &:hover {
+        background-color: #f93;
+        transition: .5s;
+      }
+
+      &.active {
+        background-color: #f93;
+      }
+    }
+  }
+}
