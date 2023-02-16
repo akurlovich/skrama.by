@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./components_V2/RoutersComponents/MainLayout/MainLayout";
-import Home from "./components/Home/Home";
+import Home from "./components_V2/Home/Home";
 import "./scss/app.scss";
 import { AddProduct } from "./components/AddProduct/AddProduct";
 import { ProductsList } from "./components/ProductsList/ProductsList";
