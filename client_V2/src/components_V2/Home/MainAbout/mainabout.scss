@@ -1,0 +1,51 @@
+.main {
+
+  &__about {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1344px;
+    margin: 20px auto;
+    gap: 2%;
+
+    &__image {
+      flex: 0 0 auto;
+      width: 49%;
+      // border-width: 5px;
+      // border-color: var(--primary);
+      border: 5px solid var(--primary);
+
+      & img {
+        width: 100%;
+      }
+    }
+
+    &__info {
+      flex: 0 0 auto;
+      width: 49%;
+      
+      &__title {
+        font-family: "Roboto",sans-serif;
+        font-weight: 700;
+        line-height: 1.2;
+        font-size: 48px;
+        color: var(--dark);
+
+      }
+
+      &__text {
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #8D9AA8;
+        font-size: 16px;
+
+        & p {
+          text-indent: 20px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+}
