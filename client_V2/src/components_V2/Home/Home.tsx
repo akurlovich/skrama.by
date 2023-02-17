@@ -7,13 +7,16 @@ import mainAvatar from '../../assets/img/main_avatar.png';
 import './home.scss';
 import { MainImage } from "./MainImage/MainImage";
 import { MainAbout } from "./MainAbout/MainAbout";
+import { MainFacts } from "./MainFacts/MainFacts";
+import { MainServices } from "./MainServices/MainServices";
 
 const Home: FC = () => {
   return (
     <main className="main__wrapper">
       <MainImage/>
       <MainAbout/>
-      
+      <MainFacts/>
+      <MainServices/>
     </main>
   );
 };
