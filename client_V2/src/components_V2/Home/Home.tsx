@@ -10,11 +10,13 @@ import { MainAbout } from "./MainAbout/MainAbout";
 import { MainFacts } from "./MainFacts/MainFacts";
 import { MainServices } from "./MainServices/MainServices";
 import { ProductsBlock } from "../ProductsBlock/ProductsBlock";
+import { ProductInfo } from "../ProductsBlock/ProductInfo/ProductInfo";
 
 const Home: FC = () => {
   return (
     <main className="main__wrapper">
-      <ProductsBlock/>
+      <ProductInfo/>
+      {/* <ProductsBlock/> */}
       {/* <MainImage/>
       <MainAbout/>
       <MainFacts/>

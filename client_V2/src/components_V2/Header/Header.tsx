@@ -19,7 +19,7 @@ export const Header: FC = () => {
             <BiPhoneCall size={40}/>
           </div>
           <div className="header__toolbar__tel__text">
-            +375 29 984 67 46
+            +375(29) 984-67-46
           </div>
         </div>
         <h1 className="header__toolbar__title">
