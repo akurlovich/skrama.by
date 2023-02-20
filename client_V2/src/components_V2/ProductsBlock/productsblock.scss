@@ -1,0 +1,26 @@
+.productsblock {
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  width: 100%;
+  padding: 15px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  font-size: 48px;
+  color: var(--dark);
+  text-align: center;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+  }
+  
+}

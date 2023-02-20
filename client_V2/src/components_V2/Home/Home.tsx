@@ -9,12 +9,15 @@ import { MainImage } from "./MainImage/MainImage";
 import { MainAbout } from "./MainAbout/MainAbout";
 import { MainFacts } from "./MainFacts/MainFacts";
 import { MainServices } from "./MainServices/MainServices";
+import { ProductsBlock } from "../ProductsBlock/ProductsBlock";
 
 const Home: FC = () => {
   return (
     <main className="main__wrapper">
       <MainImage/>
       <MainAbout/>
+      <MainFacts/>
+      <ProductsBlock/>
       <MainFacts/>
       <MainServices/>
     </main>

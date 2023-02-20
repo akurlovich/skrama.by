@@ -21,10 +21,10 @@
       text-align: center;
       background-color: #F6FFF2;
       box-shadow: 0 0 45px #EDEDED;
-      cursor: pointer;
+      // cursor: pointer;
       transition: .5s;
 
-      &:hover .main__services__item__img {
+      &:hover &__img {
         color: var(--secondary);
         transition: .5s;
       }
