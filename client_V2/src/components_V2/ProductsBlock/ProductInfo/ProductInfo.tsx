@@ -12,6 +12,30 @@ import plusSvg from '../../../assets/img/plus.png';
 import cartSvg from '../../../assets/img/cart.svg';
 // @ts-ignore
 import itemImage from '../../../assets/img/parnichok3.jpg'
+// @ts-ignore
+import beliy from '../../../assets/img/colors/beliy.jpg'
+// @ts-ignore
+import biruza from '../../../assets/img/colors/biruza.jpg'
+// @ts-ignore
+import bronza from '../../../assets/img/colors/bronza.jpg'
+// @ts-ignore
+import granat from '../../../assets/img/colors/granat.jpg'
+// @ts-ignore
+import krasniy from '../../../assets/img/colors/krasniy.jpg'
+// @ts-ignore
+import oranzhevi from '../../../assets/img/colors/oranzhevi.jpg'
+// @ts-ignore
+import prozrachniy from '../../../assets/img/colors/prozrachniy.jpg'
+// @ts-ignore
+import serebro from '../../../assets/img/colors/serebro.jpg'
+// @ts-ignore
+import seriy from '../../../assets/img/colors/seriy.jpg'
+// @ts-ignore
+import siniy from '../../../assets/img/colors/siniy.jpg'
+// @ts-ignore
+import zeleniy from '../../../assets/img/colors/zeleniy.jpg'
+// @ts-ignore
+import zheltiy from '../../../assets/img/colors/zheltiy.jpg'
 
 initializeIcons();
 
@@ -41,6 +65,20 @@ const ProductInfoInner: FC = () => {
         <div className="producinfo__container">
           <div className="producinfo__imageblock">
             <img className="producinfo__image" src={itemImage} alt="product cover"/>
+            <div className="producinfo__image__colors">
+              <img className="producinfo__image__item" src={beliy} alt="белый" />
+              <img className="producinfo__image__item" src={biruza} alt="бирюза" />
+              <img className="producinfo__image__item" src={bronza} alt="бронза" />
+              <img className="producinfo__image__item" src={granat} alt="гранат" />
+              <img className="producinfo__image__item" src={krasniy} alt="красный" />
+              <img className="producinfo__image__item" src={oranzhevi} alt="оранжевый" />
+              <img className="producinfo__image__item" src={prozrachniy} alt="прозрачный" />
+              <img className="producinfo__image__item" src={serebro} alt="серебро" />
+              <img className="producinfo__image__item" src={seriy} alt="серый" />
+              <img className="producinfo__image__item" src={siniy} alt="синий" />
+              <img className="producinfo__image__item" src={zeleniy} alt="зеленый" />
+              <img className="producinfo__image__item" src={zheltiy} alt="желтый" />
+            </div>
           </div>
           <div className="producinfo__info">
             <div className="producinfo__titleblock">

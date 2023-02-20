@@ -42,6 +42,17 @@
   &__image {
     width: 100%;
     // height: 100%;
+
+    &__colors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin-top: 3px;
+    }
+
+    &__item {
+      width: 50px;
+    }
   }
 
   &__titleblock {
