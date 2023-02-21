@@ -13,6 +13,7 @@ import Cart from "./components/Cart/Cart";
 import { ProductsBlock } from "./components_V2/ProductsBlock/ProductsBlock";
 import { ProductItem } from "./components_V2/ProductsBlock/ProductItem/ProductItem";
 import { About } from "./components_V2/About/About";
+import { ProductInfo } from "./components_V2/ProductsBlock/ProductInfo/ProductInfo";
 
 const App: FC = () => {
 
@@ -28,7 +29,7 @@ const App: FC = () => {
         }/>
         {/* <Route path="products" element={<ProductListItems/>}/> */}
         <Route path="products" element={<ProductsBlock/>}/>
-        <Route path="product/:id" element={<ProductItem/>}/>
+        <Route path="product/:id" element={<ProductInfo/>}/>
         <Route path="about" element={<About/>}/>
         <Route path="*" element={<PageNotFound/>}/>
       </Route>

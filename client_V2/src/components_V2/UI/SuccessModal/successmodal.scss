@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');
+
+.successmodal {
+  &__wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+    justify-content: center;
+    top: 0;
+    z-index: 1000;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 41px 90px 50px 90px;
+  }
+
+  &__title {
+    font-family: "Roboto",sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: 24px;
+    display: flex;
+    align-items: flex-end;
+    // text-transform: capitalize;
+    color: var(--primary);
+  }
+
+  &__buttons {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  &__btn {
+    padding: 5px 30px;
+    background: var(--primary);
+    border-radius: 10px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 16px;
+    color: #FFFFFF;
+    border: 2px solid var(--primary);
+    transition: 0.3s ease;
+
+    &:hover {
+      background: #FFFFFF;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      transition: 0.3s ease;
+    }
+  }
+
+} 
