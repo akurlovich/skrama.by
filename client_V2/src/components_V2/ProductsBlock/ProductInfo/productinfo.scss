@@ -47,11 +47,20 @@
       display: flex;
       flex-wrap: wrap;
       gap: 3px;
-      margin-top: 3px;
+      margin-top: 15px;
+      width: 100%;
+      justify-content: space-between;
     }
 
     &__item {
       width: 50px;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        box-shadow: 0 0 45px #EDEDED;
+        scale: 1.02;
+      }
     }
   }
 
