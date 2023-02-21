@@ -15,12 +15,12 @@ import { ProductInfo } from "../ProductsBlock/ProductInfo/ProductInfo";
 const Home: FC = () => {
   return (
     <main className="main__wrapper">
-      <ProductInfo/>
+      {/* <ProductInfo/> */}
       {/* <ProductsBlock/> */}
-      {/* <MainImage/>
+      <MainImage/>
       <MainAbout/>
       <MainFacts/>
-      <MainServices/> */}
+      <MainServices/>
     </main>
   );
 };

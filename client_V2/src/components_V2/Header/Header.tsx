@@ -67,8 +67,8 @@ export const Header: FC = () => {
       </div>
       <div className="header__navbar">
         <Link to='/' className="header__navbar__item active">О нас</Link>
-        <Link to='/' className="header__navbar__item">Продукция</Link>
-        <Link to='/' className="header__navbar__item">Контакты</Link>
+        <Link to='/products' className="header__navbar__item">Продукция</Link>
+        <Link to='/about' className="header__navbar__item">Контакты</Link>
       </div>
     </header>
   );
