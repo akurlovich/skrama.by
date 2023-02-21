@@ -43,6 +43,7 @@ import { SuccessModal } from '../../UI/SuccessModal/SuccessModal';
 import { addItem } from '../../../store/reducers/CartReducer/CartSlice';
 import { SERVER_URL } from '../../../constants/http';
 import { ICartItem } from '../../../types/ICartItem';
+import { Loader } from '../../UI/Loader/Loader';
 
 initializeIcons();
 
@@ -50,7 +51,7 @@ const deleteIcon: IIconProps = { iconName: 'Cancel' };
 const editIcon: IIconProps = { iconName: 'Edit' };
 
 const ProductInfoInner: FC = () => {
-  const { product, productInfo } = useAppSelector(state => state.productReducer);
+  const { product, productInfo, isLoading } = useAppSelector(state => state.productReducer);
   const params = useParams();
   const navigate = useNavigate();
   // const foundProduct = products.find(item => item._id === params.id);
@@ -108,6 +109,7 @@ const ProductInfoInner: FC = () => {
   
   return (
     <>
+      {isLoading && <Loader/>}
       {successModal && 
         <SuccessModal
           title='Товар добавлен в корзину!'
