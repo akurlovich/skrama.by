@@ -1,8 +1,19 @@
 .btn {
+  // display: flex;
+  // gap: 5px;
+  // align-items: center;
+  // text-align: center;
   font-family: 'Roboto', sans-serif;
   letter-spacing: 1px;
   font-weight: 700;
   transition: .5s;
+
+  &-df {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    text-align: center;
+  }
 
   &-primary {
     background-color: var(--primary);

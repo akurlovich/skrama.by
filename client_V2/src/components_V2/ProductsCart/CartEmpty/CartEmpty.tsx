@@ -15,8 +15,10 @@ const CartEmpty: FC = () => (
       Для того, чтобы заказать поликарбонат, перейди на страницу продукции.
     </p>
     <img src={cartEmptyImg} alt="Empty cart" />
-    <Link to="/" className="btn btn-primary btn-lg">
-      <span>Вернуться назад</span>
+    <Link to="/" >
+      <button className="btn btn-primary btn-lg">
+        Вернуться назад
+      </button>
     </Link>
   </div>
 );

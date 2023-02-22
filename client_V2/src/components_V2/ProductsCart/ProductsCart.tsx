@@ -22,9 +22,9 @@ const ProductsCartInner: FC = () => {
   };
 
   return (
-    <div className="container container--cart">
+    <div className="cart">
       {modal && <ConfirmOrder setModal={setModal} onClickClear={onClickClear} items={items}/>}
-      <div className="cart">
+      <div className="cart__container">
         <div className="cart__top">
           <h2 className="content__title">
             <svg
@@ -109,29 +109,29 @@ const ProductsCartInner: FC = () => {
             </span>
           </div>
           <div className="cart__bottom-buttons">
-            <Link to="/" className="button button--outline button--add go-back-btn">
+            <Link to="/" className="btn btn-df btn-primary btn-lg">
               <svg
-                width="8"
-                height="14"
+                width="10"
+                // height="14"
                 viewBox="0 0 8 14"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M7 13L1 6.93015L6.86175 1"
-                  stroke="#D3D3D3"
-                  strokeWidth="1.5"
+                  stroke="#fff"
+                  strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"></path>
               </svg>
 
               <span>Вернуться назад</span>
             </Link>
-            <div 
-              className="button pay-btn"
+            <button 
+              className="btn btn-secondary btn-lg"
               onClick={() => setModal(true)}
               >
               <span>Оформить заказ</span>
-            </div>
+            </button>
           </div>
         </div>
       </div>
