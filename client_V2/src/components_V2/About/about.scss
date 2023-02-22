@@ -1,3 +1,53 @@
 .about {
   flex: 1 0 auto;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   left: 0;
+  //   right: 0;
+  //   top: 0;
+  //   bottom: 0;
+  //   // z-index: -1;
+  //   background: url(../../assets/img/about.jpg) no-repeat;
+  //   filter: blur(5px);
+  // }
+
+  &__wrapper {
+    position: relative;
+    
+  }
+
+  &__title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: 48px;
+    color: var(--dark);
+    text-align: center;
+
+  }
+
+  &__adress {
+    padding: 20px 0px;
+
+    &__data {
+      padding: 10px 0px;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      line-height: 1.5;
+      font-size: 32px;
+      color: #8D9AA8;
+    }
+  }
+
+  &__map {
+
+  }
+
+  
 }
