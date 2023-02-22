@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { AiTwotoneEyeInvisible } from 'react-icons/ai';
+import { AiTwotoneBank, AiTwotoneExperiment, AiTwotoneEyeInvisible, AiTwotoneFire, AiTwotoneSafetyCertificate } from 'react-icons/ai';
 import './mainservices.scss';
 
 const MainServicesInner:FC = () => {
@@ -13,53 +13,54 @@ const MainServicesInner:FC = () => {
           UV-защита
         </div>
         <div className="main__services__item__text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem nobis molestiae totam distinctio corrupti ducimus quidem aspernatur exercitationem consequuntur nisi? 
+          Воздействие солнечного света разрушает полимерные связи, вследствие чего поликабонат теряет свои первоначальные характеристики – пластичность, устойчивость к механическому воздействию, несущую способность, цвет.
         </div>
       </div>
       <div className="main__services__item">
         <div className="main__services__item__img">
-          <AiTwotoneEyeInvisible size={80} />
+          <AiTwotoneExperiment size={80} />
         </div>
         <div className="main__services__item__title">
-          UV-защита
+          Стойкость к химикатам
         </div>
         <div className="main__services__item__text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem nobis molestiae totam distinctio corrupti ducimus quidem aspernatur exercitationem consequuntur nisi? 
+          Если вы осуществляете выращивание культур в теплице из сотового поликарбоната, можете быть уверены, что листы поликарбоната не подвержены негативному воздействию щелочных растворов, органических кислот и хлора. 
         </div>
       </div>
       <div className="main__services__item">
         <div className="main__services__item__img">
-          <AiTwotoneEyeInvisible size={80} />
+          <AiTwotoneSafetyCertificate size={80} />
         </div>
         <div className="main__services__item__title">
-          UV-защита
+          Высокая прочность
         </div>
         <div className="main__services__item__text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem nobis molestiae totam distinctio corrupti ducimus quidem aspernatur exercitationem consequuntur nisi? 
+         Поликарбонат отлично противостоит непогоде. Даже обильный дождь, снег, а также сильный ветер не смогут разрушить теплицу из поликарбоната. Даже попадание мяча не навредит этому материалу. 
         </div>
       </div>
       <div className="main__services__item">
         <div className="main__services__item__img">
-          <AiTwotoneEyeInvisible size={80} />
+          <AiTwotoneFire size={80} />
         </div>
         <div className="main__services__item__title">
-          UV-защита
+          Не горит
         </div>
         <div className="main__services__item__text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem nobis molestiae totam distinctio corrupti ducimus quidem aspernatur exercitationem consequuntur nisi? 
+          Поликарбонат может только немного поплавиться из-за воздействия температуры. Таким образом, теплица позволит обеспечить безопасность для растений, растущих внутри. 
         </div>
       </div>
       <div className="main__services__item">
         <div className="main__services__item__img">
-          <AiTwotoneEyeInvisible size={80} />
+          <AiTwotoneBank size={80} />
         </div>
         <div className="main__services__item__title">
-          UV-защита
+          Маленький вес
         </div>
         <div className="main__services__item__text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem nobis molestiae totam distinctio corrupti ducimus quidem aspernatur exercitationem consequuntur nisi? 
+          Благодаря тому, что листы весят совсем немного, их очень просто транспортировать. Кроме этого, материал очень легко устанавливать. С этим справится любой человек. 
         </div>
       </div>
+      
     </div>
   )
 }
