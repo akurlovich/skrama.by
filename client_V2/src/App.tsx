@@ -14,6 +14,7 @@ import { ProductsBlock } from "./components_V2/ProductsBlock/ProductsBlock";
 import { ProductItem } from "./components_V2/ProductsBlock/ProductItem/ProductItem";
 import { About } from "./components_V2/About/About";
 import { ProductInfo } from "./components_V2/ProductsBlock/ProductInfo/ProductInfo";
+import { ProductsCart } from "./components_V2/ProductsCart/ProductsCart";
 
 const App: FC = () => {
 
@@ -21,7 +22,7 @@ const App: FC = () => {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />}/>
-        <Route path="cart" element={<Cart/>}/>
+        <Route path="cart" element={<ProductsCart/>}/>
         <Route path='admin' element={
           <AdminAuthRouter>
             <AddProduct/>
