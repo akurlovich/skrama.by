@@ -57,7 +57,9 @@ const ProductInfoInner: FC = () => {
   // const foundProduct = products.find(item => item._id === params.id);
   const [count, setCount] = useState(1);
   const [successModal, setSuccessModal] = useState(false);
-  const [colorImage, setColorImage] = useState(NO_IMAGE);
+  const [colorImage, setColorImage] = useState({imageData: NO_IMAGE, isColor: false});
+
+  const price = colorImage.isColor ? Math.ceil(product?.price * 1.1) : product?.price;
 
   const admin = true;
 
@@ -110,7 +112,8 @@ const ProductInfoInner: FC = () => {
   }, []);
 
   useEffect(() => {
-    setColorImage(SERVER_URL + product?.coverImage);
+    setColorImage(prev => ({...prev, imageData: SERVER_URL + product?.coverImage}));
+    // setColorImage({image: SERVER_URL + product?.coverImage});
   }, [product])
   
   
@@ -140,46 +143,46 @@ const ProductInfoInner: FC = () => {
           <div className="productinfo__container">
             <div className="productinfo__imageblock">
               {/* <img className="productinfo__image" src={SERVER_URL + product?.coverImage} alt="product cover"/> */}
-              <img className="productinfo__image" src={colorImage} alt="поликарбонат"/>
+              <img className="productinfo__image" src={colorImage.imageData} alt="поликарбонат"/>
               <div className="productinfo__image__colors">
                 <img
-                  onClick={() => setColorImage(SERVER_URL + product?.coverImage)}
+                  onClick={() => setColorImage({imageData: SERVER_URL + product?.coverImage, isColor: false})}
                   className="productinfo__image__item" src={SERVER_URL + product?.coverImage} alt="поликарбонат" />
                 <img
-                  onClick={() => setColorImage(beliy)}
+                  onClick={() => setColorImage({imageData: beliy, isColor: true})}
                   className="productinfo__image__item" src={beliy} alt="белый" />
                 <img
-                  onClick={() => setColorImage(biruza)}
+                  onClick={() => setColorImage({imageData: biruza, isColor: true})}
                   className="productinfo__image__item" src={biruza} alt="бирюза" />
                 <img
-                  onClick={() => setColorImage(bronza)}
+                  onClick={() => setColorImage({imageData: bronza, isColor: true})}
                   className="productinfo__image__item" src={bronza} alt="бронза" />
                 <img
-                  onClick={() => setColorImage(granat)} 
+                  onClick={() => setColorImage({imageData: granat, isColor: true})}
                   className="productinfo__image__item" src={granat} alt="гранат" />
                 <img 
-                  onClick={() => setColorImage(krasniy)}
+                  onClick={() => setColorImage({imageData: krasniy, isColor: true})}
                   className="productinfo__image__item" src={krasniy} alt="красный" />
                 <img
-                  onClick={() => setColorImage(oranzhevi)}
+                  onClick={() => setColorImage({imageData: oranzhevi, isColor: true})}
                   className="productinfo__image__item" src={oranzhevi} alt="оранжевый" />
                 <img
-                  onClick={() => setColorImage(prozrachniy)}
+                  onClick={() => setColorImage({imageData: prozrachniy, isColor: true})}
                   className="productinfo__image__item" src={prozrachniy} alt="прозрачный" />
                 <img
-                  onClick={() => setColorImage(serebro)}
+                  onClick={() => setColorImage({imageData: serebro, isColor: true})}
                   className="productinfo__image__item" src={serebro} alt="серебро" />
                 <img
-                  onClick={() => setColorImage(seriy)}
+                  onClick={() => setColorImage({imageData: seriy, isColor: true})}
                   className="productinfo__image__item" src={seriy} alt="серый" />
                 <img
-                  onClick={() => setColorImage(siniy)}
+                  onClick={() => setColorImage({imageData: siniy, isColor: true})}
                   className="productinfo__image__item" src={siniy} alt="синий" />
                 <img 
-                  onClick={() => setColorImage(zeleniy)}
+                  onClick={() => setColorImage({imageData: zeleniy, isColor: true})}
                   className="productinfo__image__item" src={zeleniy} alt="зеленый" />
                 <img
-                  onClick={() => setColorImage(zheltiy)}
+                  onClick={() => setColorImage({imageData: zheltiy, isColor: true})}
                   className="productinfo__image__item" src={zheltiy} alt="желтый" />
               </div>
             </div>
@@ -198,7 +201,7 @@ const ProductInfoInner: FC = () => {
                   8 просмотров
                 </div>
               </div>
-              <div className="productinfo__price">{`${product?.price}.00 руб.`}</div>
+              <div className="productinfo__price">{`${price}.00 руб.`}</div>
               
                 {productInfo.map(item => (
                   <div key={item._id} className="productinfo__addinfo">
