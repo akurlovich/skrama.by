@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 // @ts-ignore
 import logoSvg from '../../assets/img/logo.png';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -66,9 +66,21 @@ export const Header: FC = () => {
         </div>
       </div>
       <div className="header__navbar">
-        <Link to='/' className="header__navbar__item active">О нас</Link>
-        <Link to='/products' className="header__navbar__item">Продукция</Link>
-        <Link to='/about' className="header__navbar__item">Контакты</Link>
+        <NavLink
+          to='/'
+          className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
+          О нас
+        </NavLink>
+        <NavLink 
+          to='/products' 
+          className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
+          Продукция
+        </NavLink>
+        <NavLink
+          to='/about'
+          className={({ isActive }) => isActive ? 'header__navbar__item active' : 'header__navbar__item'}>
+          Контакты
+        </NavLink>
       </div>
     </header>
   );
