@@ -17,7 +17,7 @@ const ProductItemInner: FC <IProps> = ({item, productsInfo}) => {
   const foundProductInfo = productsInfo.filter(i => i.productID === item._id);
 
   return (   
-    <div className="productitem__item" onClick={() => navigate(`/product/${item._id}`)}>
+    <div className="productitem__item" onClick={() => navigate(`/polikarbonat/${item._id}`)}>
       <div className="productitem__item__image">
         <img className="productitem__item__image_img" src={SERVER_URL + item.coverImage} alt="parnichok" />
       </div>
