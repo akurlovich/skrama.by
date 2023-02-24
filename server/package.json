@@ -1,5 +1,5 @@
 {
-  "name": "server for Skrama.by",
+  "name": "skramabyserver",
   "version": "1.0.0",
   "description": "REST service starter for RS School",
   "main": "src/server.ts",
