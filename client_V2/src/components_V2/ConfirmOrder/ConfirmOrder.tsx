@@ -61,7 +61,8 @@ const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items}) => {
             onChange={nameHandler}
             label="Имя:" 
             required
-            underlined  
+            underlined 
+            size={100}
             // placeholder="Введите Ваше имя" 
           />
           <TextField 
@@ -91,14 +92,24 @@ const ConfirmOrderInner: FC<IProps> = ({setModal, onClickClear, items}) => {
 
         </div>
         <div className="confirmorder__buttons">
-          <DefaultButton 
+          <button
+            onClick={() => setModal(false)} 
+            className="btn btn-secondary btn-lg">
+            Отмена
+          </button>
+          <button
+            onClick={confirmHandler}
+            className="btn btn-primary btn-lg">
+            Подтвердить
+          </button>
+          {/* <DefaultButton 
             onClick={() => setModal(false)}
             text="Отмена"
           />
           <PrimaryButton 
             onClick={confirmHandler}
             text="Подтвердить"
-          />
+          /> */}
         </div>
       </div>
     </div>
