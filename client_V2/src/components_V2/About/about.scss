@@ -8,7 +8,7 @@
   align-items: center;
   width: 100%;
   margin: 20px auto;
-  max-width: 1320px;
+  // max-width: 1320px;
   gap: 20px;
 
   &__wrapper {
@@ -22,7 +22,7 @@
     font-weight: 700;
     line-height: 1.2;
     font-size: 48px;
-    color: var(--dark);
+    color: #fff;
     text-align: center;
 
   }
@@ -34,7 +34,7 @@
 
   &__form {
     flex: 0 0 auto;
-    width: 60%;
+    width: 55%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -65,7 +65,7 @@
 
   &__adress {
     flex: 0 0 auto;
-    width: 40%;
+    width: 45%;
     padding: 48px;
     background-color: var(--secondary);
     display: flex;

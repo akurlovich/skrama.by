@@ -4,16 +4,16 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 1344px;
+    // max-width: 1344px;
     margin: 20px auto;
     gap: 2%;
+    background-color: #fff;
 
     &__image {
       flex: 0 0 auto;
-      width: 49%;
-      // border-width: 5px;
-      // border-color: var(--primary);
+      width: 47%;
       border: 5px solid var(--primary);
+      margin: 8px;
 
       & img {
         width: 100%;
@@ -30,6 +30,7 @@
         line-height: 1.2;
         font-size: 48px;
         color: var(--dark);
+        text-align: center;
 
       }
 

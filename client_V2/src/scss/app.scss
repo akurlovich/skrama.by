@@ -11,6 +11,8 @@
 #root {
   width: 100vw;
   overflow-x: hidden;
+  background: url(../assets/img/backgraund.jpg) center center no-repeat  fixed;
+  background-size: cover;
 }
 
 .wrapper {
@@ -18,11 +20,13 @@
   display: flex;
   flex-direction: column;
 
-  width: calc(100vw - 100px);
+  // width: calc(100vw - 100px);
   min-height: 92vh;
-  background-color: #fff;
+  // background-color: #fff;
   // margin: 20px auto;
-  margin: auto;
+  // background: url(../assets/img/backgraund.jpg) center center no-repeat  fixed;
+  // background-size: cover;
+  margin: 15px auto;
   border-radius: 10px;
   max-width: 1400px;
 

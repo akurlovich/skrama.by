@@ -8,19 +8,19 @@ const FooterInner: FC = () => {
     <footer className="footer">
       <div className="footer__wrapper">
         <Link to='/' className="footer__links">
-          <AiOutlineArrowRight size={20} />
+          <AiOutlineArrowRight size={30} />
           <div className="footer__links__text">
             О нас
           </div>
         </Link>
         <Link to='/products' className="footer__links">
-          <AiOutlineArrowRight size={20}/>
+          <AiOutlineArrowRight size={30}/>
           <div className="footer__links__text">
             Продукция
           </div>
         </Link>
         <Link to='/about' className="footer__links">
-          <AiOutlineArrowRight size={20}/>
+          <AiOutlineArrowRight size={30}/>
           <div className="footer__links__text">
             Контакты
           </div>
